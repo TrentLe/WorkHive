@@ -1,16 +1,24 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const thoughtSchema = new Schema({
-  thoughtText: {
+const jobpostingSchema = new Schema({
+  description: {
     type: String,
-    required: 'You need to leave a thought!',
+    required: 'You need to add a description!',
     minlength: 1,
-    maxlength: 280,
+    maxlength: 1000,
     trim: true,
   },
-  thoughtAuthor: {
+  title: {
     type: String,
+    required: 'You need to add a title!',
+    minlength: 1,
+    maxlength: 50,
+    trim: true,
+  },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
     trim: true,
   },
@@ -40,6 +48,6 @@ const thoughtSchema = new Schema({
   ],
 });
 
-const Thought = model('Thought', thoughtSchema);
+const JobPosting = model('JobPosting', jobpostingSchema);
 
-module.exports = Thought;
+module.exports = JobPosting;
