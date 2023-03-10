@@ -7,6 +7,16 @@ const typeDefs = gql`
     email: String
     password: String
     jobPostings: [JobPosting]!
+    thoughts: [Thought]!
+  }
+
+  type Company {
+    _id: ID
+    companyname: String
+    email: String
+    password: String
+    jobPostings: [JobPosting]!
+    thoughts: [Thought]!
   }
 
   type JobPosting {
@@ -47,18 +57,20 @@ const typeDefs = gql`
     user(username: String): User
     thoughts(username: String): [Thought]
     thought(thoughtId: ID!): Thought
+    companies: [Company]
+    company(companyname: String): Company
   }
 
 
   type Mutation {
-    signup(email: String!, password: String!, username: String!): Auth!
+    addUser(email: String!, password: String!, username: String!): Auth!
     login(email: String!, password: String!): Auth!
     createJobPosting(title: String!, description: String!, Author: String!): JobPosting!
     addThought(thoughtText: String!): Thought
     removeThought(thoughtId: ID!): Thought
     removeJobPosting(jobpostingId: ID!): JobPosting!
     likeJobPosting(jobpostingId: ID!): JobPosting!
-    
+    addCompany(email: String!, password: String!, companyname: String!): Auth!    
   }
 `;
 
