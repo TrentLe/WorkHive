@@ -45,10 +45,13 @@ const ThoughtForm = () => {
         },
       });
 
-      setThoughtText('');
+      setThoughtText('')
+      setCharacterCount(0);
     } catch (err) {
       console.error(err);
     }
+
+    window.location.reload();
   };
 
   const handleChange = (event) => {
@@ -95,7 +98,7 @@ const ThoughtForm = () => {
             </div>
             {error && (
               <div className="col-12 my-3 bg-danger text-white p-3">
-                {error.message}
+                {`Reporting to the Hive...`}
               </div>
             )}
           </form>
