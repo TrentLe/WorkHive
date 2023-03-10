@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const userSchema = new Schema({
-  username: {
+const companySchema = new Schema({
+  companyname: {
     type: String,
     required: true,
     unique: true,
@@ -19,6 +19,12 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  jobpostings: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'JobPosting',
+    },
+  ],
   thoughts: [
     {
       type: Schema.Types.ObjectId,
@@ -27,7 +33,7 @@ const userSchema = new Schema({
   ],
 });
 
-userSchema.pre('save', async function (next) {
+companySchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
@@ -36,10 +42,10 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.methods.isCorrectPassword = async function (password) {
+companySchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = model('User', userSchema);
+const Company = model('Company', companySchema);
 
-module.exports = User;
+module.exports = Company;
