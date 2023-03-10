@@ -25,6 +25,12 @@ const userSchema = new Schema({
       ref: 'JobPosting',
     },
   ],
+  thoughts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Thought',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {
