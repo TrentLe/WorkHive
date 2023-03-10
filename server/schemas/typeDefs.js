@@ -1,3 +1,42 @@
+// const { gql } = require('apollo-server-express');
+
+// const typeDefs = gql`
+//   type User {
+//     _id: ID
+//     username: String
+//     email: String
+//     password: String
+//     thoughts: [Thought]!
+//   }
+
+//   type Thought {
+//     _id: ID
+//     thoughtText: String
+//     thoughtAuthor: String
+//     createdAt: String
+//     comments: [Comment]!
+//   }
+
+//   type Comment {
+//     _id: ID
+//     commentText: String
+//     commentAuthor: String
+//     createdAt: String
+//   }
+
+//   type Auth {
+//     token: ID!
+//     user: User
+//   }
+
+//   type Query {
+//     users: [User]
+//     user(username: String!): User
+//     thoughts(username: String): [Thought]
+//     thought(thoughtId: ID!): Thought
+//     me: User
+//   }
+
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
@@ -6,45 +45,50 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    thoughts: [Thought]!
+    jobPostings: [JobPosting]!
   }
 
-  type Thought {
+  type JobPosting {
     _id: ID
-    thoughtText: String
-    thoughtAuthor: String
-    createdAt: String
-    comments: [Comment]!
-  }
-
-  type Comment {
-    _id: ID
-    commentText: String
-    commentAuthor: String
-    createdAt: String
+    title: String!
+    description: String!
+    createdAt: String!
+    author: User!
   }
 
   type Auth {
-    token: ID!
-    user: User
+    token: String!
+    user: User!
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(thoughtId: ID!): Thought
+    jobPostings: [JobPosting!]!
+    jobPosting(id: ID!): JobPosting
     me: User
+    users: [User]
+    user(username: String): User
   }
 
+
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    addThought(thoughtText: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    signup(email: String!, password: String!, username: String!): Auth!
+    login(email: String!, password: String!): Auth!
+    createJobPosting(title: String!, description: String!, Author: String!): JobPosting!
+    removeJobPosting(jobpostingId: ID!): JobPosting!
+    
   }
 `;
 
 module.exports = typeDefs;
+
+//   type Mutation {
+//     addUser(username: String!, email: String!, password: String!): Auth
+//     login(email: String!, password: String!): Auth
+//     addThought(thoughtText: String!): Thought
+//     addComment(thoughtId: ID!, commentText: String!): Thought
+//     removeThought(thoughtId: ID!): Thought
+//     removeComment(thoughtId: ID!, commentId: ID!): Thought
+//   }
+// `;
+
+// module.exports = typeDefs;
