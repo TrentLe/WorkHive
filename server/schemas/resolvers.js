@@ -59,6 +59,23 @@ const resolvers = {
 
       return { token, user };
     },
+    companyLogin: async (parent, { email, password }) => {
+      const company = await Company.findOne({ email });
+
+      if (!company) {
+        throw new AuthenticationError('No company found with this email address');
+      }
+
+      const correctPw = await company.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(company);
+
+      return { token, company };
+    },
     createJobPosting: async (parent, { title, description}, context) => {
       if (context.user) {
         const jobPosting = await JobPosting.create({
