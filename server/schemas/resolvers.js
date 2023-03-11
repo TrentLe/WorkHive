@@ -1,6 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, JobPosting, Thought, Company } = require('../models');
 const { signToken } = require('../utils/auth');
+const fs = require('fs')
+const path = require('path')
 
 const resolvers = {
   Query: {
@@ -38,7 +40,7 @@ const resolvers = {
       return { token, user };
     },
     addCompany: async (parent, { companyname, email, password }) => {
-      const user = await User.create({ companyname, email, password });
+      const user = await Company.create({ companyname, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -58,6 +60,23 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    companyLogin: async (parent, { email, password }) => {
+      const company = await Company.findOne({ email });
+
+      if (!company) {
+        throw new AuthenticationError('No company found with this email address');
+      }
+
+      const correctPw = await company.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(company);
+
+      return { token, company };
     },
     createJobPosting: async (parent, { title, description}, context) => {
       if (context.user) {
@@ -140,6 +159,17 @@ const resolvers = {
         return thought;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    uploadImage: async (parent, { file }, context, info) => {
+      const { createReadStream, filename, mimetype, encoding } = await file
+
+      const stream = createReadStream()
+      const pathName = path.join(__dirname, `../public/images/${filename}`)
+      await stream.pipe(fs.createWriteStream(pathName))
+      
+      return {
+        url: `http://localhost:3000/public/images/${filename}`
+      }
     },
   },
 };

@@ -43,6 +43,10 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type File {
+    url: String!
+  }
+
 
   type Auth {
     token: String!
@@ -65,12 +69,14 @@ const typeDefs = gql`
   type Mutation {
     addUser(email: String!, password: String!, username: String!): Auth!
     login(email: String!, password: String!): Auth!
+    companyLogin(email: String!, password: String!): Auth!
     createJobPosting(title: String!, description: String!, Author: String!): JobPosting!
     addThought(thoughtText: String!): Thought
     removeThought(thoughtId: ID!): Thought
     removeJobPosting(jobpostingId: ID!): JobPosting!
     likeJobPosting(jobpostingId: ID!): JobPosting!
-    addCompany(email: String!, password: String!, companyname: String!): Auth!    
+    addCompany(email: String!, password: String!, companyname: String!): Auth!
+    uploadImage(file: Upload!): File!    
   }
 `;
 
