@@ -1,6 +1,8 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, JobPosting, Thought, Company } = require('../models');
 const { signToken } = require('../utils/auth');
+const fs = require('fs')
+const path = require('path')
 
 const resolvers = {
   Query: {
@@ -157,6 +159,17 @@ const resolvers = {
         return thought;
       }
       throw new AuthenticationError('You need to be logged in!');
+    },
+    uploadImage: async (parent, { file }, context, info) => {
+      const { createReadStream, filename, mimetype, encoding } = await file
+
+      const stream = createReadStream()
+      const pathName = path.join(__dirname, `../public/images/${filename}`)
+      await stream.pipe(fs.createWriteStream(pathName))
+      
+      return {
+        url: `http://localhost:3000/public/images/${filename}`
+      }
     },
   },
 };

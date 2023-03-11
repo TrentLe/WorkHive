@@ -43,6 +43,10 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type File {
+    url: String!
+  }
+
 
   type Auth {
     token: String!
@@ -71,7 +75,8 @@ const typeDefs = gql`
     removeThought(thoughtId: ID!): Thought
     removeJobPosting(jobpostingId: ID!): JobPosting!
     likeJobPosting(jobpostingId: ID!): JobPosting!
-    addCompany(email: String!, password: String!, companyname: String!): Auth!    
+    addCompany(email: String!, password: String!, companyname: String!): Auth!
+    uploadImage(file: Upload!): File!    
   }
 `;
 
