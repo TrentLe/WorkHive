@@ -1,0 +1,53 @@
+.navbar{
+    margin: 10px 0px 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    height: 4rem;
+    background-color: lightgoldenrodyellow;
+    width: auto;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+   
+    
+
+
+    .left-side{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+    }
+    .right-side{
+        display: flex;
+        align-items: baseline;
+        gap: 30px;
+        justify-content: flex-end;
+    }
+
+    .searchbar{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid black;
+    }
+    input {
+        width: 25rem;
+    }
+    .bee{
+        display: flex;
+        width: 50px;
+        height: 50px;
+    }
+    .header {
+        display: flex;
+        font-family:'Monoton', cursive;
+        font-size: 25px;
+        // color: goldenrod;
+        color: black;
+        font-weight: bold;
+    align-items: center;
+    }
+}

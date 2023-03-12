@@ -1,43 +1,90 @@
-import React from 'react';
+
+import React from "react";
 import { Link } from 'react-router-dom';
 
-import Auth from '../../utils/auth';
+import { ImHome } from "react-icons/im";
+import { ImBubble } from "react-icons/im";
+import { ImUser} from "react-icons/im";
+import { ImBell } from "react-icons/im";
+import { ImSearch} from "react-icons/im";
+import { ImContrast } from "react-icons/im";
+import { IoIosKeypad } from "react-icons/io";
+import { MdBedtime  } from "react-icons/md";
+import { MdBrightness7} from "react-icons/md";
+ import { BsUiRadiosGrid } from "react-icons/bs";
+import "./header.scss";
+
+// import { useContext } from 'react';
+// import { DarkModeContext } from "./context/darkModeContext.js";
+
+
+
+
+
+
+
+
+import Auth from "../../utils/auth";
 
 const Header = () => {
+
+  // const { toggle, darkMode} = useContext(DarkModeContext);
+  
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
+  
   return (
-    <header className="bg-primary text-light mb-4 py-3 flex-row align-center">
-      <div className="container flex-row justify-space-between-lg justify-center align-center">
-        <div>
-          <Link className="text-light" to="/">
-            <h1 className="m-0">Work Hive</h1>
-          </Link>
-          <p className="m-0">Ready to join our colony ?</p>
+    <header className="navbar">
+      <div className="left-side">
+        <Link to="/" style={{textDecoration:'none'}}>
+          <span className='header'>WorkHive<img className='bee' src='https://user-images.githubusercontent.com/119962472/224432749-b7eb5349-2fda-4977-809c-3893df02b585.png' alt='bee'></img></span>
+        </Link>
+        <Link to="/" style={{textDecoration:'none'}}>
+          <ImHome color="black"/>
+        </Link>
+        {/* {darkMode ? (
+          <MdBedtime onClick={toggle} />
+        ) : (
+          <MdBrightness7 onClick={toggle} />
+        )} */}
+        <MdBedtime/>
+        <IoIosKeypad/>
+       
+        <div className='searchbar'>
+          <ImSearch/>
+          <input type='text' placeholder='Search'></input>
         </div>
-        <div>
-          {Auth.loggedIn() ? (
-            <>
-              <Link className="btn btn-lg btn-info m-2" to="/me">
-                {Auth.getProfile().data.username}'s profile
-              </Link>
-              <button className="btn btn-lg btn-light m-2" onClick={logout}>
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link className="btn btn-lg btn-info m-2" to="/login">
-                Login
-              </Link>
-              <Link className="btn btn-lg btn-light m-2" to="/signup">
-                Signup
-              </Link>
-            </>
-          )}
-        </div>
+
+      </div>
+      <div className="right-side">
+        <ImBell/>
+        <ImBubble/>
+        <ImUser/>
+
+      </div>
+
+      <div className="">
+        {Auth.loggedIn() ? (
+          <>
+            <Link to="/me">
+              {Auth.getProfile().data.username}
+            </Link>
+            <button  onClick={logout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">
+              Login
+            </Link>
+            <Link to="/signup">
+              Signup
+            </Link>
+          </>
+        )}
       </div>
     </header>
   );
