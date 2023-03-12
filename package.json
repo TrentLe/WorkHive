@@ -1,5 +1,5 @@
 {
-  "name": "programming-thoughts",
+  "name": "WorkHive",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -29,8 +29,7 @@
     "sass": "^1.59.2",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4"
-
-    "apollo-upload-client": "^17.0.0"
+ 
 
   }
 }
