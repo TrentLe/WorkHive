@@ -3,8 +3,14 @@ import { useQuery } from '@apollo/client';
 
 import ThoughtList from '../components/ThoughtList';
 import ThoughtForm from '../components/ThoughtForm';
+// import Stories from '../components/stories'
 
 import { QUERY_THOUGHTS } from '../utils/queries';
+import "./home.scss"
+import Header from '../components/Header';
+import Left from '../components/left/left';
+import Right from '../components/right/right';
+
 
 const Home = () => {
   const { loading, data } = useQuery(QUERY_THOUGHTS);
@@ -12,23 +18,23 @@ const Home = () => {
 
   return (
     <main>
-      <div className="flex-row justify-center">
-        <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: '1px dotted #1a1a1a' }}
-        >
-          <ThoughtForm />
-        </div>
-        <div className="col-12 col-md-8 mb-3">
+      <nav>
+
+      {/* <Header/> */}
+      </nav>
+      <div className="feed-container">
+        <Left/>
+        {/* <ThoughtForm /> */}
           {loading ? (
             <div>Loading...</div>
           ) : (
             <ThoughtList
               thoughts={thoughts}
-              title="Some Feed for Thought(s)..."
+              // title="Some Feed for Thought(s)..."
             />
           )}
-        </div>
+      
+        <Right/>
       </div>
     </main>
   );

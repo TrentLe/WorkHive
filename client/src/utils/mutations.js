@@ -99,3 +99,34 @@ export const UPLOAD_IMAGE = gql`
     }
   }
 `;
+
+export const ADD_FOLLOW = gql`
+  mutation addFollow($followId: ID!) {
+    addFollow(followId: $followId) {
+      _id
+      username
+      email
+      followerCount
+      followers {
+        _id
+        username
+      }
+    }
+  }
+`;
+
+export const REMOVE_FOLLOW = gql`
+  mutation removeFollow($followId: ID!) {
+    removeFollow(followId: $followId) {
+      _id
+      username
+      email
+      followerCount
+      followers {
+        _id
+        username
+      }
+    }
+  }
+`;
+

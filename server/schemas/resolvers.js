@@ -217,6 +217,20 @@ const resolvers = {
         throw new Error('Error deleting company');
       }
     },
+    addFollow: async (parent, { userId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { following: userId } },
+          { $addToSet: { followers: context.user._id } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    
+
   },
 };
 

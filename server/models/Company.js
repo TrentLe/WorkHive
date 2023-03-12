@@ -39,6 +39,13 @@ const companySchema = new Schema({
       ref: 'Thought',
     },
   ],
+  following: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      ref: 'Company',
+    },
+  ],
 });
 
 companySchema.pre('save', async function (next) {

@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/client';
 
 import { ADD_THOUGHT } from '../../utils/mutations';
 import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
+import "./postbox.scss"
 
 import Auth from '../../utils/auth';
 
@@ -64,40 +65,39 @@ const ThoughtForm = () => {
   };
 
   return (
-    <div>
-      <h3>What's on your techy mind?</h3>
+    <div className='postbox'>
 
       {Auth.loggedIn() ? (
         <>
           <p
-            className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
-            }`}
+            // className={`m-0 ${
+            //   characterCount === 280 || error ? 'text-danger' : ''
+            // }`}
           >
             Character Count: {characterCount}/280
           </p>
           <form
-            className="flex-row justify-center justify-space-between-md align-center"
+            className=""
             onSubmit={handleFormSubmit}
           >
-            <div className="col-12 col-lg-9">
-              <textarea
+            <div className="">
+              <input
                 name="thoughtText"
-                placeholder="Here's a new thought..."
+                placeholder="Create new post..."
                 value={thoughtText}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
+                className=""
+                style={{}}
                 onChange={handleChange}
-              ></textarea>
+              ></input>
             </div>
 
-            <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
+            <div className="">
+              <button className="" type="submit">
                 Add Thought
               </button>
             </div>
             {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
+              <div className="">
                 {`Reporting to the Hive...`}
               </div>
             )}

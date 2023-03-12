@@ -20,7 +20,14 @@ import Profile from './pages/Profile';
 import Header from './components/Header';
 import Meetup from './pages/Meetup';
 import Footer from './components/Footer';
+
+// import { DarkModeContext } from "./context/darkModeContext.js";
+// import { useContext } from 'react';
+
+
+
 import { getMainDefinition } from '@apollo/client/utilities';
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -61,13 +68,30 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+
 function App() {
+  // const { darkMode } = useContext(DarkModeContext);
+
+  // const Layout = () => {
+  //   return (
+  //     <div className={`theme-${darkMode ? "dark" : "light"}`}>
+  //       <Header />
+  //       <div style={{ display: "flex" }}>
+       
+  //         <div style={{ flex: 6 }}>
+           
+  //         </div>
+         
+  //       </div>
+  //     </div>
+  //   );
+  // };
   return (
     <ApolloProvider client={client}>
       <Router>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
-          <div className="container">
+          <div className="">
             <Routes>
               <Route 
                 path="/"
@@ -99,7 +123,7 @@ function App() {
               />
             </Routes>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     </ApolloProvider>
