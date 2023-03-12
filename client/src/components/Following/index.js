@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_FOLLOW } from '../../utils/mutations';
-import { QUERY_FOLLOWEDUSER } from '../../utils/queries';
+import { QUERY_FOLLOWING } from '../../utils/queries';
 
 import Auth from '../../utils/auth';
 
@@ -12,9 +12,9 @@ const FollowForm = () => {
 const [addFollow, { error }] = useMutation(ADD_FOLLOW, {
     update(cache, { data: { addFollow } }) {
         try {
-            const { followedUser } = cache.readQuery({ query: QUERY_FOLLOWEDUSER });
+            const { followedUser } = cache.readQuery({ query: QUERY_FOLLOWING });
             cache.writeQuery({
-                query: QUERY_FOLLOWEDUSER,
+                query: QUERY_FOLLOWING,
                 data: { followedUser: [addFollow, ...followedUser] },
             });
         } catch (e) {

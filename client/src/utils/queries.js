@@ -58,3 +58,12 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_FOLLOWING = gql`
+  query following {
+    following {
+      _id
+      username  
+    }
+  }`;
+  
