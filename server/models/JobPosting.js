@@ -18,7 +18,7 @@ const jobpostingSchema = new Schema({
   },
   author: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'Company',
     required: true,
     trim: true,
   },

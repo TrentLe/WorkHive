@@ -171,6 +171,52 @@ const resolvers = {
         url: `http://localhost:3000/public/images/${filename}`
       }
     },
+    updateUser: async (_, { id, username, email, password, profilePicture, bio }) => {
+      const user = await User.findByIdAndUpdate(
+        id,
+        { username, email, password, profilePicture, bio, },
+        { new: true }
+      );
+      return user;
+    },
+    updateCompany: async (_, { id, companyname, email, password, profilePicture, bio }) => {
+      const company = await Company.findByIdAndUpdate(
+        id,
+        { companyname, email, password, profilePicture, bio, },
+        { new: true }
+      );
+      return company;
+    },
+    deleteUser: async (parent, { userId }, context) => {
+      try {
+        const deletedUser = await User.findOneAndDelete({ _id: userId });
+        if (!deletedUser) {
+          throw new Error('User not found');
+        }
+        // delete related thoughts
+        await Thought.deleteMany({ thoughtAuthor: deletedUser.username });
+        // delete related job postings
+        return { message: 'User deleted successfully' };
+      } catch (err) {
+        console.log(err);
+        throw new Error('Error deleting user');
+      }
+    },
+    deleteCompany: async (parent, { companyId }, context) => {
+      try {
+        const deletedCompany = await Company.findOneAndDelete({ _id: companyId });
+        if (!deletedCompany) {
+          throw new Error('Company not found');
+        }
+        await Thought.deleteMany({ thoughtAuthor: deletedCompany.companyname });
+        // delete related job postings
+        await JobPosting.deleteMany({ author: deletedCompany.companyname });
+        return { message: 'Company deleted successfully' };
+      } catch (err) {
+        console.log(err);
+        throw new Error('Error deleting company');
+      }
+    },
   },
 };
 

@@ -5,7 +5,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-import { ApolloLink, split } from '@apollo/client/link/core'
+import { split } from '@apollo/client/link/core'
 import { createUploadLink }  from 'apollo-upload-client'
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
