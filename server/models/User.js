@@ -19,6 +19,14 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
+  bio: {
+    type: String,
+    minlength: 20,
+    maxlength: 1000,
+  },
+  profilepicture: {
+    type: String,
+  },
   thoughts: [
     {
       type: Schema.Types.ObjectId,

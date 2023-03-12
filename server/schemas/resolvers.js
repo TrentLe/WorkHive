@@ -171,6 +171,22 @@ const resolvers = {
         url: `http://localhost:3000/public/images/${filename}`
       }
     },
+    updateUser: async (_, { id, username, email, password, profilePicture, bio }) => {
+      const user = await User.findByIdAndUpdate(
+        id,
+        { username, email, password, profilePicture, bio, },
+        { new: true }
+      );
+      return user;
+    },
+    updateCompany: async (_, { id, companyname, email, password, profilePicture, bio }) => {
+      const company = await Company.findByIdAndUpdate(
+        id,
+        { companyname, email, password, profilePicture, bio, },
+        { new: true }
+      );
+      return company;
+    },
   },
 };
 

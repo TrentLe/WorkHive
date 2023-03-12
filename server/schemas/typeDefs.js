@@ -5,8 +5,9 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    password: String
-    jobPostings: [JobPosting]!
+    password: String    
+    bio: String
+    profilePicture: String
     thoughts: [Thought]!
   }
 
@@ -15,6 +16,8 @@ const typeDefs = gql`
     companyname: String
     email: String
     password: String
+    bio: String
+    profilePicture: String
     jobPostings: [JobPosting]!
     thoughts: [Thought]!
   }
@@ -76,7 +79,9 @@ const typeDefs = gql`
     removeJobPosting(jobpostingId: ID!): JobPosting!
     likeJobPosting(jobpostingId: ID!): JobPosting!
     addCompany(email: String!, password: String!, companyname: String!): Auth!
-    uploadImage(file: Upload!): File!    
+    uploadImage(file: String!): File!
+    updateUser(id: ID!, username: String, email: String, password: String, profilePicture: String, bio: String): User
+    updateCompany(id: ID!, companyname: String, email: String, password: String, profilePicture: String, bio: String): Company  
   }
 `;
 
