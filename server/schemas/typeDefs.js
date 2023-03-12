@@ -81,7 +81,9 @@ const typeDefs = gql`
     addCompany(email: String!, password: String!, companyname: String!): Auth!
     uploadImage(file: String!): File!
     updateUser(id: ID!, username: String, email: String, password: String, profilePicture: String, bio: String): User
-    updateCompany(id: ID!, companyname: String, email: String, password: String, profilePicture: String, bio: String): Company  
+    updateCompany(id: ID!, companyname: String, email: String, password: String, profilePicture: String, bio: String): Company
+    deleteUser(userId: ID!): User
+    deleteCompany(companyId: ID!): Company
   }
 `;
 
