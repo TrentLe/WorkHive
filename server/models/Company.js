@@ -19,6 +19,14 @@ const companySchema = new Schema({
     required: true,
     minlength: 5,
   },
+  bio: {
+    type: String,
+    minlength: 20,
+    maxlength: 1000,
+  },
+  profilepicture: {
+    type: String,
+  },
   jobpostings: [
     {
       type: Schema.Types.ObjectId,
@@ -29,6 +37,13 @@ const companySchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'Thought',
+    },
+  ],
+  following: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      ref: 'Company',
     },
   ],
 });

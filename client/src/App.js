@@ -5,8 +5,11 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+import { split } from '@apollo/client/link/core'
+import { createUploadLink }  from 'apollo-upload-client'
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 // Import pages and components
 import Home from './pages/Home';
@@ -15,10 +18,15 @@ import Login from './pages/Login';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Header from './components/Header';
+import Meetup from './pages/Meetup';
 import Footer from './components/Footer';
+
 // import { DarkModeContext } from "./context/darkModeContext.js";
 // import { useContext } from 'react';
 
+
+
+import { getMainDefinition } from '@apollo/client/utilities';
 
 
 // Construct our main GraphQL API endpoint
@@ -38,9 +46,24 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
+// This where what I am not sure of starts <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< beginning
+// Create an Apollo link for file uploads
+const uploadLink = createUploadLink({ uri: 'http://localhost:3000'})
 
+// Split function is to send HTTP requests through the HTTP link
+//with authentication headers, and file uploads through the upload link
+const link = split(
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'mutation';
+  },
+  uploadLink,
+  authLink.concat(httpLink)  
+)
+// This is where what I am not sure of ends <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 const client = new ApolloClient({
   // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
+  // link: authLink.concat(httpLink), <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< This was here before my edit! bring it back if this doesn't work!!
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
@@ -85,6 +108,10 @@ function App() {
               <Route 
                 path="/me"
                 element={<Profile />}
+              />
+                <Route 
+                path="/meetup"
+                element={<Meetup />}
               />
               <Route 
                 path="/profiles/:username"

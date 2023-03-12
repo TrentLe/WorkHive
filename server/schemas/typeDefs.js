@@ -5,9 +5,11 @@ const typeDefs = gql`
     _id: ID
     username: String
     email: String
-    password: String
-    jobPostings: [JobPosting]!
+    password: String    
+    bio: String
+    profilePicture: String
     thoughts: [Thought]!
+    followers: [User]!
   }
 
   type Company {
@@ -15,6 +17,8 @@ const typeDefs = gql`
     companyname: String
     email: String
     password: String
+    bio: String
+    profilePicture: String
     jobPostings: [JobPosting]!
     thoughts: [Thought]!
   }
@@ -43,6 +47,10 @@ const typeDefs = gql`
     createdAt: String
   }
 
+  type File {
+    url: String!
+  }
+
 
   type Auth {
     token: String!
@@ -59,18 +67,26 @@ const typeDefs = gql`
     thought(thoughtId: ID!): Thought
     companies: [Company]
     company(companyname: String): Company
+    followers: [User]
   }
 
 
   type Mutation {
     addUser(email: String!, password: String!, username: String!): Auth!
     login(email: String!, password: String!): Auth!
+    companyLogin(email: String!, password: String!): Auth!
     createJobPosting(title: String!, description: String!, Author: String!): JobPosting!
     addThought(thoughtText: String!): Thought
     removeThought(thoughtId: ID!): Thought
     removeJobPosting(jobpostingId: ID!): JobPosting!
     likeJobPosting(jobpostingId: ID!): JobPosting!
-    addCompany(email: String!, password: String!, companyname: String!): Auth!    
+    addCompany(email: String!, password: String!, companyname: String!): Auth!
+    uploadImage(file: String!): File!
+    updateUser(id: ID!, username: String, email: String, password: String, profilePicture: String, bio: String): User
+    updateCompany(id: ID!, companyname: String, email: String, password: String, profilePicture: String, bio: String): Company
+    deleteUser(userId: ID!): User
+    deleteCompany(companyId: ID!): Company
+    addFollow(userId: ID!): User
   }
 `;
 
