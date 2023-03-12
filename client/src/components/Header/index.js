@@ -36,6 +36,7 @@ const Header = () => {
   };
   
   return (
+
     <header className="navbar">
       <div className="left-side">
         <Link to="/" style={{textDecoration:'none'}}>

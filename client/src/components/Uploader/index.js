@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { UPLOAD_IMAGE } from './mutations';
+import { UPLOAD_IMAGE } from '../../utils/mutations';
 import './Uploader.css';
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';

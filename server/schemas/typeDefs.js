@@ -28,8 +28,9 @@ const typeDefs = gql`
     title: String!
     description: String!
     createdAt: String!
-    author: User!
+    author: Company!
     likes: Int!
+    comments: [Comment]!
   }
 
   type Thought {
@@ -75,11 +76,11 @@ const typeDefs = gql`
     addUser(email: String!, password: String!, username: String!): Auth!
     login(email: String!, password: String!): Auth!
     companyLogin(email: String!, password: String!): Auth!
-    createJobPosting(title: String!, description: String!, Author: String!): JobPosting!
+    createJobPosting(title: String!, description: String!): JobPosting
     addThought(thoughtText: String!): Thought
     removeThought(thoughtId: ID!): Thought
-    removeJobPosting(jobpostingId: ID!): JobPosting!
-    likeJobPosting(jobpostingId: ID!): JobPosting!
+    removeJobPosting(jobpostingId: ID!): JobPosting
+    likeJobPosting(jobpostingId: ID!): JobPosting
     addCompany(email: String!, password: String!, companyname: String!): Auth!
     uploadImage(file: String!): File!
     updateUser(id: ID!, username: String, email: String, password: String, profilePicture: String, bio: String): User
