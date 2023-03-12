@@ -79,15 +79,15 @@ const resolvers = {
       return { token, company };
     },
     createJobPosting: async (parent, { title, description}, context) => {
-      if (context.user) {
+      if (context.company) {
         const jobPosting = await JobPosting.create({
           title,
           description,
-          Author: context.user.username,
+          author: context.company.companyname,
         });
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
+        await Company.findOneAndUpdate(
+          { _id: context.company._id },
           { $addToSet: { jobpostings: jobposting._id } }
         );
 
@@ -96,14 +96,14 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     removeJobPosting: async (parent, { jobpostingId }, context) => {
-      if (context.user) {
+      if (context.company) {
         const jobposting = await JobPosting.findOneAndDelete({
           _id: jobpostingId,
-          Author: context.user.username,
+          author: context.company.companyname,
         });
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
+        await Company.findOneAndUpdate(
+          { _id: context.company._id },
           { $pull: { jobpostings: jobposting._id } }
         );
 
