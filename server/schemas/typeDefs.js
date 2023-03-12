@@ -9,6 +9,7 @@ const typeDefs = gql`
     bio: String
     profilePicture: String
     thoughts: [Thought]!
+    followers: [User]!
   }
 
   type Company {
@@ -66,6 +67,7 @@ const typeDefs = gql`
     thought(thoughtId: ID!): Thought
     companies: [Company]
     company(companyname: String): Company
+    followers: [User]
   }
 
 
@@ -84,6 +86,7 @@ const typeDefs = gql`
     updateCompany(id: ID!, companyname: String, email: String, password: String, profilePicture: String, bio: String): Company
     deleteUser(userId: ID!): User
     deleteCompany(companyId: ID!): Company
+    addFollow(userId: ID!): User
   }
 `;
 
