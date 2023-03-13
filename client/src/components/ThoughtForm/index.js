@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 
-import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
-import "./postbox.scss"
+import { ADD_THOUGHT } from "../../utils/mutations";
+import { QUERY_THOUGHTS, QUERY_ME } from "../../utils/queries";
+import "./postbox.scss";
 
-import Auth from '../../utils/auth';
+import Auth from "../../utils/auth";
+ import { FiUpload} from "react-icons/fi";
 
 const ThoughtForm = () => {
-  const [thoughtText, setThoughtText] = useState('');
+  const [thoughtText, setThoughtText] = useState("");
 
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -46,7 +47,7 @@ const ThoughtForm = () => {
         },
       });
 
-      setThoughtText('')
+      setThoughtText("");
       setCharacterCount(0);
     } catch (err) {
       console.error(err);
@@ -58,57 +59,53 @@ const ThoughtForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'thoughtText' && value.length <= 280) {
+    if (name === "thoughtText" && value.length <= 280) {
       setThoughtText(value);
       setCharacterCount(value.length);
     }
   };
 
   return (
-    <div className='postbox'>
-
-      {Auth.loggedIn() ? (
-        <>
-          <p
-            // className={`m-0 ${
-            //   characterCount === 280 || error ? 'text-danger' : ''
-            // }`}
-          >
-            Character Count: {characterCount}/280
-          </p>
-          <form
-            className=""
-            onSubmit={handleFormSubmit}
-          >
-            <div className="">
-              <input
-                name="thoughtText"
-                placeholder="Create new post..."
-                value={thoughtText}
-                className=""
-                style={{}}
-                onChange={handleChange}
-              ></input>
-            </div>
-
-            <div className="">
-              <button className="" type="submit">
-                Add Thought
-              </button>
-            </div>
-            {error && (
+    <div className="postbox">
+        
+          <div className="container">
+            <div className="user">
+            <div className="userinfo">
+            <img src='https://deadline.com/wp-content/uploads/2022/12/Garcelle-Crop2_cred-Erick-Robinson.png?w=681&h=383&crop=1' alt="" />
+            <form className="" onSubmit={handleFormSubmit}>
               <div className="">
-                {`Reporting to the Hive...`}
+                <input
+                  name="thoughtText"
+                  placeholder="Create new post..."
+                  value={thoughtText}
+                  className=""
+                  style={{}}
+                  onChange={handleChange}
+                ></input>
               </div>
-            )}
-          </form>
-        </>
-      ) : (
-        <p>
-          You need to be logged in to share your thoughts. Please{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
-      )}
+              <div className="info">
+                <div className="item">
+              <FiUpload/>
+              <span>Upload</span>
+              </div>
+              <div className="item">
+                <button className="" type="submit">
+                  Post
+                </button>
+              </div>
+              {error && <div className="">{`Reporting to the Hive...`}</div>}
+
+            </div>
+            </form>
+            {/* <div>
+              <FiUpload/>
+            </div> */}
+            </div>
+            </div>
+          </div>
+        
+     
+    
     </div>
   );
 };

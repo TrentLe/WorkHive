@@ -63,7 +63,7 @@ const ThoughtList = ({
             </div>
             <div className="content">
               <p>{thought.thoughtText}</p>
-              {/* <img src='https://images.squarespace-cdn.com/content/v1/5403e5dbe4b04db10d1d362b/1606158340808-NBB1M20E984MM9XHV733/Samuel-Ramsey_For-The-Wild_Image1.jpg?format=500w' alt="" /> */}
+              <img src='https://images.squarespace-cdn.com/content/v1/5403e5dbe4b04db10d1d362b/1606158340808-NBB1M20E984MM9XHV733/Samuel-Ramsey_For-The-Wild_Image1.jpg?format=500w' alt="" />
             </div>
             <div className='info'>
               <div className='item'>

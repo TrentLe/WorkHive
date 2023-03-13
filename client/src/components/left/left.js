@@ -5,6 +5,9 @@ import Auth from '../../utils/auth';
  import { FiUsers } from "react-icons/fi";
  import { GoCalendar} from "react-icons/go";
  import { GoBriefcase} from "react-icons/go";
+import {  CiStreamOn} from "react-icons/ci";
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -71,13 +74,17 @@ const Left = () => {
         <hr />
         <div className="menu">
           <span>Others</span>
+          
           <div className="icon">
             
             <span>Fundraiser</span>
           </div>
           <div className="icon">
+            <Link to={'/meetup'}>
+            <CiStreamOn/>
+            </Link>
             
-            <span>Tutorials</span>
+            <span>Interviews</span>
           </div>
           <div className="icon">
            
