@@ -27,6 +27,7 @@ import Footer from './components/Footer';
 
 
 import { getMainDefinition } from '@apollo/client/utilities';
+import Left from './components/left/left';
 
 
 // Construct our main GraphQL API endpoint
@@ -91,6 +92,7 @@ function App() {
       <Router>
         <div className="flex-column justify-flex-start min-100-vh">
           <Header />
+        
           <div className="">
             <Routes>
               <Route 

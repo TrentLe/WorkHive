@@ -1,10 +1,12 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
+import Left from "../components/left/left";
 
 function Meetup() {
   return (
     <div style={{ textAlign: "center" }}>
       <h1>ONLINE JOB FAIR</h1>
+     
       <div style={{ display: "flex" }}>
         <div style={{ flex: 1, fontFamily: "Comic Sans MS", fontSize: "60px" }}>
           <p>
