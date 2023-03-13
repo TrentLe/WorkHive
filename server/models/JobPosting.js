@@ -6,7 +6,7 @@ const jobpostingSchema = new Schema({
     type: String,
     required: 'You need to add a description!',
     minlength: 1,
-    maxlength: 1000,
+    maxlength: 2000,
     trim: true,
   },
   title: {

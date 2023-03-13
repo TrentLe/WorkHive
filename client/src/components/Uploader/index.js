@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { UPLOAD_IMAGE } from '../../utils/mutations';
-import './Uploader.css';
+
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 
 function Uploader() {
-
   const [image, setImage] = useState(null);
-  const [fileName, setFileName] = useState("No selected file")
+  const [fileName, setFileName] = useState("No selected file");
+  const [file, setFile] = useState(null);
+
   const [uploadImage] = useMutation(UPLOAD_IMAGE, {
     onCompleted: (data) => {
       console.log(data.uploadImage.url);
@@ -16,9 +17,13 @@ function Uploader() {
   });
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setFileName(file.name);
-    setImage(URL.createObjectURL(file));
+    const selectedFile = event.target.files[0];
+    setFileName(selectedFile.name);
+    setImage(URL.createObjectURL(selectedFile));
+    setFile(selectedFile);
+  };
+
+  const handleSaveClick = () => {
     uploadImage({ variables: { file } });
   };
 
@@ -50,9 +55,12 @@ function Uploader() {
           <MdDelete onClick={() => {
             setFileName("No selected File")
             setImage(null)
+            setFile(null);
           }} />
         </span>
       </section>
+
+      <button onClick={handleSaveClick}>Save</button>
     </main>
   );
 }
