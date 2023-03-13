@@ -1,7 +1,9 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+const cors = require('cors')
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -14,6 +16,20 @@ const server = new ApolloServer({
   resolvers,
   context: authMiddleware,
 });
+
+// Additions to this file - check if broken
+
+
+// app.use(express.static('public'))
+// app.use(cors())
+
+// app.use('/uploads', express.static('uploads')); // Serve uploaded files
+
+// app.post('/upload', upload.single('file'), (req, res) => {
+//   const { filename, mimetype, path } = req.file;
+//   res.json({ filename, mimetype, path });
+// });
+//Additions end here ^^
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

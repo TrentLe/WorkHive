@@ -39,7 +39,14 @@ const userSchema = new Schema({
       ref: 'User',
       ref: 'Company',
     },
-  ]
+  ],
+  followers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      ref: 'Company',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {

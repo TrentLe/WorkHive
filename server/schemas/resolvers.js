@@ -4,7 +4,9 @@ const { signToken } = require('../utils/auth');
 const fs = require('fs')
 const path = require('path')
 
+
 const resolvers = {
+
   Query: {
     users: async () => {
       return User.find()
@@ -164,11 +166,11 @@ const resolvers = {
       const { createReadStream, filename, mimetype, encoding } = await file
 
       const stream = createReadStream()
-      const pathName = path.join(__dirname, `../public/images/${filename}`)
+      const pathName = path.join(__dirname, `./public/images/${filename}`)
       await stream.pipe(fs.createWriteStream(pathName))
       
       return {
-        url: `http://localhost:3000/public/images/${filename}`
+        url: `http://localhost:3001/public/images/${filename}`
       }
     },
     updateUser: async (_, { id, username, email, password, profilePicture, bio }) => {
@@ -219,13 +221,35 @@ const resolvers = {
     },
     addFollow: async (parent, { userId }, context) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
+        const followingUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { following: userId } },
-          { $addToSet: { followers: context.user._id } },
           { new: true }
         );
-        return updatedUser;
+
+        const followerUser = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { followers: context.user._id } },
+          { new: true }
+        )
+        return { followingUser, followerUser };
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeFollow: async (parent, { userId }, context) => {
+      if (context.user) {
+        const followingUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { following: userId } },
+          { new: true }
+        );
+
+        const followerUser = await User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { followers: context.user._id } },
+          { new: true }
+        )
+        return { followingUser, followerUser };
       }
       throw new AuthenticationError('You need to be logged in!');
     },
