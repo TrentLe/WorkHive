@@ -7,7 +7,7 @@ function Meetup() {
     <div style={{ textAlign: "center" }}>
 
       <h1>' ONLINE JOB FAIR! '</h1>
-
+    
       <div style={{ display: "flex" }}>
         <div
           style={{
@@ -48,8 +48,14 @@ function Meetup() {
             allowfullscreen
             autoplay
           ></iframe>
+          <p style={{ fontSize: "30px", fontFamily: "Courier New", 
+          marginTop: "25%", backgroundColor: "#fafad2", borderRadius: "100px"}}>
+            ` Join the online social media revolution today and take your career to the next level! `</p>
         </div>
       </div>
+
+        <hr />
+
       <div style={{ alignItems: "center", marginTop: "3px" }}>
         <div style={{ flex: 1, margin: "10px" }}>
           
@@ -57,19 +63,21 @@ function Meetup() {
             ' ONLINE INTERVIEWS ON THE SPOT! '
           </h1>
           <img
-            src="https://hs-marketing-contentful.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2Fp15sglj92v6o%2F5v2ZmCnMGWrlijhzQu71kp%2Fdfb7161399697588d92bc68c9fbaf4db%2Fvideo-interview-placement.jpeg?ixlib=gatsbySourceUrl-2.1.1&auto=format%2C%20compress&w=720&h=482&s=dea394097ea96104389c1528641a6fd5"
-            alt="On the spot interview"
-            style={{ maxWidth: "100%", height: "auto", }}
-          />
+  src="https://hs-marketing-contentful.imgix.net/https%3A%2F%2Fimages.ctfassets.net%2Fp15sglj92v6o%2F5v2ZmCnMGWrlijhzQu71kp%2Fdfb7161399697588d92bc68c9fbaf4db%2Fvideo-interview-placement.jpeg?ixlib=gatsbySourceUrl-2.1.1&auto=format%2C%20compress&w=720&h=482&s=dea394097ea96104389c1528641a6fd5"
+  alt="On the spot interview"
+  style={{ maxWidth: "100%", height: "auto", border: "20px solid #fafad2", boxShadow: "5px 5px 5px rgba(211, 211, 211, 8.5)" }}
+/>
         </div>
+        <img src="https://esapet.org/wp-content/uploads/2020/01/ChatWithUs-300x300-1.png" width="150" height="150" />
 
         
         <div
-          style={{ display: "flex", fontFamily: "Comic Sans MS", marginTop: "20%",
+          style={{ display: "flex", fontFamily: "Comic Sans MS", marginTop: "7%",
           }}
         ></div>
-        <div style={{ textAlign: "center", marginTop: "3px" }}>
-        <h1>' ON THE SPOT INTERVIEWS!'</h1></div>
+        
+        <div style={{ textAlign: "center", margin: "20px" }}>
+        <h1>' ON THE SPOT INTERVIEWS! '</h1></div>
         <div style={{ display: "flex", fontFamily: "Comic Sans MS" }}>
           <div style={{ flex: 1 }}>
             <iframe
@@ -82,7 +90,11 @@ function Meetup() {
               allowfullscreen
               autoplay
             ></iframe>
+            <p style={{ marginTop: "12%", fontSize: "30px", fontFamily: "Courier New", backgroundColor: "#fafad2", borderRadius: "100px"}}>
+              "Remember, every day is a new opportunity to achieve your dreams and become the best version of yourself. 
+            Stay positive, work hard, and believe in yourself, and you'll be amazed at what you can accomplish!"</p>
           </div>
+          
           <div
     style={{
       flex: 1,
