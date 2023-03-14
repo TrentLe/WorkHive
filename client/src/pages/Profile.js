@@ -46,7 +46,7 @@ const handleFollow = (user) => {
     <div className="">
       
       <div className="">
-        <Left/>
+   
         
         <h2 className="">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
