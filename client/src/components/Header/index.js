@@ -33,6 +33,7 @@ const Header = () => {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
+    
   };
   
   return (
@@ -78,11 +79,9 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link to="/login">
-              Login
-            </Link>
-            <Link to="/signup">
-              Signup
+            <Link to="/LandingPage">
+              Login or Signup           
+
             </Link>
           </>
         )}
