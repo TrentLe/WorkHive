@@ -43,12 +43,12 @@ const handleFollow = (user) => {
   }
 
   return (
-    <div>
+    <div className="">
       
       <div className="">
-        <Left/>
+   
         
-        <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
+        <h2 className="">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
 <button onClick={() => handleFollow(user)}>Follow {user.username}</button>
@@ -67,6 +67,7 @@ const handleFollow = (user) => {
           >
             <ThoughtForm />
           </div>
+          
         )}
       </div>
     </div>
