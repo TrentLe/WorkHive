@@ -20,17 +20,17 @@ import LandingPage from './pages/LandingPage';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Header from './components/Header';
-
 import Meetup from './pages/Meetup';
-import Footer from './components/Footer';
+import AuthRequired from './components/AuthRequired/AuthRequired';
+
 
 // import { DarkModeContext } from "./context/darkModeContext.js";
 // import { useContext } from 'react';
 
 
 
-import { getMainDefinition } from '@apollo/client/utilities';
-import Left from './components/left/left';
+// import { getMainDefinition } from '@apollo/client/utilities';
+// import Left from './components/left/left';
 
 
 // Construct our main GraphQL API endpoint
@@ -99,30 +99,15 @@ function App() {
         
           <div className="">
             <Routes>
-            <Route 
-                path="/LandingPage"
-                element={<LandingPage />}
-              />
-              <Route
-                path="/"
-                element={<Home />}
-              />
-              <Route 
-                path="/me"
-                element={<Profile />}
-              />
-
-                <Route 
-                path="/meetup"
-                element={<Meetup />}
-              />
-              <Route 
-                path="/profiles/:username"
-                element={<Profile />}
-              />
-              <Route 
-                path="/thoughts/:thoughtId"
-                element={<SingleThought />}
+            <Route path="/LandingPage" element={<LandingPage />} />
+              
+              <Route path="/me" element={<Profile />} />
+              <Route element={<AuthRequired />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/meetup" element={<Meetup />} />
+              </Route>
+              <Route path="/profiles/:username" element={<Profile />} />
+              <Route path="/thoughts/:thoughtId" element={<SingleThought />}
               />
             </Routes>
           </div>
