@@ -57,7 +57,7 @@ const Left = () => {
          <Link to="/contact">
           <CiMail />
           </Link>
-          <span>Contact</span>
+          <span>Contact Us</span>
            </div>
         </div>
         <hr />

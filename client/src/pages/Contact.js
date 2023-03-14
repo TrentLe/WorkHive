@@ -2,19 +2,42 @@ import React, { useState } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Parallax.css';
+import { useMutation } from '@apollo/client';
+import { ADD_CONTACT } from '../utils/mutations';
 
 function Contact() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [formState, setFormState] = useState({name: '', email: '', message: ''});
+  const [addContact, {error, data}] = useMutation(ADD_CONTACT)
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormState({
+    ...formState,
+    [name]: value,
+  });
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`Name: ${name}, Email: ${email}, Message: ${message}`);
+    console.log(formState);
+    try {
+      const { data } = await addContact({
+        variables: { ...formState },
+        });
+    } catch (e) {
+      console.error(e);
+    }
+
+    setFormState({
+      name: '',
+      email: '',
+      message: '',
+    });
+    }
     // Send the form data to the server using fetch or Axios
-  };
+  
 
   return (
+    
     <div className="parallax">
       <div className="parallax-overlay">
       <h1 style={{ marginTop: '100px' }} className="hd-text text-center">Shaping the Future of Business.</h1>
@@ -28,8 +51,9 @@ function Contact() {
                 type="text"
                 className="form-control"
                 id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={formState.name}
+                name="name"
+                onChange={handleChange}
                 required
                 style={{ width: "200px", fontSize: "1.2rem", padding: "10px" }}
               />
@@ -40,8 +64,9 @@ function Contact() {
                 type="email"
                 className="form-control"
                 id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formState.email}
+                name="email"
+                onChange={handleChange}
                 required
                 style={{ width: "200px", fontSize: "1.2rem", padding: "10px" }}
               />
@@ -51,8 +76,9 @@ function Contact() {
               <textarea
                 className="form-control"
                 id="message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                name="message"
+                value={formState.message}
+                onChange={handleChange}
                 required
                 style={{ width: "200px", fontSize: "1.2rem", padding: "10px", height: "150px" }}
               />
@@ -65,6 +91,6 @@ function Contact() {
       </div>
     </div>
   );
-}
+  }
 
 export default Contact;
