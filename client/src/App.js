@@ -20,6 +20,10 @@ import LandingPage from './pages/LandingPage';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Header from './components/Header';
+
+
+import Contact from "./pages/Contact"; // import the Contact component
+
 import Meetup from './pages/Meetup';
 import AuthRequired from './components/AuthRequired/AuthRequired';
 
@@ -99,6 +103,7 @@ function App() {
         
           <div className="">
             <Routes>
+
             <Route path="/LandingPage" element={<LandingPage />} />
               
               <Route path="/me" element={<Profile />} />
@@ -108,10 +113,19 @@ function App() {
               </Route>
               <Route path="/profiles/:username" element={<Profile />} />
               <Route path="/thoughts/:thoughtId" element={<SingleThought />}
+
+           
+              <Route 
+                path="/contact"
+                element={<Contact />}
               />
+              
+             
+             
+              
             </Routes>
           </div>
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
     </ApolloProvider>

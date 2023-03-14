@@ -15,18 +15,10 @@ const Footer = () => {
             &larr; Go Back
           </button>
         )}
-        <h4>
-          Made with{' '}
-          <span
-            className="emoji"
-            role="img"
-            aria-label="heart"
-            aria-hidden="false"
-          >
-            ❤️
-          </span>{' '}
-          by the Tech Thoughts team.
-        </h4>
+        <div class="container">
+    <p>&copy; All Rights Reserved <a href="https://github.com/TrentLe/WorkHive">THE ISLAND BOYS</a></p>
+    <p>Phone: (555) 555-5555</p>
+  </div>
       </div>
     </footer>
   );
