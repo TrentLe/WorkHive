@@ -11,10 +11,12 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
+
 // Import pages and components
 import Home from './pages/Home';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
+// import Signup from './components/Signup/Signup';
+// import Login from './components/Login/Login';
+import LandingPage from './pages/LandingPage';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Header from './components/Header';
@@ -97,17 +99,13 @@ function App() {
         
           <div className="">
             <Routes>
-              <Route 
+            <Route 
+                path="/LandingPage"
+                element={<LandingPage />}
+              />
+              <Route
                 path="/"
                 element={<Home />}
-              />
-              <Route 
-                path="/login"
-                element={<Login />}
-              />
-              <Route 
-                path="/signup"
-                element={<Signup />}
               />
               <Route 
                 path="/me"
@@ -136,3 +134,4 @@ function App() {
 }
 
 export default App;
+
