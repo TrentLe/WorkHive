@@ -56,6 +56,13 @@ const typeDefs = gql`
     mimetype: String!
   }
 
+  type Contact {
+    _id: ID
+    name: String
+    email: String
+    message: String
+  }
+
 
   type Auth {
     token: String!
@@ -74,6 +81,8 @@ const typeDefs = gql`
     company(companyname: String): Company
     followers: [User]
     following: [User]
+    contacts: [Contact]
+    contact(name: String): Contact
   }
 
 
@@ -94,6 +103,7 @@ const typeDefs = gql`
     deleteCompany(companyId: ID!): Company
     addFollow(userId: ID!): User
     removeFollow(userId: ID!): User
+    addContact(name: String, email: String, message: String): Contact
   }
 `;
 

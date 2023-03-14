@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, JobPosting, Thought, Company } = require('../models');
+const { User, JobPosting, Thought, Company, Contact } = require('../models');
 const { signToken } = require('../utils/auth');
 const fs = require('fs')
 const path = require('path')
@@ -33,6 +33,12 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    contacts: async () => {
+      return Contact.find()
+    },
+    contact: async () => {
+      return Contact.findOne({ name })
+    }
   },
 
   Mutation: {
@@ -253,7 +259,10 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    
+    addContact: async (parent, { name, email, message }) => {
+      const contact = await Contact.create({ name, email, message });
+      return { contact };
+    },
 
   },
 };
