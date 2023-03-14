@@ -66,47 +66,45 @@ const ThoughtForm = () => {
   };
 
   return (
-    <div className="postbox">
-        
-          <div className="container">
-            <div className="user">
-            <div className="userinfo">
-            <img src='https://deadline.com/wp-content/uploads/2022/12/Garcelle-Crop2_cred-Erick-Robinson.png?w=681&h=383&crop=1' alt="" />
-            <form className="" onSubmit={handleFormSubmit}>
-              <div className="">
-                <input
-                  name="thoughtText"
-                  placeholder="Create new post..."
-                  value={thoughtText}
-                  className=""
-                  style={{}}
-                  onChange={handleChange}
-                ></input>
-              </div>
-              <div className="info">
-                <div className="item">
-              <FiUpload/>
-              <span>Upload</span>
-              </div>
-              <div className="item">
-                <button className="" type="submit">
-                  Post
-                </button>
-              </div>
-              {error && <div className="">{`Reporting to the Hive...`}</div>}
-
-            </div>
-            </form>
-            {/* <div>
-              <FiUpload/>
-            </div> */}
-            </div>
-            </div>
-          </div>
-        
-     
-    
+    <form onSubmit={handleFormSubmit}>
+<div className="postbox">
+<div className="container">
+  <div className="top">
+    <img
+      src=''
+      alt=""
+    />
+    <input  placeholder={`What's on your mind ?`} name='thoughtText' value={thoughtText} onChange={handleChange} />
+  </div>
+  <hr />
+  
+  <div className="bottom">
+    <div className="lefty">
+      <input type="file" id="file" style={{display:"none"}}  />
+      <label htmlFor="file">
+        <div className="item">
+          <img src={Image} alt="" />
+          <span>Add Image</span>
+        </div>
+      </label>
+      <div className="item">
+        <img src={Map} alt="" />
+        <span></span>
+      </div>
+      <div className="item">
+        {/* <FileUploader/> */}
+        {/* <img src={Friend} alt="" /> */}
+        <span></span>
+      </div>
     </div>
+    <div className="righty">
+      <button  type="submit">Post</button>
+    </div>
+    {error && <div className="">{`Reporting to the Hive...`}</div>}
+  </div>
+</div>
+</div>
+</form>
   );
 };
 
