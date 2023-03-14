@@ -138,5 +138,6 @@ export const ADD_CONTACT = gql`
     name
   }
 }
+
 `;
 
