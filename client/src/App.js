@@ -19,6 +19,7 @@ import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 
+import Contact from "./pages/Contact"; // import the Contact component
 import Meetup from './pages/Meetup';
 import Footer from './components/Footer';
 
@@ -113,7 +114,10 @@ function App() {
                 path="/me"
                 element={<Profile />}
               />
-
+              <Route 
+                path="/contact"
+                element={<Contact />}
+              />
                 <Route 
                 path="/meetup"
                 element={<Meetup />}
