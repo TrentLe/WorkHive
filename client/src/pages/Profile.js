@@ -1,21 +1,65 @@
 import React, { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
-
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+// import Left from '../components/left/left';
 
 import Auth from '../utils/auth';
-import Left from '../components/left/left';
 
-const Profile = () => {
+import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { ADD_FOLLOW } from '../utils/mutations';
+import { QUERY_FOLLOWING } from '../utils/queries';
+import { REMOVE_FOLLOW} from '../utils/mutations';
+// import { QUERY_FOLLOWERS } from '../../utils/queries';
+
+const FollowButton = ({ userId, following }) => {
+  const [ isFollowing, setFollowing ] = useState(following);
+  const [ addFollow ] = useMutation(ADD_FOLLOW);
+  const [ removeFollower ] = useMutation(REMOVE_FOLLOW);
+
+  const handleFollow = async () => {
+    console.log('Function works ?');
+    console.log(userId);
+    if (isFollowing) {
+      try {
+        await removeFollower({
+          variables: { userId },
+        });
+        setFollowing(false);
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      try {
+        await addFollow({
+          variables: { userId },
+        });
+        setFollowing(true);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
+  return (
+    <button className="btn ml-auto" onClick={handleFollow}>
+      {isFollowing ? 'Unfollow' : 'Follow'}
+    </button>
+  );
+
+};
+const Profile = ({userID}) => {
+  // use this to determine if `useEffect()` hook needs to run again
   const { username: userParam } = useParams();
 
+  // if username is in the URL, execute the QUERY_USER query and return its data
   const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
+
 
   const [followed, setFollowed] = useState([]);
   const [bio, setBio] = useState('');
@@ -27,6 +71,7 @@ const Profile = () => {
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
+
 
   const user = data?.me || data?.user || {};
 
@@ -58,7 +103,7 @@ const Profile = () => {
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
         <button onClick={() => handleFollow(user)}>Follow {user.username}</button>
-        
+  
         <div className="col-12 col-md-10 mb-5">
           <ThoughtList
             thoughts={user.thoughts}

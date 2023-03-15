@@ -34,9 +34,10 @@ const LandingPage = () => {
   
     return (
 
-      <main>
-        <div className="container">
-          <Link to='/companylanding'><button>Signup or Login as a Compny</button></Link>
+
+      <section>
+        <container className="container">
+          <Link to='/companylanding'><button>Signup or Login as a Company</button></Link>
 
           <Login/>        
           <Signup/>

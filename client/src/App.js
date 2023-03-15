@@ -33,8 +33,10 @@ import CompanyLanding from './pages/CompanyLanding'
 
 
 
+
 // import { getMainDefinition } from '@apollo/client/utilities';
 // import Left from './components/left/left';
+
 
 
 // Construct our main GraphQL API endpoint
@@ -103,6 +105,7 @@ function App() {
         
           <div className="">
             <Routes>
+
               <Route path="/companylanding" element={<CompanyLanding />} />
               <Route path="/LandingPage" element={<LandingPage />} />              
               <Route path="/me" element={<Profile />} />
@@ -116,7 +119,7 @@ function App() {
               <Route path="/uploader" element={<Uploader />} />             
                          
              
-              
+          
             </Routes>
           </div>
           

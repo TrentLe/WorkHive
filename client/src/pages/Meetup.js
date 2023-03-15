@@ -28,7 +28,9 @@ function Meetup() {
             next step in your career.{" "}
           </p>
 <h1 style={{marginTop: "7%"}}>Sign up for our Jobs Newsletter today!</h1>
-<button href="#">Sign Up</button>
+
+<button href="/Contact">Sign Up</button>
+
 
           <img
             src="https://cdn.vectorstock.com/i/1000x1000/20/51/job-proposal-abstract-concept-vector-33672051.webp"
