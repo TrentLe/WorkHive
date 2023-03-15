@@ -48,9 +48,9 @@ const resolvers = {
       return { token, user };
     },
     addCompany: async (parent, { companyname, email, password }) => {
-      const user = await Company.create({ companyname, email, password });
-      const token = signToken(user);
-      return { token, user };
+      const company = await Company.create({ companyname, email, password });
+      const token = signToken(company);
+      return { token, company };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
