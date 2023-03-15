@@ -1,6 +1,9 @@
 import React from 'react';
 import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
+
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 import {motion} from 'framer-motion'
 import Left from '../components/left/left';
@@ -57,6 +60,20 @@ const LandingPage = () => {
            
 
           </div>
+
+
+const LandingPage = () => {
+
+  
+    return (
+
+
+      <section>
+        <container className="container">
+          <Link to='/companylanding'><button>Signup or Login as a Company</button></Link>
+
+          <Login/>        
+          <Signup/>
 
         </container>
 
