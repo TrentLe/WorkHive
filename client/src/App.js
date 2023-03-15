@@ -27,6 +27,7 @@ import Footer from './components/Footer';
 
 
 import { getMainDefinition } from '@apollo/client/utilities';
+import JobListing from './pages/Jobs';
 
 
 // Construct our main GraphQL API endpoint
@@ -121,6 +122,10 @@ function App() {
                 path="/thoughts/:thoughtId"
                 element={<SingleThought />}
               />
+              <Route
+                path="/jobs"
+                element={<JobListing />}
+                />
             </Routes>
           </div>
           {/* <Footer /> */}

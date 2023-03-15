@@ -12,13 +12,13 @@ import Auth from '../utils/auth';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import { ADD_FOLLOW } from '../utils/mutations';
 import { QUERY_FOLLOWING } from '../utils/queries';
-import { REMOVE_FOLLOWER } from '../ugit tils/mutations';
+import { REMOVE_FOLLOW} from '../utils/mutations';
 // import { QUERY_FOLLOWERS } from '../../utils/queries';
 
 const FollowButton = ({ userId, following }) => {
   const [ isFollowing, setFollowing ] = useState(following);
   const [ addFollow ] = useMutation(ADD_FOLLOW);
-  const [ removeFollower ] = useMutation(REMOVE_FOLLOWER);
+  const [ removeFollower ] = useMutation(REMOVE_FOLLOW);
 
   const handleFollow = async () => {
     console.log('Function works ?');
