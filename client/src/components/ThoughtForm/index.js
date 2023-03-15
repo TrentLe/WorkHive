@@ -8,6 +8,7 @@ import "./postbox.scss";
 
 import Auth from "../../utils/auth";
  import { FiUpload} from "react-icons/fi";
+import Uploader from "../Uploader";
 
 const ThoughtForm = () => {
   const [thoughtText, setThoughtText] = useState("");
@@ -71,7 +72,7 @@ const ThoughtForm = () => {
 <div className="container">
   <div className="top">
     <img
-      src=''
+      src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0'
       alt=""
     />
     <input  placeholder={`What's on your mind ?`} name='thoughtText' value={thoughtText} onChange={handleChange} />
@@ -88,13 +89,14 @@ const ThoughtForm = () => {
         </div>
       </label>
       <div className="item">
-        <img src={Map} alt="" />
+     
         <span></span>
       </div>
       <div className="item">
         {/* <FileUploader/> */}
         {/* <img src={Friend} alt="" /> */}
         <span></span>
+       
       </div>
     </div>
     <div className="righty">
