@@ -75,9 +75,9 @@ return (
        </>
      ) : (
       <>
-        <Link to="/LandingPage" style={{textDecoration:"none", margin:'0vw 3vw 0vw 0vw'}}>
-          Login      
-        </Link>
+        {/* <Link to="/LandingPage" style={{textDecoration:"none", margin:'0vw 3vw 0vw 0vw'}}>
+             
+        </Link> */}
       </>
      )}
    </div>
