@@ -27,13 +27,14 @@ function Meetup() {
             opportunities, network with industry professionals, and take the
             next step in your career.{" "}
           </p>
-
+<h1 style={{marginTop: "7%"}}>Sign up for our Jobs Newsletter today!</h1>
+<button href="#">Sign Up</button>
 
           <img
             src="https://cdn.vectorstock.com/i/1000x1000/20/51/job-proposal-abstract-concept-vector-33672051.webp"
             alt="On the spot interview"
             style={{ maxWidth: "100%", height: "auto", 
-            clipPath: "inset(0px 0px 60px 0px)", marginTop: "30%" }}
+            clipPath: "inset(0px 0px 85px 0px)", marginTop: "2%" }}
           />
         </div>
 
@@ -112,7 +113,7 @@ function Meetup() {
             <img
             src="https://cdn.vectorstock.com/i/1000x1000/55/92/smiling-confident-businessman-male-character-wear-vector-44275592.webp"
             alt="On the spot interview"
-            style={{ maxWidth: "100%", height: "auto", clipPath: "inset(0px 0px 60px 0px)" }}
+            style={{ maxWidth: "100%", height: "auto", clipPath: "inset(0px 0px 70px 0px)" }}
           />
           </div>
         </div>

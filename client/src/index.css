@@ -1705,4 +1705,16 @@ label form [type='radio'] {
   .align-content-center-xl {
     align-content: center;
   }
+} 
+
+.contactCard {
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+/* added strobing in contact page email */
+@keyframes strobing {
+  0% { color: red; }
+  50% { color: rgb(194, 194, 210); }
+  100% { color: rgb(36, 3, 182); }
 }
