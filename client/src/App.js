@@ -121,7 +121,7 @@ function App() {
               <Route path="/profiles/:username" element={<Profile />} />
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/uploader" element={<Uploader />} />             
+              {/* <Route path="/uploader" element={<Uploader />} />              */}
                          
              
           
