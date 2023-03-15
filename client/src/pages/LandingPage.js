@@ -1,6 +1,9 @@
 import React from 'react';
 import Login from "../components/Login/Login";
 import Signup from "../components/Signup/Signup";
+
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 import {motion} from 'framer-motion'
 
@@ -25,12 +28,16 @@ padding: 3rem calc ((100vwv - 1300px)/2);
   grid-grid-template-columns: 1fr;
 }`;
 
+
 const LandingPage = () => {
 
   
     return (
-      <section>
-        <container className="container">
+
+      <main>
+        <div className="container">
+          <Link to='/companylanding'><button>Signup or Login as a Compny</button></Link>
+
           <Login/>        
           <Signup/>
         </container>
