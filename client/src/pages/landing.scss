@@ -1,0 +1,94 @@
+.section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: lightgoldenrodyellow;
+
+    .containing {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100vh;
+        padding: 3rem calc((100vw - 1300px) / 2);
+
+        @media screen and (max-width: 768px) {
+            grid-grid-template-columns: 1fr;
+        }
+
+        .columnLeft {
+            display: flex;
+            color: black;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 5rem 2rem;
+
+            h1 {
+                margin-bottom: 0.5rem;
+                font-family: "Monoton", cursive;
+                font-size: 7rem;
+            }
+
+            p {
+                margin: 2rem 0;
+                font-size: 1rem;
+                // line-height: 1.1;
+            }
+
+           
+        }
+        button {
+            padding: 1rem 3rem;
+            font-size: 5rem;
+            border: 2px solid black;
+            border-radius: 50px;
+            outline: none;
+            cursor: pointer;
+            background: transparent;
+            background-color: #FCDE53;
+            color: black;
+        }
+        p {
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            // line-height: 1.1;
+        }
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            max-width: 250px;
+            max-height: 250px;
+        }
+
+        .columnRight {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+
+            .img1 {
+                top: 10px;
+                left: 10px;
+                
+                
+            }
+
+            .img2 {
+                top: 170px;
+                right: 10px;
+            }
+
+            .img3 {
+                top: 350px;
+                left: 50px;
+            }
+
+            .img4 {
+                bottom: 100px;
+                right: 75px;
+            }
+        }
+    }
+}

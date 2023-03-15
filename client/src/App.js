@@ -17,14 +17,16 @@ import Home from './pages/Home';
 // import Signup from './components/Signup/Signup';
 // import Login from './components/Login/Login';
 import LandingPage from './pages/LandingPage';
+import Login from './components/Login/Login';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 import Contact from './pages/Contact';
 import Meetup from './pages/Meetup';
 import AuthRequired from './components/AuthRequired/AuthRequired';
-import Uploader from './components/Uploader'
-import CompanyLanding from './pages/CompanyLanding'
+
+import Signup from './components/Signup/Signup';
+
 
 
 
@@ -106,8 +108,11 @@ function App() {
           <div className="">
             <Routes>
 
-              <Route path="/companylanding" element={<CompanyLanding />} />
-              <Route path="/LandingPage" element={<LandingPage />} />              
+
+              <Route path="/LandingPage" element={<LandingPage />} />  
+              <Route path="/Login" element={<Login/>} /> 
+              <Route path="/Signup" element={<Signup/>} />          
+
               <Route path="/me" element={<Profile />} />
               <Route element={<AuthRequired />}>
                 <Route path="/" element={<Home />} />
