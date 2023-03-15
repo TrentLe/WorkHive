@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdOutlineMessage  } from "react-icons/md";
 import "./thoughtList.scss"
@@ -9,7 +9,9 @@ import "./thoughtList.scss"
 
 import Auth from "../../utils/auth";
 
+
 const ThoughtList = ({
+  
 
 
   
@@ -20,6 +22,8 @@ const ThoughtList = ({
 }) => {
 
   const liked = false ;
+  const [commentOpen, setComment] = useState(false)
+
   if (!thoughts.length) {
     return <h3>No Thoughts Yet</h3>;
   }
@@ -32,7 +36,7 @@ const ThoughtList = ({
           <div key={thought._id} className="container">
             <div className="user">
               <div className='userinfo'>
-              <img src='https://deadline.com/wp-content/uploads/2022/12/Garcelle-Crop2_cred-Erick-Robinson.png?w=681&h=383&crop=1' alt="" />
+              <img src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0' alt="" />
               <div className='postdetails'>
               <Link
                 to={`/profiles/${thought.thoughtAuthor}`}
@@ -63,7 +67,7 @@ const ThoughtList = ({
             </div>
             <div className="content">
               <p>{thought.thoughtText}</p>
-              {/* <img src='https://images.squarespace-cdn.com/content/v1/5403e5dbe4b04db10d1d362b/1606158340808-NBB1M20E984MM9XHV733/Samuel-Ramsey_For-The-Wild_Image1.jpg?format=500w' alt="" /> */}
+              <img src='https://cdn.vox-cdn.com/thumbor/RaRYyCa8D-PrmpPMrBTOsIIkvEg=/0x0:2997x2398/1200x800/filters:focal(852x628:1330x1106)/cdn.vox-cdn.com/uploads/chorus_image/image/71761914/usa_today_19606912.0.jpg' alt="" />
             </div>
             <div className='info'>
               <div className='item'>

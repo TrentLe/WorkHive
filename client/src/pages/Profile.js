@@ -60,7 +60,21 @@ const Profile = ({userID}) => {
     variables: { username: userParam },
   });
 
+
+  const [followed, setFollowed] = useState([]);
+  const [bio, setBio] = useState('');
+
+  const handleFollow = (user) => {
+    setFollowed([...followed, user]);
+  };
+
+  const handleBioChange = (event) => {
+    setBio(event.target.value);
+  };
+
+
   const user = data?.me || data?.user || {};
+
   // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
@@ -80,18 +94,16 @@ const Profile = ({userID}) => {
   }
 
   return (
-    <div>
+    <div className="">
       
       <div className="">
-        {/* <Left/> */}
-        
-        <h2 className="col-12 col-md-10 bg-dark text-light p-3 mb-5">
+   
+
+        <h2 className="">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-
-        <FollowButton userId={user._id} isFollowing={user.isFollowing} />
-
-       
+        <button onClick={() => handleFollow(user)}>Follow {user.username}</button>
+  
         <div className="col-12 col-md-10 mb-5">
           <ThoughtList
             thoughts={user.thoughts}
@@ -100,13 +112,22 @@ const Profile = ({userID}) => {
             showUsername={false}
           />
         </div>
+        
         {!userParam && (
           <div
             className="col-12 col-md-10 mb-3 p-3"
             style={{ border: '1px dotted #1a1a1a' }}
           >
             <ThoughtForm />
+            <h3>Biography:</h3>
+            <textarea
+              placeholder="Type your bio here..."
+              value={bio}
+              onChange={handleBioChange}
+              rows={5}
+            />
           </div>
+        
         )}
       </div>
     </div>

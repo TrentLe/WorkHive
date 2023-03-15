@@ -14,6 +14,7 @@ import { MdBrightness7} from "react-icons/md";
  import { BsUiRadiosGrid } from "react-icons/bs";
 import "./header.scss";
 
+
 // import { useContext } from 'react';
 // import { DarkModeContext } from "./context/darkModeContext.js";
 
@@ -28,67 +29,61 @@ import Auth from "../../utils/auth";
 
 const Header = () => {
 
-  // const { toggle, darkMode} = useContext(DarkModeContext);
+const logout = (event) => {
+  event.preventDefault();
+  Auth.logout();   
+};
   
-  const logout = (event) => {
-    event.preventDefault();
-    Auth.logout();
-  };
-  
-  return (
-
-    <header className="navbar">
-      <div className="left-side">
-        <Link to="/" style={{textDecoration:'none'}}>
-          <span className='header'>WorkHive<img className='bee' src='https://user-images.githubusercontent.com/119962472/224432749-b7eb5349-2fda-4977-809c-3893df02b585.png' alt='bee'></img></span>
-        </Link>
-        <Link to="/" style={{textDecoration:'none'}}>
-          <ImHome color="black"/>
-        </Link>
-        {/* {darkMode ? (
-          <MdBedtime onClick={toggle} />
-        ) : (
-          <MdBrightness7 onClick={toggle} />
-        )} */}
-        <MdBedtime/>
-        <IoIosKeypad/>
-       
-        <div className='searchbar'>
-          <ImSearch/>
-          <input type='text' placeholder='Search'></input>
-        </div>
-
-      </div>
-      <div className="right-side">
-        <ImBell/>
-        <ImBubble/>
-        <ImUser/>
-
-      </div>
-
-      <div className="">
-        {Auth.loggedIn() ? (
-          <>
-            <Link to="/me">
+return (
+  <div className="images">
+    {Auth.loggedIn() ? (
+       <>
+         <header className="navbar">
+           <div className="left-side">
+             <Link to="/" style={{textDecoration:'none'}}>
+               <span className='header'>WorkHive<img className='bee' src='https://user-images.githubusercontent.com/119962472/224432749-b7eb5349-2fda-4977-809c-3893df02b585.png' alt='bee'></img></span>
+             </Link>
+             <Link to="/" style={{textDecoration:'none'}}>
+               <ImHome color="black"/>
+             </Link>
+             <MdBedtime/>
+             <IoIosKeypad/>
+             <div className='searchbar'>
+               <ImSearch/>
+               <input type='text' placeholder='Search'></input>
+             </div>
+           </div>
+           <div className="right-side">
+             <ImBell/>
+             <ImBubble/>
+             <ImUser/>
+           </div>
+           <div className="images">    
+             <Link to="/me">
               {Auth.getProfile().data.username}
-            </Link>
-            <button  onClick={logout}>
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">
-              Login
-            </Link>
-            <Link to="/signup">
-              Signup
-            </Link>
-          </>
-        )}
-      </div>
-    </header>
-  );
+               <div className="dropdown">
+                  <span><img src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0' alt="" /></span>
+                  <div className="dropdown-content">
+                    <button  onClick={logout}>
+                      Logout
+                    </button>
+                  </div>
+               </div>
+             </Link>                   
+           </div>
+         </header>
+       </>
+     ) : (
+      <>
+        <Link to="/LandingPage" style={{textDecoration:"none", margin:'0vw 3vw 0vw 0vw'}}>
+          Login      
+        </Link>
+      </>
+     )}
+   </div>
+);
+
+
 };
 
 export default Header;

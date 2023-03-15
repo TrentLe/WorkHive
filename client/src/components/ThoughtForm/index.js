@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 
-import { ADD_THOUGHT } from '../../utils/mutations';
-import { QUERY_THOUGHTS, QUERY_ME } from '../../utils/queries';
-import "./postbox.scss"
+import { ADD_THOUGHT } from "../../utils/mutations";
+import { QUERY_THOUGHTS, QUERY_ME } from "../../utils/queries";
+import "./postbox.scss";
 
-import Auth from '../../utils/auth';
+import Auth from "../../utils/auth";
+ import { FiUpload} from "react-icons/fi";
+import Uploader from "../Uploader";
 
 const ThoughtForm = () => {
-  const [thoughtText, setThoughtText] = useState('');
+  const [thoughtText, setThoughtText] = useState("");
 
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -46,7 +48,7 @@ const ThoughtForm = () => {
         },
       });
 
-      setThoughtText('')
+      setThoughtText("");
       setCharacterCount(0);
     } catch (err) {
       console.error(err);
@@ -58,58 +60,53 @@ const ThoughtForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'thoughtText' && value.length <= 280) {
+    if (name === "thoughtText" && value.length <= 280) {
       setThoughtText(value);
       setCharacterCount(value.length);
     }
   };
 
   return (
-    <div className='postbox'>
-
-      {Auth.loggedIn() ? (
-        <>
-          <p
-            // className={`m-0 ${
-            //   characterCount === 280 || error ? 'text-danger' : ''
-            // }`}
-          >
-            Character Count: {characterCount}/280
-          </p>
-          <form
-            className=""
-            onSubmit={handleFormSubmit}
-          >
-            <div className="">
-              <input
-                name="thoughtText"
-                placeholder="Create new post..."
-                value={thoughtText}
-                className=""
-                style={{}}
-                onChange={handleChange}
-              ></input>
-            </div>
-
-            <div className="">
-              <button className="" type="submit">
-                Add Thought
-              </button>
-            </div>
-            {error && (
-              <div className="">
-                {`Reporting to the Hive...`}
-              </div>
-            )}
-          </form>
-        </>
-      ) : (
-        <p>
-          You need to be logged in to share your thoughts. Please{' '}
-          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-        </p>
-      )}
+    <form onSubmit={handleFormSubmit}>
+<div className="postbox">
+<div className="container">
+  <div className="top">
+    <img
+      src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0'
+      alt=""
+    />
+    <input  placeholder={`What's on your mind ?`} name='thoughtText' value={thoughtText} onChange={handleChange} />
+  </div>
+  <hr />
+  
+  <div className="bottom">
+    <div className="lefty">
+      <input type="file" id="file" style={{display:"none"}}  />
+      <label htmlFor="file">
+        <div className="item">
+          <img src={Image} alt="" />
+          <span>Add Image</span>
+        </div>
+      </label>
+      <div className="item">
+     
+        <span></span>
+      </div>
+      <div className="item">
+        {/* <FileUploader/> */}
+        {/* <img src={Friend} alt="" /> */}
+        <span></span>
+       
+      </div>
     </div>
+    <div className="righty">
+      <button  type="submit">Post</button>
+    </div>
+    {error && <div className="">{`Reporting to the Hive...`}</div>}
+  </div>
+</div>
+</div>
+</form>
   );
 };
 

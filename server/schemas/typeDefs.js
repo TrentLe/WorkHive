@@ -10,6 +10,7 @@ const typeDefs = gql`
     profilePicture: String
     thoughts: [Thought]!
     followers: [User]!
+    following: [User]!
   }
 
   type Company {
@@ -50,6 +51,16 @@ const typeDefs = gql`
 
   type File {
     url: String!
+    filename: String!
+    encoding: String!
+    mimetype: String!
+  }
+
+  type Contact {
+    _id: ID
+    name: String
+    email: String
+    message: String
   }
 
 
@@ -69,6 +80,9 @@ const typeDefs = gql`
     companies: [Company]
     company(companyname: String): Company
     followers: [User]
+    following: [User]
+    contacts: [Contact]
+    contact(name: String): Contact
   }
 
 
@@ -88,6 +102,8 @@ const typeDefs = gql`
     deleteUser(userId: ID!): User
     deleteCompany(companyId: ID!): Company
     addFollow(userId: ID!): User
+    removeFollow(userId: ID!): User
+    addContact(name: String, email: String, message: String): Contact
   }
 `;
 
