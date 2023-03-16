@@ -120,7 +120,7 @@ Whether you are a social media professional or just starting out in the industry
 <br>
 <h2 id="credits">Collaborators/Creditors 🏆</h2>
 
-👨‍💻 We are Coding BootCamp Alumni of [UCF](https://www.ucf.edu/students/) ⭐️
+👨‍💻 We are Coding BootCamp Alumni of [UCF](https://www.ucf.edu/students/)  ⭐️
 
 - [Profile]( https://github.com/TheQuentinJones  "Quentin Jones") -- Quentin Jones
 - [Profile]( https://github.com/TrentLe " Tanis Henrich") -- Trent Raeburn
