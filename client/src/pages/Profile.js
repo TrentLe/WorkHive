@@ -100,19 +100,21 @@ const Profile = ({userID}) => {
 
   return (
     
-    <div className="">
+    <div className="feed-container">
       <Left/>
       
       <div className="">
         
    
-
+        
+  
+        <div className="col-12 col-md-10 mb-5">
+        <div>
         <h2 className="">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
         <button onClick={() => handleFollow(user)}>Follow {user.username}</button>
-  
-        <div className="col-12 col-md-10 mb-5">
+        </div>
           <ThoughtList
             thoughts={user.thoughts}
             title={`${user.username}'s thoughts...`}

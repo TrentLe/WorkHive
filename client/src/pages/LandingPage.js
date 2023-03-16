@@ -1,18 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Login from "../components/Login/Login";
-import Signup from "../components/Signup/Signup";
+// import Signup from "../components/Signup/Signup";
+import Modal from 'react-bootstrap/Modal';
 
 import { Link } from 'react-router-dom';
 
-import styled from 'styled-components';
-import {motion} from 'framer-motion'
-import Left from '../components/left/left';
+// import styled from 'styled-components';
+// import {motion} from 'framer-motion'
+// import Left from '../components/left/left';
 import './landing.scss'
 
 
 
 
 const LandingPage = () => {
+  const [showLoginModal, setShowLoginModal] = useState(false)
   
     return (
 
@@ -25,11 +27,11 @@ const LandingPage = () => {
             <p>
               Ready to join the Colony?
             </p>
-            <Link to="/Login">
-              <button style={{borderRadius:"30px", fontSize: "30px"}}>
+            {/* <Link to="/Login"> */}
+              <button onClick={() => setShowLoginModal(true)} style={{borderRadius:"30px", fontSize: "30px"}}>
                 Login
               </button>
-            </Link>
+            {/* </Link> */}
             <Link to="/SignUp">
               <button style={{borderRadius:"30px", fontSize: "30px"}}>
                 Sign Up
@@ -43,6 +45,12 @@ const LandingPage = () => {
             <img className='img4' src='https://user-images.githubusercontent.com/119962472/225370717-35a6f9b7-562c-4726-9e76-d3aa7a9d6a58.png' alt='bee'/>
           </div>
         </div>
+
+        <Modal show={showLoginModal} onHide={() => setShowLoginModal(false)}>
+        <Modal.Body>
+          <Login />
+        </Modal.Body>
+      </Modal>
 
       </section>
     );
