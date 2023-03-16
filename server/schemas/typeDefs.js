@@ -31,7 +31,7 @@ const typeDefs = gql`
     createdAt: String!
     author: Company!
     likes: Int!
-    comments: [Comment]!
+    comments: [Comment!]!
   }
 
   type Thought {
@@ -82,7 +82,7 @@ const typeDefs = gql`
     followers: [User]
     following: [User]
     contacts: [Contact]
-    contact(name: String): Contact
+    contact(name: String): Contact     
   }
 
 
@@ -104,6 +104,7 @@ const typeDefs = gql`
     addFollow(userId: ID!): User
     removeFollow(userId: ID!): User
     addContact(name: String, email: String, message: String): Contact
+    addComment(thoughtId: ID!, commentText: String!): Thought
   }
 `;
 

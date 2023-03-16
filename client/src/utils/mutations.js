@@ -135,3 +135,11 @@ export const ADD_CONTACT = gql`
 
 `;
 
+export const DELETE_USER = gql`
+  mutation DeleteUser($userId: ID!) {
+  deleteUser(userId: $userId) {
+   _id
+  }
+}
+`;
+

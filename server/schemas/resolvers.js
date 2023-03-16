@@ -33,12 +33,12 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
-    contacts: async () => {
+    contacts: async (parent, args, context, info) => {
       return Contact.find()
     },
-    contact: async () => {
+    contact: async (parent, { name }, context, info) => {
       return Contact.findOne({ name })
-    }
+    },
   },
 
   Mutation: {
@@ -263,7 +263,23 @@ const resolvers = {
       const contact = await Contact.create({ name, email, message });
       return { contact };
     },
-
+    addComment: async (parent, { thoughtId, commentText }, context) => {
+      if (context.user) {
+        return Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          {
+            $addToSet: {
+              comments: { commentText, commentAuthor: context.user.username },
+            },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   },
 };
 

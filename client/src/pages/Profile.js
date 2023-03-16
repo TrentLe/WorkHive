@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 
 import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
+import RemoveUser from '../components/DeleteUser/DeleteUser'
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 
@@ -69,6 +70,9 @@ const handleFollow = (user) => {
           </div>
           
         )}
+      </div>
+      <div>
+        <RemoveUser />
       </div>
     </div>
   );
