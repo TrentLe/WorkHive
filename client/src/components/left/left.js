@@ -7,12 +7,16 @@ import { GoCalendar } from "react-icons/go";
 import { GoBriefcase } from "react-icons/go";
 import { CiStreamOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
+
+import PopupCalendar from "../Calendar/index"
+
  import { RiFundsBoxFill} from "react-icons/ri";
  import { BsFillCalendarMonthFill} from "react-icons/bs"
  import { MdGroups2} from "react-icons/md";
  import {  FcCalendar } from "react-icons/fc";
  import { FcBriefcase } from "react-icons/fc";
  import {  BsFillPersonCheckFill} from "react-icons/bs";
+
 
 
 
@@ -33,8 +37,17 @@ const Left = () => {
         <div className="menu">
           <div className="info"></div>
           <div className="icon">
+
+            <GoCalendar className="icon" />
+          
+         
+            <span>Calendar</span>
+           <PopupCalendar/>
+         
+
             <FcCalendar style={{fontSize:"2rem", color:'#FFD02E'}}/>
             <span>Calender</span>
+
           </div>
           <div className="icon">
             <MdGroups2 style={{fontSize:"2rem", color:'#FFD02E'}}/>
