@@ -13,7 +13,7 @@ import { REMOVE_THOUGHT } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 // added --
 
-import SingleThought from './SingleThought';
+
 
 
 
@@ -126,7 +126,7 @@ const ThoughtList = ({
             </div>
           </div>
 
-          <SingleThought thought={thought} key={thought._id} liked={liked} />
+          
           // show comments on click
 
         ))}
