@@ -1718,3 +1718,7 @@ label form [type='radio'] {
   50% { color: rgb(194, 194, 210); }
   100% { color: rgb(36, 3, 182); }
 }
+
+.calendar{
+  width:85px;
+}

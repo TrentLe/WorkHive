@@ -7,7 +7,7 @@ import { GoCalendar } from "react-icons/go";
 import { GoBriefcase } from "react-icons/go";
 import { CiStreamOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
-
+import PopupCalendar from "../Calendar/index"
 const Left = () => {
   return (
     //     <div className='left-side'>
@@ -26,7 +26,11 @@ const Left = () => {
           <div className="info"></div>
           <div className="icon">
             <GoCalendar className="icon" />
-            <span>Calender</span>
+          
+         
+            <span>Calendar</span>
+           <PopupCalendar/>
+         
           </div>
           <div className="icon">
             <FiUsers className="icon" />
