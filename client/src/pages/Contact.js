@@ -82,7 +82,7 @@ function Contact() {
             </div>
             <div className="col-lg-4 contactCard">
               <div className="card w-60 h-75" style={{ width: "18rem;" }}>
-                <img
+                <img href="https://github.com/TheQuentinJones"
                   src="https://media.licdn.com/dms/image/C5603AQFcm8UdjN47dw/profile-displayphoto-shrink_800_800/0/1567959211712?e=1684368000&v=beta&t=mPzHaUVCQgirid2R1m2gP3VWUvSzdagApu3W-a2wd1E"
                   className="card-img-top"
                   alt="..."
