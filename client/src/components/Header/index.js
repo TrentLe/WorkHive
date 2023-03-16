@@ -52,7 +52,9 @@ return (
            </div>
            <div className="images">    
              <Link to="/me">
+
               {Auth.getProfile().data.token}
+
                <div className="dropdown">
                   <span><img src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0' alt="" /></span>
                   <div className="dropdown-content">
@@ -67,9 +69,9 @@ return (
        </>
      ) : (
       <>
-        <Link to="/LandingPage" style={{textDecoration:"none", margin:'0vw 3vw 0vw 0vw'}}>
-          Login      
-        </Link>
+        {/* <Link to="/LandingPage" style={{textDecoration:"none", margin:'0vw 3vw 0vw 0vw'}}>
+             
+        </Link> */}
       </>
      )}
    </div>
