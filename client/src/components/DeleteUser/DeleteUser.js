@@ -38,7 +38,7 @@ function RemoveUser() {
 
   return (
     <div>
-      <button onClick={handleDelete} disabled={!user}>
+      <button className="btn-sm" onClick={handleDelete} disabled={!user}>
         <p>Delete Your Account</p>
       </button>
       {!user && <p>User not found</p>}
