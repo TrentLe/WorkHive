@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../../utils/mutations';
+import { ADD_COMPANY } from '../../utils/mutations';
 
 import Auth from '../../utils/auth';
-import "./login.scss"
 
-const Login = (props) => {
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+const CompanySignup = () => {
+  const [formState, setFormState] = useState({
+    companyname: '',
+    email: '',
+    password: '',
+  });
+  const [addCompany, { error, data }] = useMutation(ADD_COMPANY);
 
-  // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -20,57 +23,26 @@ const Login = (props) => {
     });
   };
 
-  // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
+
     try {
-      const { data } = await login({
+      const { data } = await addCompany({
         variables: { ...formState },
       });
 
-      Auth.login(data.login.token);
+      Auth.login(data.addCompany.token);
     } catch (e) {
       console.error(e);
     }
-
-    // clear form values
-    setFormState({
-      email: '',
-      password: '',
-    });
   };
 
   return (
-    
-  //   <div className="login">
-  //   <div className="carding">
-  //     <div className="leftside">
-  //       <h1>Hello World.</h1>
-  //       <p>
-  //         Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
-  //         alias totam numquam ipsa exercitationem dignissimos, error nam,
-  //         consequatur.
-  //       </p>
-  //       <span>Don't you have an account?</span>
-  //       <Link to="/register">
-  //         <button>Register</button>
-  //       </Link>
-  //     </div>
-  //     <div className="rightside">
-  //       <h1>Login</h1>
-  //       <form>
-  //         <input type="text" placeholder="Username" />
-  //         <input type="password" placeholder="Password" />
-  //         <button onClick={handleFormSubmit}>Login</button>
-  //       </form>
-  //     </div>
-  //   </div>
-  // </div>
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -81,6 +53,14 @@ const Login = (props) => {
               <form onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
+                  placeholder="Your Company Name"
+                  name="companyname"
+                  type="text"
+                  value={formState.companyname}
+                  onChange={handleChange}
+                />
+                <input
+                  className="form-input"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -89,7 +69,7 @@ const Login = (props) => {
                 />
                 <input
                   className="form-input"
-                  placeholder="******"
+                  placeholder="Your Password"
                   name="password"
                   type="password"
                   value={formState.password}
@@ -117,4 +97,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default CompanySignup;

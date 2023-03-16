@@ -22,7 +22,14 @@ export const QUERY_THOUGHTS = gql`
       thoughtText
       thoughtAuthor
       createdAt
+      comments {
+        _id
+        commentText
+        commentAuthor
+        createdAt
+      }
     }
+    
   }
 `;
 

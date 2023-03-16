@@ -8,9 +8,15 @@ import { FcLikePlaceholder } from "react-icons/fc";
 import { TbShare3 } from "react-icons/tb";
 
 import Auth from "../../utils/auth";
+
 import { REMOVE_THOUGHT } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 // added --
+
+import SingleThought from './SingleThought';
+
+
+
 const ThoughtList = ({
   thoughts,
   title,
@@ -46,6 +52,7 @@ const ThoughtList = ({
       {/* {showTitle && <h3>{title}</h3>} */}
       {thoughts &&
         thoughts.map((thought) => (
+
           <div key={thought._id} className="container">
             <div className="user">
               <div className="userinfo">
@@ -118,6 +125,10 @@ const ThoughtList = ({
               </button>
             </div>
           </div>
+
+          <SingleThought thought={thought} key={thought._id} liked={liked} />
+          // show comments on click
+
         ))}
     </div>
   );

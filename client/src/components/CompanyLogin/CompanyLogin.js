@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../../utils/mutations';
+import { LOGIN_COMPANY } from '../../utils/mutations';
 
 import Auth from '../../utils/auth';
-import "./login.scss"
 
-const Login = (props) => {
+const CompanyLogin = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login, { error, data }] = useMutation(LOGIN_COMPANY);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -42,31 +41,6 @@ const Login = (props) => {
   };
 
   return (
-    
-  //   <div className="login">
-  //   <div className="carding">
-  //     <div className="leftside">
-  //       <h1>Hello World.</h1>
-  //       <p>
-  //         Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
-  //         alias totam numquam ipsa exercitationem dignissimos, error nam,
-  //         consequatur.
-  //       </p>
-  //       <span>Don't you have an account?</span>
-  //       <Link to="/register">
-  //         <button>Register</button>
-  //       </Link>
-  //     </div>
-  //     <div className="rightside">
-  //       <h1>Login</h1>
-  //       <form>
-  //         <input type="text" placeholder="Username" />
-  //         <input type="password" placeholder="Password" />
-  //         <button onClick={handleFormSubmit}>Login</button>
-  //       </form>
-  //     </div>
-  //   </div>
-  // </div>
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
@@ -117,4 +91,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default CompanyLogin;

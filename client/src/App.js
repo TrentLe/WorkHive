@@ -17,12 +17,16 @@ import Home from './pages/Home';
 // import Signup from './components/Signup/Signup';
 // import Login from './components/Login/Login';
 import LandingPage from './pages/LandingPage';
+import Login from './components/Login/Login';
 import SingleThought from './pages/SingleThought';
 import Profile from './pages/Profile';
 import Header from './components/Header';
 import Contact from './pages/Contact';
 import Meetup from './pages/Meetup';
 import AuthRequired from './components/AuthRequired/AuthRequired';
+
+import Signup from './components/Signup/Signup';
+
 
 
 
@@ -31,8 +35,10 @@ import AuthRequired from './components/AuthRequired/AuthRequired';
 
 
 
+
 // import { getMainDefinition } from '@apollo/client/utilities';
 // import Left from './components/left/left';
+
 
 
 // Construct our main GraphQL API endpoint
@@ -77,6 +83,14 @@ const client = new ApolloClient({
 
 
 function App() {
+  function LoginWithHeader() {
+    return (
+      <>
+        <Header />
+        <Login />
+      </>
+    );
+  }
   // const { darkMode } = useContext(DarkModeContext);
 
   // const Layout = () => {
@@ -102,7 +116,14 @@ function App() {
           <div className="">
             <Routes>
 
-              <Route path="/LandingPage" element={<LandingPage />} />              
+
+              <Route path="/LandingPage" element={<LandingPage />} />  
+           
+              
+              <Route path="/Login" element={<LoginWithHeader />} />
+               
+              <Route path="/Signup" element={<Signup/>} />          
+
               <Route path="/me" element={<Profile />} />
               <Route element={<AuthRequired />}>
                 <Route path="/" element={<Home />} />
@@ -110,10 +131,11 @@ function App() {
               </Route>
               <Route path="/profiles/:username" element={<Profile />} />
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />
-              <Route path="/contact" element={<Contact />} />           
+              <Route path="/contact" element={<Contact />} />
+              {/* <Route path="/uploader" element={<Uploader />} />              */}
                          
              
-              
+          
             </Routes>
           </div>
           

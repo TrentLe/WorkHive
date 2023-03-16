@@ -16,7 +16,7 @@ const contactSchema = new Schema({
   },
   message: {
     type: String,
-    minlength: 20,
+    minlength: 10,
     maxlength: 1000,
   },
 });
