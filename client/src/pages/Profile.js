@@ -5,9 +5,13 @@ import { useMutation } from '@apollo/client';
 
 import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
+
+import RemoveUser from '../components/DeleteUser/DeleteUser'
+
 // import Left from '../components/left/left';
 
 import Auth from '../utils/auth';
+
 
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import { ADD_FOLLOW } from '../utils/mutations';
@@ -129,6 +133,9 @@ const Profile = ({userID}) => {
           </div>
         
         )}
+      </div>
+      <div>
+        <RemoveUser />
       </div>
     </div>
   );

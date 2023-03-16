@@ -15,6 +15,7 @@ import './landing.scss'
 const LandingPage = () => {
   
     return (
+
       <section className='section'>
         <div className="containing">
           <div>
@@ -42,6 +43,7 @@ const LandingPage = () => {
             <img className='img4' src='https://user-images.githubusercontent.com/119962472/225370717-35a6f9b7-562c-4726-9e76-d3aa7a9d6a58.png' alt='bee'/>
           </div>
         </div>
+
       </section>
     );
 }

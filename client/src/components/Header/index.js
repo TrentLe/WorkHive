@@ -13,18 +13,10 @@ import { MdBedtime  } from "react-icons/md";
 import { MdBrightness7} from "react-icons/md";
  import { BsUiRadiosGrid } from "react-icons/bs";
 import "./header.scss";
-
-
 // import { useContext } from 'react';
 // import { DarkModeContext } from "./context/darkModeContext.js";
 
-
-
-
-
-
-
-
+import RemoveUser from "../DeleteUser/DeleteUser";
 import Auth from "../../utils/auth";
 
 const Header = () => {
@@ -60,13 +52,15 @@ return (
            </div>
            <div className="images">    
              <Link to="/me">
-              {/* {Auth.getProfile().data.username} */}
+
+              {Auth.getProfile().data.token}
+
                <div className="dropdown">
                   <span><img src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0' alt="" /></span>
                   <div className="dropdown-content">
                     <button  onClick={logout}>
                       Logout
-                    </button>
+                    </button>                    
                   </div>
                </div>
              </Link>                   
