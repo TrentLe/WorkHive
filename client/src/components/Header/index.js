@@ -48,7 +48,7 @@ return (
            <div className="right-side">
              <ImBell/>
              <ImBubble/>
-             <ImUser/>
+             {/* <ImUser/> */}
            </div>
            <div className="images">    
              <Link to="/me">

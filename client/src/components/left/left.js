@@ -7,6 +7,14 @@ import { GoCalendar } from "react-icons/go";
 import { GoBriefcase } from "react-icons/go";
 import { CiStreamOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
+ import { RiFundsBoxFill} from "react-icons/ri";
+ import { BsFillCalendarMonthFill} from "react-icons/bs"
+ import { MdGroups2} from "react-icons/md";
+ import {  FcCalendar } from "react-icons/fc";
+ import { FcBriefcase } from "react-icons/fc";
+ import {  BsFillPersonCheckFill} from "react-icons/bs";
+
+
 
 const Left = () => {
   return (
@@ -25,15 +33,15 @@ const Left = () => {
         <div className="menu">
           <div className="info"></div>
           <div className="icon">
-            <GoCalendar className="icon" />
+            <FcCalendar style={{fontSize:"2rem", color:'#FFD02E'}}/>
             <span>Calender</span>
           </div>
           <div className="icon">
-            <FiUsers className="icon" />
+            <MdGroups2 style={{fontSize:"2rem", color:'#FFD02E'}}/>
             <span>Groups</span>
           </div>
           <div className="icon">
-            <GoBriefcase className="icon" />
+            <FcBriefcase style={{fontSize:"2rem", }}/>
             <span>Jobs</span>
           </div>
         </div>
@@ -41,21 +49,22 @@ const Left = () => {
         <div className="menu">
           <span>Your shortcuts</span>
           <div className="icon">
-            <span>Events</span>
+            <BsFillPersonCheckFill style={{color:'#FFD02E', fontSize:'2rem'}}/>
+            <span>Following</span>
           </div>
-          <div className="icon">
+          {/* <div className="icon">
             <span>Gaming</span>
           </div>
           <div className="icon">
             <span>Gallery</span>
-          </div>
+          </div> */}
           <div className="icon">
-            <CiYoutube />
+            <CiYoutube style={{fontSize:'2rem', color:"red"}}/>
             <span>Videos</span>
           </div>
           <div className="icon">
          <Link to="/contact">
-          <CiMail />
+          <CiMail style={{fontSize:'2rem'}} />
           </Link>
           <span>Contact Us</span>
            </div>
@@ -65,17 +74,18 @@ const Left = () => {
           <span>Others</span>
 
           <div className="icon">
-            <span>Fundraiser</span>
+            <RiFundsBoxFill style={{color:'#FFD02E', fontSize:"2rem"}}/>
+            <span>Fundraisers</span>
           </div>
           <div className="icon">
             <Link to={"/meetup"}>
-              <CiStreamOn />
+              <CiStreamOn style={{color:'blue', fontSize:"2rem"}}  />
             </Link>
 
             <span>Interviews</span>
           </div>
           <div className="icon">
-            <span>Courses</span>
+           
           </div>
         </div>
       </div>

@@ -17,6 +17,7 @@ import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import { ADD_FOLLOW } from '../utils/mutations';
 import { QUERY_FOLLOWING } from '../utils/queries';
 import { REMOVE_FOLLOW} from '../utils/mutations';
+import Left from '../components/left/left';
 // import { QUERY_FOLLOWERS } from '../../utils/queries';
 
 const FollowButton = ({ userId, following }) => {
@@ -98,9 +99,12 @@ const Profile = ({userID}) => {
   }
 
   return (
+    
     <div className="">
+      <Left/>
       
       <div className="">
+        
    
 
         <h2 className="">
