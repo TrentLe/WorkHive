@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Link } from 'react-router-dom';
-
 import { ImHome } from "react-icons/im";
 import { ImBubble } from "react-icons/im";
 import { ImUser} from "react-icons/im";
@@ -58,9 +57,15 @@ return (
                <div className="dropdown">
                   <span><img src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0' alt="" /></span>
                   <div className="dropdown-content">
+                    <div>
+                      {Auth.getProfile().data.username}
+                    </div>
                     <button  onClick={logout}>
                       Logout
-                    </button>                    
+                    </button> 
+                    <div>
+                    <RemoveUser />
+                    </div>                   
                   </div>
                </div>
              </Link>                   

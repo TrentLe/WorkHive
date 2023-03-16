@@ -140,9 +140,6 @@ const Profile = ({userID}) => {
         
         )}
       </div>
-      <div>
-        <RemoveUser />
-      </div>
     </div>
   );
 };
