@@ -9,49 +9,16 @@ import ThoughtList from '../components/ThoughtList';
 
 import Auth from '../utils/auth';
 
+import FollowButton from '../components/FollowButton';
 import { QUERY_USER, QUERY_ME } from '../utils/queries';
 import { ADD_FOLLOW } from '../utils/mutations';
 import { QUERY_FOLLOWING } from '../utils/queries';
 import { REMOVE_FOLLOW} from '../utils/mutations';
 // import { QUERY_FOLLOWERS } from '../../utils/queries';
 
-const FollowButton = ({ userId, following }) => {
-  const [ isFollowing, setFollowing ] = useState(following);
-  const [ addFollow ] = useMutation(ADD_FOLLOW);
-  const [ removeFollower ] = useMutation(REMOVE_FOLLOW);
 
-  const handleFollow = async () => {
-    console.log('Function works ?');
-    console.log(userId);
-    if (isFollowing) {
-      try {
-        await removeFollower({
-          variables: { userId },
-        });
-        setFollowing(false);
-      } catch (e) {
-        console.error(e);
-      }
-    } else {
-      try {
-        await addFollow({
-          variables: { userId },
-        });
-        setFollowing(true);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
 
-  return (
-    <button className="btn ml-auto" onClick={handleFollow}>
-      {isFollowing ? 'Unfollow' : 'Follow'}
-    </button>
-  );
-
-};
-const Profile = ({userID}) => {
+const Profile = ({userId}) => {
   // use this to determine if `useEffect()` hook needs to run again
   const { username: userParam } = useParams();
 
@@ -61,12 +28,10 @@ const Profile = ({userID}) => {
   });
 
 
-  const [followed, setFollowed] = useState([]);
+  const [followed, setFollowed] = useState([false]);
+  const targetUserID = data?.user || {};
   const [bio, setBio] = useState('');
 
-  const handleFollow = (user) => {
-    setFollowed([...followed, user]);
-  };
 
   const handleBioChange = (event) => {
     setBio(event.target.value);
@@ -102,8 +67,7 @@ const Profile = ({userID}) => {
         <h2 className="">
           Viewing {userParam ? `${user.username}'s` : 'your'} profile.
         </h2>
-        <button onClick={() => handleFollow(user)}>Follow {user.username}</button>
-  
+        <FollowButton userId={targetUserID} followed={followed}/>
         <div className="col-12 col-md-10 mb-5">
           <ThoughtList
             thoughts={user.thoughts}
