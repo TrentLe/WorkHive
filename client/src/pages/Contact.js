@@ -60,11 +60,11 @@ function Contact() {
             <div className="col-lg-4 contactCard">
               <div className="card w-60 h-75" style={{ width: "18rem;" }}>
                 <a href='https://github.com/JonJon50'>
-                <img
-                  src="https://media.licdn.com/dms/image/D5603AQEzlPHvPwJ_YQ/profile-displayphoto-shrink_800_800/0/1678838200855?e=1684368000&v=beta&t=rxvAwfDqAUfCO4R5uIlLPcz5c5ZXn2XVV0iR4iR-Ip8"
-                  className="card-img-top"
-                  alt="..."
-                />
+                  <img
+                    src="https://media.licdn.com/dms/image/D5603AQEzlPHvPwJ_YQ/profile-displayphoto-shrink_800_800/0/1678838200855?e=1684368000&v=beta&t=rxvAwfDqAUfCO4R5uIlLPcz5c5ZXn2XVV0iR4iR-Ip8"
+                    className="card-img-top"
+                    alt="..."
+                  />
                 </a>
                 <div className="card-body">
                   <p className="card-text" style={{ color: "white" }}>
