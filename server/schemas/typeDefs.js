@@ -111,7 +111,6 @@ const typeDefs = gql`
     removeFollow(userId: ID!): Boolean
     addContact(name: String, email: String, message: String): Contact
     addComment(thoughtId: ID!, commentText: String!): Thought
-
   }
 `;
 

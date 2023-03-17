@@ -84,6 +84,14 @@ const client = new ApolloClient({
 
 
 function App() {
+  function LoginWithHeader() {
+    return (
+      <>
+        <Header />
+        <Login />
+      </>
+    );
+  }
   // const { darkMode } = useContext(DarkModeContext);
 
   // const Layout = () => {
@@ -111,7 +119,10 @@ function App() {
 
 
               <Route path="/LandingPage" element={<LandingPage />} />  
-              <Route path="/Login" element={<Login/>} /> 
+           
+              
+              <Route path="/Login" element={<LoginWithHeader />} />
+               
               <Route path="/Signup" element={<Signup/>} />          
 
               <Route path="/me" element={<Profile />} />
