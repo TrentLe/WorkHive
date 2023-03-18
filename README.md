@@ -83,7 +83,7 @@ Whether you are a social media professional or just starting out in the industry
 
 <br>
 
-🔭 [Deployment Video](https://drive.google.com/file/d/1tfy9g1DGI9eUbnjihZgitYW4bga30lvB/view) 🔭
+🔭 [Deployment Video](https://workhive1.herokuapp.com) 🔭
 
 ![WorkHive Landing Page](https://i.postimg.cc/nLY8ZVDq/Screenshot-Work-Hive.jpg)
 ![Photo1](./client/src/Image/Home%3Apage.png)
