@@ -85,7 +85,7 @@ Whether you are a social media professional or just starting out in the industry
 
 🔭 [Deployment Video](https://drive.google.com/file/d/1tfy9g1DGI9eUbnjihZgitYW4bga30lvB/view) 🔭
 
-![Photo1]()
+![WorkHive Landing Page](https://i.postimg.cc/nLY8ZVDq/Screenshot-Work-Hive.jpg)
 ![Photo1]()
 ![Photo1]()
 
