@@ -9,12 +9,14 @@ import { Link } from 'react-router-dom';
 // import {motion} from 'framer-motion'
 // import Left from '../components/left/left';
 import './landing.scss'
+import Signup from '../components/Signup/Signup';
 
 
 
 
 const LandingPage = () => {
   const [showLoginModal, setShowLoginModal] = useState(false)
+  const [showSignUpModal, setShowSignupModal] = useState(false)
   
     return (
 
@@ -32,11 +34,11 @@ const LandingPage = () => {
                 Login
               </button>
             {/* </Link> */}
-            <Link to="/SignUp">
-              <button style={{borderRadius:"30px", fontSize: "30px"}}>
+            {/* <Link to="/SignUp"> */}
+              <button onClick={() => setShowSignupModal(true)}  style={{borderRadius:"30px", fontSize: "30px"}}>
                 Sign Up
               </button>
-            </Link>
+            {/* </Link> */}
           </div>
           <div className='columnRight'>  
             <img className='img1' src='https://user-images.githubusercontent.com/119962472/224432749-b7eb5349-2fda-4977-809c-3893df02b585.png' alt='hive'/>
@@ -49,6 +51,12 @@ const LandingPage = () => {
         <Modal show={showLoginModal} onHide={() => setShowLoginModal(false)}>
         <Modal.Body>
           <Login />
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showSignUpModal} onHide={() => setShowSignupModal(false)}>
+        <Modal.Body>
+          <Signup/>
         </Modal.Body>
       </Modal>
 
