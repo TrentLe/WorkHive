@@ -67,7 +67,7 @@ const Profile = ({userId}) => {
     
     <div className="feed-container">
       <Left/>      
-      <div>     
+      <div className=''>     
         
   
         <div className="col-12 col-md-10 mb-5">
