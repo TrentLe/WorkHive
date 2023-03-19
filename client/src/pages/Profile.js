@@ -5,58 +5,14 @@ import { useMutation } from '@apollo/client';
 
 import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
-
-import RemoveUser from '../components/DeleteUser/DeleteUser'
-
-// import Left from '../components/left/left';
-
+import RemoveUser from '../components/DeleteUser/DeleteUser';
 import Auth from '../utils/auth';
-
-
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import { ADD_FOLLOW } from '../utils/mutations';
-import { QUERY_FOLLOWING } from '../utils/queries';
-import { REMOVE_FOLLOW} from '../utils/mutations';
+import FollowButton from '../components/FollowButton';
+import { QUERY_USER, QUERY_ME, QUERY_FOLLOWING } from '../utils/queries';
+import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
 import Left from '../components/left/left';
-// import { QUERY_FOLLOWERS } from '../../utils/queries';
 
-const FollowButton = ({ userId, following }) => {
-  const [ isFollowing, setFollowing ] = useState(following);
-  const [ addFollow ] = useMutation(ADD_FOLLOW);
-  const [ removeFollower ] = useMutation(REMOVE_FOLLOW);
-
-  const handleFollow = async () => {
-    console.log('Function works ?');
-    console.log(userId);
-    if (isFollowing) {
-      try {
-        await removeFollower({
-          variables: { userId },
-        });
-        setFollowing(false);
-      } catch (e) {
-        console.error(e);
-      }
-    } else {
-      try {
-        await addFollow({
-          variables: { userId },
-        });
-        setFollowing(true);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
-
-  return (
-    <button className="btn ml-auto" onClick={handleFollow}>
-      {isFollowing ? 'Unfollow' : 'Follow'}
-    </button>
-  );
-
-};
-const Profile = ({userID}) => {
+const Profile = ({ userId }) => {
   // use this to determine if `useEffect()` hook needs to run again
   const { username: userParam } = useParams();
 
@@ -65,18 +21,13 @@ const Profile = ({userID}) => {
     variables: { username: userParam },
   });
 
-
-  const [followed, setFollowed] = useState([]);
+  const targetUser = data?.user || {};
+  const [followed, setFollowed] = useState(targetUser.followed || false);
   const [bio, setBio] = useState('');
-
-  const handleFollow = (user) => {
-    setFollowed([...followed, user]);
-  };
 
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
-
 
   const user = data?.me || data?.user || {};
 
@@ -99,49 +50,40 @@ const Profile = ({userID}) => {
   }
 
   return (
-    
     <div className="feed-container">
-      <Left/>
-      
+      <Left />
       <div className="">
-        
-   
-        
-  
         <div className="col-12 col-md-10 mb-5">
-        <div>
-        <h2 className="">
-          Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-        </h2>
-        <button onClick={() => handleFollow(user)}>Follow {user.username}</button>
-        </div>
-          <ThoughtList
-            thoughts={user.thoughts}
-            title={`${user.username}'s thoughts...`}
-            showTitle={false}
-            showUsername={false}
-          />
-        </div>
-        
-        {!userParam && (
-          <div
-            className="col-12 col-md-10 mb-3 p-3"
-            style={{ border: '1px dotted #1a1a1a' }}
-          >
-            <ThoughtForm />
-            <h3>Biography:</h3>
-            <textarea
-              placeholder="Type your bio here..."
-              value={bio}
-              onChange={handleBioChange}
-              rows={5}
-            />
+          <div>
+            <h2 className="">
+              Viewing {userParam ? `${user.username}'s` : 'your'} profile.
+            </h2>
+            <FollowButton userId={targetUser.id} followed={followed} />
+            <div className="col-12 col-md-10 mb-5">
+              <ThoughtList
+                thoughts={user.thoughts}
+                title={`${user.username}'s thoughts...`}
+                showTitle={false}
+                showUsername={false}
+              />
+            </div>
           </div>
-        
-        )}
-      </div>
-      <div>
-        <RemoveUser />
+          {!userParam && (
+            <div
+              className="col-12 col-md-10 mb-3 p-3"
+              style={{ border: '1px dotted #1a1a1a' }}
+            >
+              <ThoughtForm />
+              <h3>Biography:</h3>
+              <textarea
+                placeholder="Type your bio here..."
+                value={bio}
+                onChange={handleBioChange}
+                rows={5}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

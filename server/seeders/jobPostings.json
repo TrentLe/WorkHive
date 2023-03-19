@@ -1,18 +1,64 @@
 [
-{
-    "title" : "Software Engineering",
-    "description" : "Writing and Developing code for businesses and industries",
-    "keywords" : "Software Engineering",
-    "author" : "Software Engineering"
+    {
+        "title" : "Software Engineering",
+        "description" : "Software engineering is the application of engineering principles, techniques, and methods to the development, design, and maintenance of software systems. It is a discipline that involves the entire software development life cycle, from planning and requirements gathering to testing and deployment",
+        "keywords" : "Software, Engineering, Software Engineering", 
+        "author" : "ConEd"
+        
+    },
+    {
+        "title" : "Data Science",
+        "description" : "Data science is an interdisciplinary field that involves using scientific methods, processes, algorithms, and systems to extract insights and knowledge from structured and unstructured data. It combines aspects of mathematics, statistics, computer science, and domain-specific knowledge to analyze, interpret, and draw conclusions from complex data sets.",
+        "keywords" : "Data, Science, Data Science",
+        "author" : "Duane"
+    },
+    {
+        "title" : " Data Analytics",
+        "description" : "Data analytics is the process of examining data sets to extract insights and draw conclusions about the information they contain. It involves using various techniques, tools, and technologies to analyze and interpret data, identify patterns and trends, and make informed decisions based on the result. Data analytics can be divided into four main categories: descriptive analytics, diagnostic analytics, predictive analytics, and prescriptive analytics.",
+        "keywords" : "Data, Analytics, Data Analytics",
+        "author" : "Sea World"
+    },
+    {
+        "title" : "Network Engineering",
+        "description" : "Network engineering is the practice of designing, building, and maintaining computer networks. It involves the planning, design, implementation, and management of computer networks, including local area networks (LANs), wide area networks (WANs), and intranets. Network engineers are responsible for the design, implementation, and maintenance of computer networks, including LANs, WANs, and intranets.",
+        "keywords" : "Network, Engineering, Network Engineering",
+        "author" : "Azure Cloud"
+    }, 
+    {
+        "title" : "Cyber Security",
+        "description" : "Cyber security is the practice of protecting systems, networks, and programs from digital attacks. These cyber attacks are usually aimed at accessing, changing, or destroying sensitive information; extorting money from users; or interrupting normal business processes. Cyber security is a broad term that includes a variety of different types of security, including network security, application security, data security, and endpoint security.",
+        "keywords" : "Cyber, Security, Cyber Security",
+        "author" : "Microsoft"
+    },
+    {
+        "title" : "Cloud Computing",
+        "description" : "Cloud computing is the practice of using a network of remote servers hosted on the Internet to store, manage, and process data, rather than a local server or a personal computer. Cloud computing is a type of Internet-based computing that provides shared computer processing resources and data to computers and other devices on demand. It is a model for enabling ubiquitous, convenient, on-demand network access to a shared pool of configurable computing resources (e.g., networks, servers, storage, applications, and services) that can be rapidly provisioned and released with minimal management effort or service provider interaction.",
+        "keywords" : "Cloud, Computing, Cloud Computing",
+        "author" : "Google"
+    },
+    {
+        "title" : "Artificial Intelligence",
+        "description" : "Artificial intelligence (AI) is the simulation of human intelligence processes by machines, especially computer systems. These processes include learning (the acquisition of information and rules for using the information), reasoning (using rules to reach approximate or definite conclusions) and self-correction. Particular applications of AI include expert systems, speech recognition and machine vision.",
+        "keywords" : "Artificial, Intelligence, Artificial Intelligence",
+        "author" : "IBM"
+    },
+    {
+        "title" : "Machine Learning",
+        "description" : "Machine learning is the study of computer algorithms that improve automatically through experience. It is seen as a subset of artificial intelligence. Machine learning algorithms build a mathematical model based on sample data, known as 'training data', in order to make predictions or decisions without being explicitly programmed to do so.",
+        "keywords" : "Machine, Learning, Machine Learning",
+        "author" : "Amazon"
+    },
+    {
+        "title" : "Data Engineering",
+        "description" : "Data engineering is the practice of collecting, storing, and processing large amounts of data to make it useful for analysis. Data engineers are responsible for the design, implementation, and maintenance of data systems, including data warehouses, data lakes, and data pipelines. They are also responsible for the design, implementation, and maintenance of data systems, including data warehouses, data lakes, and data pipelines.",
+        "keywords" : "Data, Engineering, Data Engineering",
+        "author" : "Facebook"
+    },
+    {
+        "title" : "Data Visualization",
+        "description" : "Data visualization is the graphical representation of information and data. It involves producing images that communicate relationships among the represented data to viewers of the images. Data visualization uses statistical graphics, plots, information graphics, and other tools to communicate data. Data visualization is a form of data analysis that uses visual representations to communicate information.",
+        "keywords" : "Data, Visualization, Data Visualization",
+        "author" : "Twitter"
+    }
     
-},
-{
-    "title" : "Data Science",
-    "description" : "Data Science",
-    "keywords" : "Data Science",
-    "author" : "Data Science"
-},
-{
-    "title" : ""
-}
-]
+    ]

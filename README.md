@@ -83,11 +83,11 @@ Whether you are a social media professional or just starting out in the industry
 
 <br>
 
-🔭 [Deployment Video](https://drive.google.com/file/d/1tfy9g1DGI9eUbnjihZgitYW4bga30lvB/view) 🔭
+🔭 [Deployment Video](https://workhive1.herokuapp.com) 🔭
 
-![Photo1]()
-![Photo1]()
-![Photo1]()
+![WorkHive Landing Page](https://i.postimg.cc/nLY8ZVDq/Screenshot-Work-Hive.jpg)
+![Photo1](./client/src/Image/Home%3Apage.png)
+![Photo1](./client/src/Image/Contact%3Apage.png)
 
 
 
@@ -120,7 +120,7 @@ Whether you are a social media professional or just starting out in the industry
 <br>
 <h2 id="credits">Collaborators/Creditors 🏆</h2>
 
-👨‍💻 We are Coding BootCamp Alumni of [UCF](https://www.ucf.edu/students/) ⭐️
+👨‍💻 We are Coding BootCamp Alumni of [UCF](https://www.ucf.edu/students/)  ⭐️
 
 - [Profile]( https://github.com/TheQuentinJones  "Quentin Jones") -- Quentin Jones
 - [Profile]( https://github.com/TrentLe " Tanis Henrich") -- Trent Raeburn

@@ -9,6 +9,7 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
     return <h3>No Comments Yet</h3>;
               
    
+
   }
 
   return (
@@ -18,8 +19,10 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
         style={{ borderBottom: '1px dotted #1a1a1a' }}
       >
         Comments
+
       </h3>
       
+
       <div className="flex-row my-4">
         {comments &&
           comments.map((comment) => (
@@ -31,6 +34,7 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
                     on {comment.createdAt}
                   </span>
                 </h5>
+
                 <p className="card-body">{comment.commentText}</p>
                 
               </div>
@@ -40,6 +44,12 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
       <CommentForm/>
       
       
+                <p className="card-body">{comment.commentText}</p>                
+              </div>             
+            </div>
+          ))}
+      </div>      
+
     </>
   );
 };

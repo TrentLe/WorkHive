@@ -24,6 +24,7 @@ import Header from './components/Header';
 import Contact from './pages/Contact';
 import Meetup from './pages/Meetup';
 import AuthRequired from './components/AuthRequired/AuthRequired';
+import JobListing from './pages/Jobs';
 
 import Signup from './components/Signup/Signup';
 
@@ -133,6 +134,7 @@ function App() {
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />
               <Route path="/contact" element={<Contact />} />
               {/* <Route path="/uploader" element={<Uploader />} />              */}
+              <Route path="/jobs" element={<JobListing />} />
                          
              
           
