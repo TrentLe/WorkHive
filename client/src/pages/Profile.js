@@ -51,15 +51,21 @@ const Profile = ({ userId }) => {
 
   return (
     <div className="feed-container">
-      <Left />
-      <div className="">
+
+      <Left/>      
+      <div className=''>     
+
         <div className="col-12 col-md-10 mb-5">
           <div>
             <h2 className="">
               Viewing {userParam ? `${user.username}'s` : 'your'} profile.
             </h2>
-            <FollowButton userId={targetUser.id} followed={followed} />
+
+
+            <FollowButton userId={targetUserID} followed={followed}/>
             <div className="col-12 col-md-10 mb-5">
+
+
               <ThoughtList
                 thoughts={user.thoughts}
                 title={`${user.username}'s thoughts...`}
@@ -67,22 +73,25 @@ const Profile = ({ userId }) => {
                 showUsername={false}
               />
             </div>
+
+            
+            {!userParam && (
+              <div
+                className="col-12 col-md-10 mb-3 p-3"
+                style={{ border: '1px dotted #1a1a1a' }}
+              >
+                <ThoughtForm />
+                <h3>Biography:</h3>
+                <textarea
+                  placeholder="Type your bio here..."
+                  value={bio}
+                  onChange={handleBioChange}
+                  rows={5}
+                />
+              </div>
+            
+            )}
           </div>
-          {!userParam && (
-            <div
-              className="col-12 col-md-10 mb-3 p-3"
-              style={{ border: '1px dotted #1a1a1a' }}
-            >
-              <ThoughtForm />
-              <h3>Biography:</h3>
-              <textarea
-                placeholder="Type your bio here..."
-                value={bio}
-                onChange={handleBioChange}
-                rows={5}
-              />
-            </div>
-          )}
         </div>
       </div>
     </div>
