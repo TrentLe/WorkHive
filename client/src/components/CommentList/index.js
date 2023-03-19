@@ -1,8 +1,15 @@
 import React from 'react';
+import CommentForm from '../CommentForm';
 
-const CommentList = ({ comments = [] }) => { 
+
+
+const CommentList = ({ comments = [] },{thoughtId}) => {
+
   if (!comments.length) {
-    return <h3>No Comments Yet</h3>;    
+    return <h3>No Comments Yet</h3>;
+              
+   
+
   }
 
   return (
@@ -12,7 +19,10 @@ const CommentList = ({ comments = [] }) => {
         style={{ borderBottom: '1px dotted #1a1a1a' }}
       >
         Comments
-      </h3>      
+
+      </h3>
+      
+
       <div className="flex-row my-4">
         {comments &&
           comments.map((comment) => (
@@ -24,11 +34,22 @@ const CommentList = ({ comments = [] }) => {
                     on {comment.createdAt}
                   </span>
                 </h5>
+
+                <p className="card-body">{comment.commentText}</p>
+                
+              </div>
+            </div>
+          ))}
+      </div>
+      <CommentForm/>
+      
+      
                 <p className="card-body">{comment.commentText}</p>                
               </div>             
             </div>
           ))}
       </div>      
+
     </>
   );
 };

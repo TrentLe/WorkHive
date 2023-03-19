@@ -5,25 +5,14 @@ import { useMutation } from '@apollo/client';
 
 import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
-
-import RemoveUser from '../components/DeleteUser/DeleteUser'
-
-// import Left from '../components/left/left';
-
+import RemoveUser from '../components/DeleteUser/DeleteUser';
 import Auth from '../utils/auth';
-
 import FollowButton from '../components/FollowButton';
-
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
-import { ADD_FOLLOW } from '../utils/mutations';
-import { QUERY_FOLLOWING } from '../utils/queries';
-import { REMOVE_FOLLOW} from '../utils/mutations';
+import { QUERY_USER, QUERY_ME, QUERY_FOLLOWING } from '../utils/queries';
+import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
 import Left from '../components/left/left';
-// import { QUERY_FOLLOWERS } from '../../utils/queries';
 
-
-
-const Profile = ({userId}) => {
+const Profile = ({ userId }) => {
   // use this to determine if `useEffect()` hook needs to run again
   const { username: userParam } = useParams();
 
@@ -32,16 +21,13 @@ const Profile = ({userId}) => {
     variables: { username: userParam },
   });
 
-
-  const [followed, setFollowed] = useState([false]);
-  const targetUserID = data?.user || {};
+  const targetUser = data?.user || {};
+  const [followed, setFollowed] = useState(targetUser.followed || false);
   const [bio, setBio] = useState('');
-
 
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
-
 
   const user = data?.me || data?.user || {};
 
@@ -64,20 +50,21 @@ const Profile = ({userId}) => {
   }
 
   return (
-    
     <div className="feed-container">
+
       <Left/>      
       <div className=''>     
-        
-  
+
         <div className="col-12 col-md-10 mb-5">
           <div>
             <h2 className="">
               Viewing {userParam ? `${user.username}'s` : 'your'} profile.
             </h2>
 
+
             <FollowButton userId={targetUserID} followed={followed}/>
             <div className="col-12 col-md-10 mb-5">
+
 
               <ThoughtList
                 thoughts={user.thoughts}
@@ -86,6 +73,7 @@ const Profile = ({userId}) => {
                 showUsername={false}
               />
             </div>
+
             
             {!userParam && (
               <div
