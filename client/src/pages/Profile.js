@@ -52,8 +52,9 @@ const Profile = ({ userId }) => {
   return (
     <div className="feed-container">
 
-      <Left/>      
-      <div className=''>     
+      <Left/>
+      
+      <div className="">       
 
         <div className="col-12 col-md-10 mb-5">
           <div>
@@ -64,7 +65,6 @@ const Profile = ({ userId }) => {
 
             <FollowButton userId={targetUserID} followed={followed}/>
             <div className="col-12 col-md-10 mb-5">
-
 
               <ThoughtList
                 thoughts={user.thoughts}
