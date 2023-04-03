@@ -6,9 +6,9 @@
 
 
 
-<p align="center">Welcome to our Social Media Job Website!
+<h3 align="center">Welcome to our Social Media Job Website!</h3>
 
-</p>
+
 
 ![](https://i.imgur.com/waxVImv.png)
 <br>
@@ -79,15 +79,22 @@ Whether you are a social media professional or just starting out in the industry
 👯  Refresh MongoDB database. That's it -->
 
 
-<p align="center">ScreenShots 🏆</p>
+<h3 align="center">ScreenShots 🏆</h3>
 
 <br>
 
 🔭 [Deployment Video](https://workhive1.herokuapp.com) 🔭
 
-![WorkHive Landing Page](https://i.postimg.cc/nLY8ZVDq/Screenshot-Work-Hive.jpg)
-![Photo1](./client/src/Image/Home%3Apage.png)
-![Photo1](./client/src/Image/Contact%3Apage.png)
+<img src='https://i.postimg.cc/nLY8ZVDq/Screenshot-Work-Hive.jpg' width='70%' height='auto'>
+
+<br>
+
+<img src='./client/src/images/Home_page.png' width='70%' height='auto'>
+
+<br>
+
+<img src='./client/src/images/Contact_page.png' width='70%' height='auto'>
+
 
 
 
