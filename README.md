@@ -83,7 +83,7 @@ Whether you are a social media professional or just starting out in the industry
 
 <br>
 
-🔭 [Deployment Video](https://workhive1.herokuapp.com) 🔭
+🔭 [Heroku Deployed Application Link](https://workhive1.herokuapp.com) 🔭
 
 <img src='https://i.postimg.cc/nLY8ZVDq/Screenshot-Work-Hive.jpg' width='70%' height='auto'>
 
