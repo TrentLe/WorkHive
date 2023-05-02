@@ -63,7 +63,7 @@ const Profile = ({ userId }) => {
             </h2>
 
 
-            <FollowButton userId={targetUserID} followed={followed}/>
+            {/* <FollowButton userId={targetUserID} followed={followed}/> */}
             <div className="col-12 col-md-10 mb-5">
 
               <ThoughtList

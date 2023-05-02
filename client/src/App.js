@@ -25,6 +25,7 @@ import Contact from './pages/Contact';
 import Meetup from './pages/Meetup';
 import AuthRequired from './components/AuthRequired/AuthRequired';
 import JobListing from './pages/Jobs';
+import ProfileEditor from './pages/ProfileEditor/ProfileEditor';
 
 import Signup from './components/Signup/Signup';
 
@@ -135,7 +136,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               {/* <Route path="/uploader" element={<Uploader />} />              */}
               <Route path="/jobs" element={<JobListing />} />
-                         
+              <Route path="/ProfileEditor" element={<ProfileEditor />} />  
              
           
             </Routes>

@@ -5,7 +5,7 @@ import "./Parallax.css";
 import { useMutation } from "@apollo/client";
 import { ADD_CONTACT } from "../utils/mutations";
 // if we want to import picture in src = {test}, from Image folder
-import test from "../Image/test.png";
+// import test from "../Image/test.png";
 
 function Contact() {
   const [formState, setFormState] = useState({
