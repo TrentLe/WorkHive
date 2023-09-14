@@ -11,12 +11,15 @@ import { IoIosKeypad } from "react-icons/io";
 import { MdBedtime } from "react-icons/md";
 import { MdBrightness7 } from "react-icons/md";
 import { BsUiRadiosGrid } from "react-icons/bs";
+import { UPDATE_USER } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
 import "./header.scss";
 // import { useContext } from 'react';
 // import { DarkModeContext } from "./context/darkModeContext.js";
 
 import RemoveUser from "../DeleteUser/DeleteUser";
 import Auth from "../../utils/auth";
+
 
 const Header = () => {
 
@@ -27,6 +30,32 @@ const Header = () => {
     localStorage.removeItem('name');
     localStorage.removeItem('profilePic');
   };
+
+  const [ setProfilePic, {error, info}] = useMutation(UPDATE_USER)
+  
+
+  const handleProfilePic = async () => {    
+
+    const image = localStorage.getItem('profilePic')
+    const theId = Auth.getProfile().data._id
+
+    try {
+      console.log(image)
+      console.log(theId)
+
+      await setProfilePic({ variables: {
+        updateUserId: theId,
+        profilepicture: image,
+      }})
+      
+      console.log(Auth.getProfile())
+
+    } catch (err) {
+      console.error(err)
+    }   
+    
+  }
+
 
   return (
     <div className="images">
@@ -69,6 +98,7 @@ const Header = () => {
                     <div>
                       <RemoveUser />
                     </div>
+                    <button onClick={handleProfilePic}>Set Profile Picture</button>
                   </div>
                 </div>
               </Link>

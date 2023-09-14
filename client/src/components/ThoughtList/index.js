@@ -27,6 +27,8 @@ const ThoughtList = ({
   const liked = false;
   const [commentOpen, setComment] = useState(false);
 
+  
+
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
 

@@ -20,6 +20,9 @@ function RemoveUser() {
     if (user && user._id === Auth.getProfile().data._id) {
       try {
         await deleteUser({ variables: { userId: user._id } });
+        localStorage.removeItem("name")
+        localStorage.removeItem("email")
+        localStorage.removeItem("profilePic")
         Auth.logout();
         // Handle success
       } catch (error) {
