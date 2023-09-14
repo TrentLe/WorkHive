@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth, signInWithGoogle } from '../Firebase/Firebase';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
@@ -22,6 +23,39 @@ const Signup = () => {
       [name]: value,
     });
   };
+
+  // my new code before handleFormSubmit
+
+  const signInUsingGoogle = async () => {
+
+    await signInWithGoogle()
+
+    setFormState({
+      username: localStorage.getItem("email"),
+      email: localStorage.getItem("email"),
+      password: localStorage.getItem("email"),
+    })
+
+    if (localStorage.getItem("email") && localStorage.getItem("name") && localStorage.getItem("profilePic")) {
+
+      const info = localStorage.getItem("email")
+      console.log(info)
+
+      console.log(formState)
+
+      try {
+        console.log(formState)
+        const { data } = await addUser({
+          variables: { ...formState },
+        })
+
+        Auth.login(data.addUser.token)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+  }
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -50,39 +84,44 @@ const Signup = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your username"
-                  name="username"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-primary"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
+              <div>
+                <form onSubmit={handleFormSubmit}>
+                  <input
+                    className="form-input"
+                    placeholder="Your username"
+                    name="username"
+                    type="text"
+                    value={formState.name}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="Your email"
+                    name="email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="******"
+                    name="password"
+                    type="password"
+                    value={formState.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    className="btn btn-block btn-primary"
+                    style={{ cursor: 'pointer' }}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </form>
+                <button type="button" className="login-with-google-btn" onClick={signInUsingGoogle} >
+                  Sign in with Google
                 </button>
-              </form>
+              </div>
             )}
 
             {error && (
