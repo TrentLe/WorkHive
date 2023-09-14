@@ -56,6 +56,7 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      profilepicture
       thoughts {
         _id
         thoughtText
