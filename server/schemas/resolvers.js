@@ -179,12 +179,21 @@ const resolvers = {
         url: `http://localhost:3001/public/images/${filename}`
       }
     },
-    updateUser: async (_, { id, username, email, password, profilePicture, bio }) => {
+    updateUser: async (_, { id, username, email, password, profilepicture, bio }, context) => {
+      console.log(id, profilepicture, context.user._id)
       const user = await User.findByIdAndUpdate(
-        id,
-        { username, email, password, profilePicture, bio, },
-        { new: true }
+        {_id: context.user._id},
+        {$set: { username: username, email: email, password: password, profilepicture: profilepicture, bio: bio, }},
+        { new: true },
+        (error, updatedUser) => {
+          if (error) {
+            console.error(error)
+          } else {
+            console.log(updatedUser)
+          }
+        }
       );
+      console.log(user)
       return user;
     },
     updateCompany: async (_, { id, companyname, email, password, profilePicture, bio }) => {
