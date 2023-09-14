@@ -14,10 +14,7 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
 
   return (
     <>
-      <h3
-        className="p-5 display-inline-block"
-        style={{ borderBottom: '1px dotted #1a1a1a' }}
-      >
+      <h3 className="p-5 display-inline-block" style={{ borderBottom: '1px dotted #1a1a1a' }} >
         Comments
 
       </h3>
@@ -42,13 +39,14 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
           ))}
       </div>
       <CommentForm/>
-      
-      
+      {/* <div>
+            <div>
+              <div>
                 <p className="card-body">{comment.commentText}</p>                
               </div>             
             </div>
           ))}
-      </div>      
+      </div>       */}
 
     </>
   );

@@ -1,0 +1,39 @@
+.about__me-section {
+
+    background: #191919;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 90vw;
+    left: 0;
+}
+
+.positioning {
+
+    display: flex;
+
+}
+
+.about__me-title {
+
+    margin: 4rem;
+    padding: 3rem;
+
+
+}
+
+.about__me-heading {
+
+    padding: 3rem;
+
+}
+
+.about__me-content {
+
+    width: 50vw;
+    resize: none;
+
+
+}
