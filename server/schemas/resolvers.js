@@ -9,10 +9,10 @@ const resolvers = {
 
   Query: {
     users: async () => {
-      return User.find()
+      return User.find().populate('thoughts')
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username })
+      return User.findOne({ username }).populate('thoughts')
     },
     companies: async () => {
       return Company.find()
