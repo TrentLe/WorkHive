@@ -158,3 +158,15 @@ export const DELETE_USER = gql`
 }
 `;
 
+export const UPDATE_USER = gql`
+mutation updateUser($updateUserId: ID!, $username: String, $email: String, $password: String, $profilepicture: String, $bio: String) {
+  updateUser(id: $updateUserId, username: $username, email: $email, password: $password, profilepicture: $profilepicture, bio: $bio) {
+    _id
+    email
+    username
+    profilepicture
+    bio
+  }
+}
+`
+

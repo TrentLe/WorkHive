@@ -11,17 +11,18 @@ import FollowButton from '../components/FollowButton';
 import { QUERY_USER, QUERY_ME, QUERY_FOLLOWING } from '../utils/queries';
 import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
 import Left from '../components/left/left';
+import Right from '../components/right/right';
 
 const Profile = ({ userId }) => {
   // use this to determine if `useEffect()` hook needs to run again
   const { username: userParam } = useParams();
 
   // if username is in the URL, execute the QUERY_USER query and return its data
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
+  const query1 = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
 
-  const targetUser = data?.user || {};
+  const targetUser = query1.data?.user || {};
   const [followed, setFollowed] = useState(targetUser.followed || false);
   const [bio, setBio] = useState('');
 
@@ -29,14 +30,14 @@ const Profile = ({ userId }) => {
     setBio(event.target.value);
   };
 
-  const user = data?.me || data?.user || {};
+  const user = query1.data?.me || query1.data?.user || {};
 
   // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
     return <Navigate to="/me" />;
   }
 
-  if (loading) {
+  if (query1.loading) {
     return <div>Loading...</div>;
   }
 
@@ -50,51 +51,30 @@ const Profile = ({ userId }) => {
   }
 
   return (
-    <div className="feed-container">
 
-      <Left/>
-      
-      <div className="">       
+    <>
+      <h2 className="text-center">
+        You are viewing {userParam ? `${user.username}'s` : 'your'} profile.
+      </h2>
+      <div className="feed-container">
 
-        <div className="col-12 col-md-10 mb-5">
-          <div>
-            <h2 className="">
-              Viewing {userParam ? `${user.username}'s` : 'your'} profile.
-            </h2>
+        <Left />
 
+        <ThoughtList
+          thoughts={user.thoughts}
+          title={`${user.username}'s thoughts...`}
+          displayPic={user.profilepicture}
+          showTitle={false}
+          showUsername={false}
+        />
 
-            {/* <FollowButton userId={targetUserID} followed={followed}/> */}
-            <div className="col-12 col-md-10 mb-5">
+        {!userParam && (
+          <Right me={user.profilepicture} />
 
-              <ThoughtList
-                thoughts={user.thoughts}
-                title={`${user.username}'s thoughts...`}
-                showTitle={false}
-                showUsername={false}
-              />
-            </div>
+        )}
 
-            
-            {!userParam && (
-              <div
-                className="col-12 col-md-10 mb-3 p-3"
-                style={{ border: '1px dotted #1a1a1a' }}
-              >
-                <ThoughtForm />
-                <h3>Biography:</h3>
-                <textarea
-                  placeholder="Type your bio here..."
-                  value={bio}
-                  onChange={handleBioChange}
-                  rows={5}
-                />
-              </div>
-            
-            )}
-          </div>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 

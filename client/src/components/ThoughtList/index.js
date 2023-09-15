@@ -10,7 +10,10 @@ import { TbShare3 } from "react-icons/tb";
 import Auth from "../../utils/auth";
 
 import { REMOVE_THOUGHT } from "../../utils/mutations";
-import { useMutation } from "@apollo/client";
+
+import { useMutation, useQuery } from "@apollo/client";
+import { QUERY_USERS } from "../../utils/queries";
+
 // added --
 
 
@@ -19,13 +22,32 @@ import { useMutation } from "@apollo/client";
 
 const ThoughtList = ({
   thoughts,
+  users,
   title,
+  displayPic,
   showTitle = true,
   showUsername = true,
 }) => {
-  console.log(thoughts);
+
   const liked = false;
   const [commentOpen, setComment] = useState(false);
+  // MY QUERY
+  const authorMap = new Map
+
+  if (users) {
+
+
+    const authorArr = thoughts.map(thought => thought.thoughtAuthor)
+
+    authorArr.forEach(author => {
+      for (let i = 0; i < users.length; i++) {
+        if (author === users[i].username) {
+          authorMap.set(author, users[i].profilepicture)
+        }
+      }
+    }
+    )
+  }
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -57,7 +79,7 @@ const ThoughtList = ({
             <div className="user">
               <div className="userinfo">
                 <img
-                  src="https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0"
+                  src={authorMap.get(thought.thoughtAuthor) || displayPic}
                   alt=""
                 />
                 <div className="postdetails">
@@ -126,7 +148,7 @@ const ThoughtList = ({
             </div>
           </div>
 
-          
+
           // show comments on click
 
         ))}

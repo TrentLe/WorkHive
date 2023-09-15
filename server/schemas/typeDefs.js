@@ -3,12 +3,12 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
   type User {
     _id: ID
-    username: String
+    username: String!
     email: String
     password: String    
     bio: String
-    profilePicture: String
-    thoughts: [Thought]!
+    profilepicture: String
+    thoughts: [Thought]
     followers: [User]!
     following: [User]!
   }
@@ -80,7 +80,7 @@ const typeDefs = gql`
     jobPosting(id: ID!): JobPosting
     me: User
     users: [User]
-    user(username: String): User
+    user(username: String!): User
     thoughts(username: String): [Thought]
     thought(thoughtId: ID!): Thought
     companies: [Company]
@@ -103,7 +103,7 @@ const typeDefs = gql`
     likeJobPosting(jobpostingId: ID!): JobPosting
     addCompany(email: String!, password: String!, companyname: String!): Auth!
     uploadImage(file: String!): File!
-    updateUser(id: ID!, username: String, email: String, password: String, profilePicture: String, bio: String): User
+    updateUser(id: ID!, username: String, email: String, password: String, profilepicture: String, bio: String): User
     updateCompany(id: ID!, companyname: String, email: String, password: String, profilePicture: String, bio: String): Company
     deleteUser(userId: ID!): User
     deleteCompany(companyId: ID!): Company
@@ -111,6 +111,7 @@ const typeDefs = gql`
     removeFollow(userId: ID!): Boolean
     addContact(name: String, email: String, message: String): Contact
     addComment(thoughtId: ID!, commentText: String!): Thought
+    
   }
 `;
 

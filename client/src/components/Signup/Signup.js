@@ -24,6 +24,8 @@ const Signup = () => {
     });
   };
 
+  
+
   // my new code before handleFormSubmit
 
   const signInUsingGoogle = async () => {
