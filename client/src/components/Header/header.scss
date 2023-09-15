@@ -1,89 +1,96 @@
-.navbar{
+.navbar {
     margin: 10px 0px 10px 5px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 20px;
     height: 4rem;
-    background-color: lightgoldenrodyellow;
+    background-color: transparent;
     width: auto;
     position: sticky;
     top: 0;
     z-index: 999;
-   
-    
 
 
-    .left-side{
+
+
+    .left-side {
         display: flex;
         align-items: center;
         gap: 30px;
 
     }
-    .right-side{
+
+    .right-side {
         display: flex;
         align-items: baseline;
         gap: 30px;
         justify-content: flex-end;
     }
-    .images{
-    
-        .dropdown{
-        position: relative;
-        display: inline-block;
-        img{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 3vw;
-        }
-      
-        &-content {
-          display: none;
-          position: absolute;
-          background-color: #f9f9f9;
-          min-width: 160px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          padding: 12px 16px;
-          z-index: 1;
-        }
-      
-        &:hover .dropdown-content{
-          display: block
-        }
+
+    .images {
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            direction: rtl;
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 3vw;
+            }
+
+            &-content {
+                display: none;
+                position: absolute;
+                background-color: darkblue;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                padding: 12px 16px;
+                z-index: 1;
+            }
+
+            &:hover .dropdown-content {
+                display: block
+            }
         }
 
-            
+
     }
 
-          
-    }
-  
 
-    .searchbar{
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        border: 1px solid black;
-        margin-right: 40rem;
-       background-color: white;
-    }
-    input {
-        width: 25rem;
-        margin-right: 30rem;
-    }
-    .bee{
-        display: flex;
-        width: 50px;
-        height: 50px;
-    }
-    .header {
-        display: flex;
-        font-family:'Monoton', cursive;
-        font-size: 25px;
-        // color: goldenrod;
-        color: black;
-        font-weight: bold;
+}
+
+
+.searchbar {
+    display: flex;
     align-items: center;
-    }
+    gap: 10px;
+    border: 1px solid black;
+    margin-right: 40rem;
+    background-color: white;
+}
+
+input {
+    width: 25rem;
+    margin-right: 30rem;
+}
+
+.bee {
+    display: flex;
+    width: 50px;
+    height: 50px;
+}
+
+.header {
+    display: flex;
+    font-family: 'Monoton', cursive;
+    font-size: 25px;
+    // color: goldenrod;
+    color: white;
+    font-weight: bold;
+    align-items: center;
+}
