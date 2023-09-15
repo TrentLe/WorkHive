@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import ThoughtList from '../components/ThoughtList';
 // import Stories from '../components/stories'
 
-import { QUERY_THOUGHTS, QUERY_USERS } from '../utils/queries';
+import { QUERY_THOUGHTS, QUERY_USERS, QUERY_ME } from '../utils/queries';
 import "./home.scss"
 import Left from '../components/left/left';
 import Right from '../components/right/right';
@@ -12,18 +12,17 @@ import Right from '../components/right/right';
 const Home = () => {
   const query1 = useQuery(QUERY_THOUGHTS);
   const query2 = useQuery(QUERY_USERS)
-  console.log(query1.data)
-  console.log(query2.data)
+  const query3 = useQuery(QUERY_ME)
 
   const thoughts = query1.data?.thoughts || [];
   const users = query2.data?.users || [];
+  const me = query3.data?.me || [];
 
   return (
-    <main>
-      <nav>
-
-      {/* <Header/> */}
-      </nav>
+    <>
+      <h2 className="text-center">
+        You are viewing the live feed. Tell us something cool!
+      </h2>
       <div className="feed-container">
         <Left/>
         
@@ -37,9 +36,11 @@ const Home = () => {
             />
           )}
       
-        <Right />
+        <Right
+          me={me}
+        />
       </div>
-    </main>
+    </>
   );
 };
 

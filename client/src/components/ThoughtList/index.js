@@ -24,30 +24,30 @@ const ThoughtList = ({
   thoughts,
   users,
   title,
+  displayPic,
   showTitle = true,
   showUsername = true,
 }) => {
-  console.log(thoughts);
-  console.log(users);
+
   const liked = false;
   const [commentOpen, setComment] = useState(false);
   // MY QUERY
- 
   const authorMap = new Map
 
-  const authorArr = thoughts.map(thought => thought.thoughtAuthor)
-  console.log(authorArr)
+  if (users) {
 
-  authorArr.forEach(author => {
-    for (let i = 0; i < users.length; i++) {
-      if (author === users[i].username) {
-        authorMap.set(author, users[i].profilepicture)
+
+    const authorArr = thoughts.map(thought => thought.thoughtAuthor)
+
+    authorArr.forEach(author => {
+      for (let i = 0; i < users.length; i++) {
+        if (author === users[i].username) {
+          authorMap.set(author, users[i].profilepicture)
+        }
       }
     }
+    )
   }
-  )
-  
-
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -79,7 +79,7 @@ const ThoughtList = ({
             <div className="user">
               <div className="userinfo">
                 <img
-                  src={authorMap.get(thought.thoughtAuthor)}
+                  src={authorMap.get(thought.thoughtAuthor) || displayPic}
                   alt=""
                 />
                 <div className="postdetails">

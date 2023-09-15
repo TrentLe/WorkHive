@@ -2,14 +2,16 @@ import './right.scss'
 import Auth from '../../utils/auth';
 import ThoughtForm from '../ThoughtForm';
 
-const Right= () => {
+const Right = (me) => {
    
     return(   
     
     <div className='right'>
      
     <div className='container'>
-        <ThoughtForm/>
+        <ThoughtForm
+            meInfo={me}
+        />
         <div className='menu'>
         <h3> </h3>
             <div className='info'>

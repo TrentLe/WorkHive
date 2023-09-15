@@ -30,19 +30,6 @@ import ProfileEditor from './pages/ProfileEditor/ProfileEditor';
 import Signup from './components/Signup/Signup';
 
 
-
-
-// import { DarkModeContext } from "./context/darkModeContext.js";
-// import { useContext } from 'react';
-
-
-
-
-// import { getMainDefinition } from '@apollo/client/utilities';
-// import Left from './components/left/left';
-
-
-
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -60,25 +47,9 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
-// This where what I am not sure of starts <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< beginning
-// Create an Apollo link for file uploads
-// const uploadLink = createUploadLink({ uri: 'http://localhost:3001'})
 
-// Split function is to send HTTP requests through the HTTP link
-//with authentication headers, and file uploads through the upload link
-// const link = split(
-//   ({ query }) => {
-//     const { kind, operation } = getMainDefinition(query);
-//     return kind === 'OperationDefinition' && operation === 'mutation';
-//   },
-//   uploadLink,
-//   authLink.concat(httpLink)  
-// )
-// This is where what I am not sure of ends <<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
-
-  // link: authLink.concat(httpLink), <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< This was here before my edit! bring it back if this doesn't work!!
+  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API  
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
@@ -93,22 +64,7 @@ function App() {
       </>
     );
   }
-  // const { darkMode } = useContext(DarkModeContext);
 
-  // const Layout = () => {
-  //   return (
-  //     <div className={`theme-${darkMode ? "dark" : "light"}`}>
-  //       <Header />
-  //       <div style={{ display: "flex" }}>
-       
-  //         <div style={{ flex: 6 }}>
-           
-  //         </div>
-         
-  //       </div>
-  //     </div>
-  //   );
-  // };
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -126,10 +82,11 @@ function App() {
                
               <Route path="/Signup" element={<Signup/>} />          
 
-              <Route path="/me" element={<Profile />} />
+              
               <Route element={<AuthRequired />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/meetup" element={<Meetup />} />
+                <Route path="/me" element={<Profile />} />                
               </Route>
               <Route path="/profiles/:username" element={<Profile />} />
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />

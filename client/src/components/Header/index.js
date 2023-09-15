@@ -12,13 +12,14 @@ import { MdBedtime } from "react-icons/md";
 import { MdBrightness7 } from "react-icons/md";
 import { BsUiRadiosGrid } from "react-icons/bs";
 import { UPDATE_USER } from "../../utils/mutations";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import "./header.scss";
 // import { useContext } from 'react';
 // import { DarkModeContext } from "./context/darkModeContext.js";
 
 import RemoveUser from "../DeleteUser/DeleteUser";
 import Auth from "../../utils/auth";
+import { QUERY_ME } from "../../utils/queries";
 
 
 const Header = () => {
@@ -31,8 +32,7 @@ const Header = () => {
     localStorage.removeItem('profilePic');
   };
 
-  const [ setProfilePic, {error, info}] = useMutation(UPDATE_USER)
-  
+  const [ setProfilePic, {error, info}] = useMutation(UPDATE_USER)  
 
   const handleProfilePic = async () => {    
 
@@ -87,7 +87,7 @@ const Header = () => {
                 {Auth.getProfile().data.token}
 
                 <div className="dropdown">
-                  <span><img src={localStorage.getItem("profilePic")} alt="" /></span>
+                  <span><img src={localStorage.getItem('profilePic')} alt="my profile" /></span>
                   <div className="dropdown-content">
                     <div>
                       {Auth.getProfile().data.username}

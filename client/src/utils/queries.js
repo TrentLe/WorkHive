@@ -6,8 +6,10 @@ export const QUERY_USER = gql`
       _id
       username
       email
+      profilepicture
       thoughts {
         _id
+        thoughtAuthor
         thoughtText
         createdAt
       }
@@ -63,20 +65,27 @@ export const QUERY_SINGLE_THOUGHT = gql`
 `;
 
 export const QUERY_ME = gql`
-  query me {
-    me {
+query me {
+  me {
+    _id
+    bio
+    email
+    profilepicture
+    username
+    thoughts {
       _id
-      username
-      email
-      profilepicture
-      thoughts {
+      createdAt
+      thoughtAuthor
+      thoughtText
+      comments {
         _id
-        thoughtText
-        thoughtAuthor
+        commentAuthor
+        commentText
         createdAt
       }
     }
   }
+}
 `;
 
 export const QUERY_FOLLOWING = gql`
