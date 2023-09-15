@@ -15,6 +15,18 @@ export const QUERY_USER = gql`
   }
 `;
 
+export const QUERY_USERS = gql`
+query users {
+  users {
+    _id
+    bio
+    email
+    profilepicture
+    username
+  }
+}
+`;
+
 export const QUERY_THOUGHTS = gql`
   query getThoughts {
     thoughts {

@@ -72,7 +72,7 @@ const ThoughtForm = () => {
 <div className="container">
   <div className="top">
     <img
-      src='https://media.licdn.com/dms/image/C4E03AQG8hEqqWqj0AQ/profile-displayphoto-shrink_800_800/0/1549993870611?e=1684368000&v=beta&t=_rd0TrKAHnKrGGmgPpDO3xJIqshZi6c86pUtZq9r8X0'
+      src={localStorage.getItem('profilePic') || null}
       alt=""
     />
     <input  placeholder={`What's on your mind ?`} name='thoughtText' value={thoughtText} onChange={handleChange} />
