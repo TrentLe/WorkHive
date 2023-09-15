@@ -28,6 +28,7 @@ import JobListing from './pages/Jobs';
 import ProfileEditor from './pages/ProfileEditor/ProfileEditor';
 
 import Signup from './components/Signup/Signup';
+import './App.css'
 
 
 // Construct our main GraphQL API endpoint
