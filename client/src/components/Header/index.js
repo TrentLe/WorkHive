@@ -32,9 +32,9 @@ const Header = () => {
     localStorage.removeItem('profilePic');
   };
 
-  const [ setProfilePic, {error, info}] = useMutation(UPDATE_USER)  
+  const [setProfilePic, { error, info }] = useMutation(UPDATE_USER)
 
-  const handleProfilePic = async () => {    
+  const handleProfilePic = async () => {
 
     const image = localStorage.getItem('profilePic')
     const theId = Auth.getProfile().data._id
@@ -43,17 +43,19 @@ const Header = () => {
       console.log(image)
       console.log(theId)
 
-      await setProfilePic({ variables: {
-        updateUserId: theId,
-        profilepicture: image,
-      }})
-      
+      await setProfilePic({
+        variables: {
+          updateUserId: theId,
+          profilepicture: image,
+        }
+      })
+
       console.log(Auth.getProfile())
 
     } catch (err) {
       console.error(err)
-    }   
-    
+    }
+
   }
 
 
@@ -71,11 +73,12 @@ const Header = () => {
               </Link>
               <MdBedtime />
               <IoIosKeypad />
-              <div className='searchbar'>
+
+            </div>
+            <div className='searchbar'>
                 <ImSearch />
                 <input type='text' placeholder='Search'></input>
               </div>
-            </div>
             <div className="right-side">
               <ImBell />
               <ImBubble />

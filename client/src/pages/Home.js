@@ -9,6 +9,7 @@ import Left from '../components/left/left';
 import Right from '../components/right/right';
 
 
+
 const Home = () => {
   const query1 = useQuery(QUERY_THOUGHTS);
   const query2 = useQuery(QUERY_USERS)

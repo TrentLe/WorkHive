@@ -24,7 +24,7 @@ const LandingPage = () => {
         <div className="containing">
           <div>
             <div className='columnLeft'>
-              <h1> Welcome to the WorkHive</h1>
+              <h1>WorkHive</h1>
             </div>
             <p>
               Ready to join the Colony?
