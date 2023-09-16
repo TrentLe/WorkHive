@@ -3,7 +3,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: lightgoldenrodyellow;
+    body {
+        background-image: url("https://i.postimg.cc/vmwTKTd4/shutterstock-black-design-how-to-black-cover.jpg");
+        background-attachment: fixed;
+         color: white;
+    }
 
     .containing {
         display: grid;
@@ -17,7 +21,7 @@
 
         .columnLeft {
             display: flex;
-            color: black;
+            color: white;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
@@ -45,8 +49,8 @@
             outline: none;
             cursor: pointer;
             background: transparent;
-            background-color: #FCDE53;
-            color: black;
+            background-color: darkblue;
+            color: white;
             margin: 0px 10px 0px 0px;
         }
         p {
