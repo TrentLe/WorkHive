@@ -9,14 +9,14 @@ const typeDefs = gql`
     bio: String
     profilepicture: String
     thoughts: [Thought]
-    followers: [User]!
-    following: [User]!
+    followers: [User]
+    following: [User]
   }
 
   type Follow {
     _id: ID
-    follower: User!
-    following: User!
+    follower: User
+    following: User
   }
 
   type Company {

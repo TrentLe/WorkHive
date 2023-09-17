@@ -68,10 +68,15 @@ const Profile = ({ userId }) => {
           showUsername={false}
         />
 
-        {!userParam && (
-          <Right 
-          me={user.profilepicture}
-           />
+        {!userParam ? (
+          <Right
+            me={user.profilepicture}
+          />
+        ) : (
+
+          <Right          
+            user={user}
+          />
 
         )}
 

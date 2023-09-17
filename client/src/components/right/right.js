@@ -4,18 +4,24 @@ import ThoughtForm from '../ThoughtForm';
 import FollowForm from '../Followers';
 import News from '../News/News';
 
-const Right = (me, url) => {
+const Right = (me, user) => {    
 
     return (
 
         <div className='right'>
 
             <div className='container'>
-                <ThoughtForm
+
+                {me.me && (
+                    <ThoughtForm
+                        meInfo={me}
+                    />
+                )}
+
+                <FollowForm
                     meInfo={me}
-                />
-                <FollowForm meInfo={me} />
-                <News url={url}/>
+                    userInfo={user} />
+                <News />
             </div>
         </div>)
 

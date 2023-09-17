@@ -9,10 +9,10 @@ const resolvers = {
 
   Query: {
     users: async () => {
-      return User.find().populate('thoughts')
+      return User.find().populate('thoughts').populate('following').populate('followers')
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts')
+      return User.findOne({ username }).populate('thoughts').populate('following').populate('followers')
     },
     companies: async () => {
       return Company.find()
@@ -29,7 +29,7 @@ const resolvers = {
     },    
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts');
+        return User.findOne({ _id: context.user._id }).populate('thoughts').populate('following').populate('followers');
       }
       throw new AuthenticationError('You need to be logged in!');
     },

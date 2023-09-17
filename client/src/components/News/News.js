@@ -12,9 +12,6 @@ const News = () => {
         Axios.get(`https://newsapi.org/v2/everything?q=tesla&from=2023-08-16&sortBy=publishedAt&apiKey=7fb98074f5544ddaaaf883b1f3c6c357`)
             .then((res) => {
                 // setNews(res.data.articles)
-                console.log(res.data.articles[0].author)
-                console.log(news)
-
                 for (let i = 0; i < 10; i++) {
                     limitedNews.push(res.data.articles[i])
                 }
@@ -26,12 +23,6 @@ const News = () => {
     useEffect(() => {
         getNews()
     }, [])
-
-
-
-
-    console.log(limitedNews)
-
 
     return (
         <section>
