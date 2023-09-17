@@ -1,6 +1,6 @@
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
-import Left from "../components/left/left";
+// import Left from "../components/left/left";
 
 function Meetup() {
   return (
@@ -75,7 +75,7 @@ function Meetup() {
   style={{ maxWidth: "100%", height: "auto", border: "20px solid #fafad2", boxShadow: "5px 5px 5px rgba(211, 211, 211, 8.5)" }}
 />
         </div>
-        <img src="https://esapet.org/wp-content/uploads/2020/01/ChatWithUs-300x300-1.png" width="150" height="150" />
+        <img src="https://esapet.org/wp-content/uploads/2020/01/ChatWithUs-300x300-1.png" width="150" height="150" alt="" />
 
         
         <div

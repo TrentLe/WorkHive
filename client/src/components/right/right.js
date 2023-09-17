@@ -1,5 +1,5 @@
 import './right.scss'
-import Auth from '../../utils/auth';
+// import Auth from '../../utils/auth';
 import ThoughtForm from '../ThoughtForm';
 import FollowForm from '../Followers';
 import News from '../News/News';

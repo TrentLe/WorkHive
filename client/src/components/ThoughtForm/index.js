@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+
 import { useMutation } from "@apollo/client";
 
 import { ADD_THOUGHT } from "../../utils/mutations";
@@ -7,8 +7,8 @@ import { QUERY_THOUGHTS, QUERY_ME } from "../../utils/queries";
 import "./postbox.scss";
 
 import Auth from "../../utils/auth";
-import { FiUpload } from "react-icons/fi";
-import Uploader from "../Uploader";
+// import { FiUpload } from "react-icons/fi";
+// import Uploader from "../Uploader";
 
 const ThoughtForm = (meInfo) => {
 
@@ -63,6 +63,7 @@ const ThoughtForm = (meInfo) => {
   };
 
   const handleChange = (event) => {
+    event.preventDefault()
     const { name, value } = event.target;
 
     if (name === "thoughtText" && value.length <= 280) {
@@ -91,8 +92,10 @@ const ThoughtForm = (meInfo) => {
                 <div className="item">
                   <img src={Image} alt="" />
                   <span>Add Image</span>
+                  
                 </div>
               </label>
+              <span>Character Count: {characterCount}</span>
               <div className="item">
 
                 <span></span>

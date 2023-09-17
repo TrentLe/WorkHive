@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import { ADD_FOLLOW, REMOVE_FOLLOW } from "../../utils/mutations";
-import { QUERY_USER, QUERY_ME } from "../../utils/queries";
+import { QUERY_USER } from "../../utils/queries";
 
 
 const FollowButton = ({ userId, following }) => {
@@ -15,7 +15,7 @@ const FollowButton = ({ userId, following }) => {
     });
 
   
-    const user = data?.user || {};
+    // const user = data?.user || {};
   
     const handleFollow = async () => {
       console.log('Function works ?');
