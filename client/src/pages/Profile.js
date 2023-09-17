@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useMutation } from '@apollo/client';
+// import { useMutation } from '@apollo/client';
 
-import ThoughtForm from '../components/ThoughtForm';
+// import ThoughtForm from '../components/ThoughtForm';
 import ThoughtList from '../components/ThoughtList';
-import RemoveUser from '../components/DeleteUser/DeleteUser';
+// import RemoveUser from '../components/DeleteUser/DeleteUser';
 import Auth from '../utils/auth';
-import FollowButton from '../components/FollowButton';
-import { QUERY_USER, QUERY_ME, QUERY_FOLLOWING } from '../utils/queries';
-import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
+// import FollowButton from '../components/FollowButton';
+import { QUERY_USER, QUERY_ME } from '../utils/queries';
+// import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
 import Left from '../components/left/left';
 import Right from '../components/right/right';
 
@@ -22,13 +22,13 @@ const Profile = ({ userId }) => {
     variables: { username: userParam },
   });
 
-  const targetUser = query1.data?.user || {};
-  const [followed, setFollowed] = useState(targetUser.followed || false);
-  const [bio, setBio] = useState('');
+  // const targetUser = query1.data?.user || {};
+  // const [followed, setFollowed] = useState(targetUser.followed || false);
+  // const [bio, setBio] = useState('');
 
-  const handleBioChange = (event) => {
-    setBio(event.target.value);
-  };
+  // const handleBioChange = (event) => {
+  //   setBio(event.target.value);
+  // };
 
   const user = query1.data?.me || query1.data?.user || {};
 

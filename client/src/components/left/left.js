@@ -1,17 +1,17 @@
 import "./left.scss";
-import Auth from "../../utils/auth";
+// import Auth from "../../utils/auth";
 import { CiYoutube } from "react-icons/ci";
 import { CiMail } from "react-icons/ci";
-import { FiUsers } from "react-icons/fi";
+// import { FiUsers } from "react-icons/fi";
 import { GoCalendar } from "react-icons/go";
-import { GoBriefcase } from "react-icons/go";
+// import { GoBriefcase } from "react-icons/go";
 import { CiStreamOn } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
 import PopupCalendar from "../Calendar/index"
 
  import { RiFundsBoxFill} from "react-icons/ri";
- import { BsFillCalendarMonthFill} from "react-icons/bs"
+//  import { BsFillCalendarMonthFill} from "react-icons/bs"
  import { MdGroups2} from "react-icons/md";
  import {  FcCalendar } from "react-icons/fc";
  import { FcBriefcase } from "react-icons/fc";

@@ -11,8 +11,8 @@ import Auth from "../../utils/auth";
 
 import { REMOVE_THOUGHT } from "../../utils/mutations";
 
-import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_USERS } from "../../utils/queries";
+import { useMutation } from "@apollo/client";
+// import { QUERY_USERS } from "../../utils/queries";
 
 // added --
 
@@ -30,9 +30,9 @@ const ThoughtList = ({
 }) => {
 
   const liked = false;
-  const [commentOpen, setComment] = useState(false);
+  // const [commentOpen, setComment] = useState(false);
   // MY QUERY
-  const authorMap = new Map
+  const authorMap = new Map()
 
   if (users) {
 
@@ -58,7 +58,7 @@ const ThoughtList = ({
       return false;
     }
     try {
-      const { data } = await removeThought({ variables: { thoughtId } });
+      await removeThought({ variables: { thoughtId } });
       window.location.reload();
     } catch (error) {
       console.log(error);

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_FOLLOW } from '../../utils/mutations';
-import { QUERY_ME } from '../../utils/queries';
 import { Link } from 'react-router-dom';
 import './FollowForm.scss'
 
@@ -14,10 +13,7 @@ const FollowForm = (meInfo, userInfo) => {
     const otherFollowed = meInfo.meInfo?.user?.following?.length
     const otherFollowers = meInfo.meInfo?.user?.followers?.length
 
-    const [followedUser, setFollowedUser] = useState([]);
-    const [followedUserCount, setFollowedUserCount] = useState(0);
-
-    const [followUser, followThatUser] = useMutation(ADD_FOLLOW)
+    const [followUser] = useMutation(ADD_FOLLOW)
 
     const handleFollow = async () => {
 
