@@ -40,8 +40,7 @@ const Header = () => {
     const theId = Auth.getProfile().data._id
 
     try {
-      console.log(image)
-      console.log(theId)
+
 
       await setProfilePic({
         variables: {
@@ -51,6 +50,8 @@ const Header = () => {
       })
 
       console.log(Auth.getProfile())
+
+      window.location.reload()
 
     } catch (err) {
       console.error(err)

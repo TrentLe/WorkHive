@@ -236,18 +236,21 @@ const resolvers = {
     },
     addFollow: async (parent, { userId }, context) => {
       if (context.user) {
-        const followingUser = await User.findOneAndUpdate(
+
+        const followedUser = await User.findOne({userId})
+        
+        await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { following: userId } },
           { new: true }
         );
 
-        const followerUser = await User.findOneAndUpdate(
+        await User.findOneAndUpdate(
           { _id: userId },
           { $addToSet: { followers: context.user._id } },
           { new: true }
         )
-        return { followingUser, followerUser };
+        return followedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

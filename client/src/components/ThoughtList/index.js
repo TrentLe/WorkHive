@@ -66,7 +66,7 @@ const ThoughtList = ({
   };
 
   if (!thoughts.length) {
-    return <h3>No Thoughts Yet</h3>;
+    return <div className="no-thoughts"><h3 >No Thoughts Yet</h3></div>;
   }
 
   return (

@@ -37,14 +37,12 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      ref: 'Company',
     },
   ],
   followers: [
     {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      ref: 'Company',
     },
   ],
 });
