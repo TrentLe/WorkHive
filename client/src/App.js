@@ -24,11 +24,12 @@ import Header from './components/Header';
 import Contact from './pages/Contact';
 import Meetup from './pages/Meetup';
 import AuthRequired from './components/AuthRequired/AuthRequired';
-import JobListing from './pages/Jobs';
 import ProfileEditor from './pages/ProfileEditor/ProfileEditor';
 
 import Signup from './components/Signup/Signup';
 import './App.css'
+
+
 
 
 // Construct our main GraphQL API endpoint
@@ -93,8 +94,7 @@ function App() {
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />
               <Route path="/contact" element={<Contact />} />
               {/* <Route path="/uploader" element={<Uploader />} />              */}
-              <Route path="/jobs" element={<JobListing />} />
-              <Route path="/ProfileEditor" element={<ProfileEditor />} />  
+               <Route path="/ProfileEditor" element={<ProfileEditor />} />  
              
           
             </Routes>

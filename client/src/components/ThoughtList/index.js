@@ -66,7 +66,7 @@ const ThoughtList = ({
   };
 
   if (!thoughts.length) {
-    return <h3>No Thoughts Yet</h3>;
+    return <div className="no-thoughts"><h3 >No Thoughts Yet</h3></div>;
   }
 
   return (
@@ -113,10 +113,10 @@ const ThoughtList = ({
             </div>
             <div className="content">
               <p>{thought.thoughtText}</p>
-              <img
+              {/* <img
                 src="https://cdn.vox-cdn.com/thumbor/RaRYyCa8D-PrmpPMrBTOsIIkvEg=/0x0:2997x2398/1200x800/filters:focal(852x628:1330x1106)/cdn.vox-cdn.com/uploads/chorus_image/image/71761914/usa_today_19606912.0.jpg"
                 alt=""
-              />
+              /> */}
             </div>
             <div className="info">
               <div className="item">

@@ -2,9 +2,6 @@ import React, {useState} from 'react';
 import Login from "../components/Login/Login";
 // import Signup from "../components/Signup/Signup";
 import Modal from 'react-bootstrap/Modal';
-
-import { Link } from 'react-router-dom';
-
 // import styled from 'styled-components';
 // import {motion} from 'framer-motion'
 // import Left from '../components/left/left';

@@ -36,10 +36,14 @@ const Home = () => {
               // title="Some Feed for Thought(s)..."
             />
           )}
-      
-        <Right
-          me={me}
-        />
+          {query3.loading ? (
+            <div>Loading...</div>
+          ) : (
+            <Right
+            me={me}          
+          />
+          )}
+
       </div>
     </>
   );

@@ -110,18 +110,11 @@ export const UPLOAD_IMAGE = gql`
 `;
 
 export const ADD_FOLLOW = gql`
-  mutation addFollow($followId: ID!) {
-    addFollow(followId: $followId) {
-      _id
-      username
-      email
-      followerCount
-      followers {
-        _id
-        username
-      }
-    }
+mutation AddFollow($userId: ID!) {
+  addFollow(userId: $userId) {
+    _id
   }
+}
 `;
 
 export const REMOVE_FOLLOW = gql`

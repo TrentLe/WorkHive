@@ -40,8 +40,7 @@ const Header = () => {
     const theId = Auth.getProfile().data._id
 
     try {
-      console.log(image)
-      console.log(theId)
+
 
       await setProfilePic({
         variables: {
@@ -51,6 +50,8 @@ const Header = () => {
       })
 
       console.log(Auth.getProfile())
+
+      window.location.reload()
 
     } catch (err) {
       console.error(err)
@@ -76,9 +77,9 @@ const Header = () => {
 
             </div>
             <div className='searchbar'>
-                <ImSearch />
-                <input type='text' placeholder='Search'></input>
-              </div>
+              <ImSearch />
+              <input type='text' placeholder='Search'></input>
+            </div>
             <div className="right-side">
               <ImBell />
               <ImBubble />
@@ -92,16 +93,16 @@ const Header = () => {
                 <div className="dropdown">
                   <span><img src={localStorage.getItem('profilePic')} alt="my profile" /></span>
                   <div className="dropdown-content">
-                    <div>
+                    <div className="get-username">
                       {Auth.getProfile().data.username}
                     </div>
-                    <button onClick={logout}>
+                    <button className="btn btn-secondary" onClick={logout}>
                       Logout
                     </button>
+                    <button className="btn btn-secondary" onClick={handleProfilePic}>Set Profile Picture</button>
                     <div>
                       <RemoveUser />
                     </div>
-                    <button onClick={handleProfilePic}>Set Profile Picture</button>
                   </div>
                 </div>
               </Link>
