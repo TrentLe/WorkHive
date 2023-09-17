@@ -38,7 +38,7 @@ const Home = () => {
           )}
       
         <Right
-          me={me}
+          me={me}          
         />
       </div>
     </>

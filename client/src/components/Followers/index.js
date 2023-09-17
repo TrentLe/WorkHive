@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_FOLLOW } from '../../utils/mutations';
 import './FollowForm.scss'
 
-const FollowForm = (meInfo) => {
+const FollowForm = (meInfo, userInfo) => {
     const [followedUser, setFollowedUser] = useState([]);
     const [followedUserCount, setFollowedUserCount] = useState(0);
 

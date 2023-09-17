@@ -69,7 +69,9 @@ const Profile = ({ userId }) => {
         />
 
         {!userParam && (
-          <Right me={user.profilepicture} />
+          <Right 
+          me={user.profilepicture}
+           />
 
         )}
 
