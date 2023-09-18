@@ -21,6 +21,10 @@ const Home = () => {
 
   console.log(me)
 
+  if ( query1.loading || query2.loading || query3.loading ) {
+    <div>Loading...</div>
+  }
+
   return (
     <>
       <h2 className="text-center">
@@ -28,23 +32,17 @@ const Home = () => {
       </h2>
       <div className="feed-container">
         <Left/>
-        
-          {query1.loading ? (
-            <div>Loading...</div>
-          ) : (
+
             <ThoughtList
               thoughts={thoughts}
               users={users}
               // title="Some Feed for Thought(s)..."
             />
-          )}
-          {query3.loading ? (
-            <div>Loading...</div>
-          ) : (
+
             <Right
             me={me}          
           />
-          )}
+
 
       </div>
     </>

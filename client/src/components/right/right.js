@@ -21,7 +21,7 @@ const Right = (me, user) => {
                 <FollowForm
                     meInfo={me}
                     userInfo={user} />
-                <News />
+                {/* <News /> */}
             </div>
         </div>)
 

@@ -5,14 +5,19 @@ import { Link } from 'react-router-dom';
 import './FollowForm.scss'
 
 const FollowForm = (meInfo, userInfo) => {
-
-    console.log(meInfo.meInfo.me.following.length)
+    
+    console.log(meInfo)
 
     const followed = meInfo.meInfo.me?.following?.length
     const followers = meInfo.meInfo.me?.followers?.length
 
     const otherFollowed = meInfo.meInfo?.user?.following?.length
     const otherFollowers = meInfo.meInfo?.user?.followers?.length
+
+    console.log(followed)
+    console.log(followers)
+    console.log(otherFollowed)
+    console.log(otherFollowers)
 
     const [followUser] = useMutation(ADD_FOLLOW)
 
