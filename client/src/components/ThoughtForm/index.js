@@ -15,7 +15,6 @@ const ThoughtForm = (meInfo) => {
   const myImage = meInfo.meInfo.me?.profilepicture
   const thisImage = meInfo.meInfo.me
 
-
   const [thoughtText, setThoughtText] = useState("");
 
   const [characterCount, setCharacterCount] = useState(0);

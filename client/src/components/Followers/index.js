@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './FollowForm.scss'
 
 const FollowForm = (meInfo, userInfo) => {
+    
 
 
     const followed = meInfo.meInfo.me?.following?.length

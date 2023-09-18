@@ -19,6 +19,12 @@ const Home = () => {
   const users = query2.data?.users || [];
   const me = query3.data?.me || [];
 
+  console.log(me)
+
+  if ( query1.loading || query2.loading || query3.loading ) {
+    <div>Loading...</div>
+  }
+
   return (
     <>
       <h2 className="text-center">
@@ -36,11 +42,12 @@ const Home = () => {
               // title="Some Feed for Thought(s)..."
             />
           )}
-          {query3.loading ? (
+          {query3.loading || query2.loading || query1.loading ? (
             <div>Loading...</div>
           ) : (
             <Right
-            me={me}          
+            me={me}
+            user={me}          
           />
           )}
 
