@@ -68,9 +68,9 @@ const Profile = ({ userId }) => {
           showUsername={false}
         />
 
-        {!userParam ? (
+        { query1.loading ? ( <div>Loading...</div> ) : ( !userParam ? (
           <Right
-            me={user.profilepicture}
+            me={user}
           />
         ) : (
 
@@ -78,7 +78,7 @@ const Profile = ({ userId }) => {
             user={user}
           />
 
-        )}
+        ))}
 
       </div>
     </>

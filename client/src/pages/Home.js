@@ -32,17 +32,24 @@ const Home = () => {
       </h2>
       <div className="feed-container">
         <Left/>
-
+        
+          {query1.loading ? (
+            <div>Loading...</div>
+          ) : (
             <ThoughtList
               thoughts={thoughts}
               users={users}
               // title="Some Feed for Thought(s)..."
             />
-
+          )}
+          {query3.loading || query2.loading || query1.loading ? (
+            <div>Loading...</div>
+          ) : (
             <Right
-            me={me}          
+            me={me}
+            user={me}          
           />
-
+          )}
 
       </div>
     </>
