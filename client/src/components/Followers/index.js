@@ -6,6 +6,8 @@ import './FollowForm.scss'
 
 const FollowForm = (meInfo, userInfo) => {
     
+
+
     const followed = meInfo.meInfo.me?.following?.length
     const followers = meInfo.meInfo.me?.followers?.length
 
