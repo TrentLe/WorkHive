@@ -4,8 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./Parallax.css";
 import { useMutation } from "@apollo/client";
 import { ADD_CONTACT } from "../utils/mutations";
-// if we want to import picture in src = {test}, from Image folder
-// import test from "../Image/test.png";
 
 function Contact() {
   const [formState, setFormState] = useState({
@@ -13,7 +11,7 @@ function Contact() {
     email: "",
     message: "",
   });
-  const [addContact, { error, data }] = useMutation(ADD_CONTACT);
+  const [addContact] = useMutation(ADD_CONTACT);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +24,7 @@ function Contact() {
     e.preventDefault();
     console.log(formState);
     try {
-      const { data } = await addContact({
+      await addContact({
         variables: { ...formState },
       });
     } catch (e) {
@@ -85,7 +83,7 @@ function Contact() {
             <div className="col-lg-4 contactCard">
               <div className="card w-60 h-75" style={{ width: "18rem;" }}>
                 <a href="https://github.com/TheQuentinJones">
-                  <img 
+                  <img
                     src="https://media.licdn.com/dms/image/C5603AQFcm8UdjN47dw/profile-displayphoto-shrink_800_800/0/1567959211712?e=1684368000&v=beta&t=mPzHaUVCQgirid2R1m2gP3VWUvSzdagApu3W-a2wd1E"
                     className="card-img-top"
                     alt="..."
@@ -113,8 +111,8 @@ function Contact() {
                 </a>
                 <div className="card-body">
                   <p className="card-text" style={{ color: "white" }}>
-                  Dhruvin Patel - "The best leaders are those most interested in surrounding 
-                  themselves with assistants and associates smarter than they are." - John C. Maxwell
+                    Dhruvin Patel - "The best leaders are those most interested in surrounding
+                    themselves with assistants and associates smarter than they are." - John C. Maxwell
                   </p>
                 </div>
               </div>
@@ -150,7 +148,7 @@ function Contact() {
                 </a>
                 <div className="card-body">
                   <p className="card-text" style={{ color: "white" }}>
-                    Henrich Tanis - "Success is not final, failure is not fatal: 
+                    Henrich Tanis - "Success is not final, failure is not fatal:
                     it is the courage to continue that counts." - Winston Churchill
                   </p>
                 </div>

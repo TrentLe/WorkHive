@@ -3,23 +3,19 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { ImHome } from "react-icons/im";
 import { ImBubble } from "react-icons/im";
-import { ImUser } from "react-icons/im";
 import { ImBell } from "react-icons/im";
 import { ImSearch } from "react-icons/im";
-import { ImContrast } from "react-icons/im";
 import { IoIosKeypad } from "react-icons/io";
 import { MdBedtime } from "react-icons/md";
-import { MdBrightness7 } from "react-icons/md";
-import { BsUiRadiosGrid } from "react-icons/bs";
 import { UPDATE_USER } from "../../utils/mutations";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import "./header.scss";
 // import { useContext } from 'react';
 // import { DarkModeContext } from "./context/darkModeContext.js";
 
 import RemoveUser from "../DeleteUser/DeleteUser";
 import Auth from "../../utils/auth";
-import { QUERY_ME } from "../../utils/queries";
+
 
 
 const Header = () => {
@@ -32,7 +28,7 @@ const Header = () => {
     localStorage.removeItem('profilePic');
   };
 
-  const [setProfilePic, { error, info }] = useMutation(UPDATE_USER)
+  const [setProfilePic] = useMutation(UPDATE_USER)
 
   const handleProfilePic = async () => {
 
@@ -40,8 +36,7 @@ const Header = () => {
     const theId = Auth.getProfile().data._id
 
     try {
-      console.log(image)
-      console.log(theId)
+
 
       await setProfilePic({
         variables: {
@@ -51,6 +46,8 @@ const Header = () => {
       })
 
       console.log(Auth.getProfile())
+
+      window.location.reload()
 
     } catch (err) {
       console.error(err)
@@ -76,9 +73,9 @@ const Header = () => {
 
             </div>
             <div className='searchbar'>
-                <ImSearch />
-                <input type='text' placeholder='Search'></input>
-              </div>
+              <ImSearch />
+              <input type='text' placeholder='Search'></input>
+            </div>
             <div className="right-side">
               <ImBell />
               <ImBubble />
@@ -92,16 +89,16 @@ const Header = () => {
                 <div className="dropdown">
                   <span><img src={localStorage.getItem('profilePic')} alt="my profile" /></span>
                   <div className="dropdown-content">
-                    <div>
+                    <div className="get-username">
                       {Auth.getProfile().data.username}
                     </div>
-                    <button onClick={logout}>
+                    <button className="btn btn-secondary" onClick={logout}>
                       Logout
                     </button>
+                    <button className="btn btn-secondary" onClick={handleProfilePic}>Set Profile Picture</button>
                     <div>
                       <RemoveUser />
                     </div>
-                    <button onClick={handleProfilePic}>Set Profile Picture</button>
                   </div>
                 </div>
               </Link>

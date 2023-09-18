@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { UPLOAD_IMAGE } from '../../utils/mutations';
+// import { useMutation } from '@apollo/client';
+// import { UPLOAD_IMAGE } from '../../utils/mutations';
 
 import { MdCloudUpload, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
-import { AxiosContext } from 'react-axios/lib/components/AxiosProvider'
+// import { AxiosContext } from 'react-axios/lib/components/AxiosProvider'
 import  axios  from 'axios'
 import FormData from 'form-data'
 

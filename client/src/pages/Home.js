@@ -19,6 +19,8 @@ const Home = () => {
   const users = query2.data?.users || [];
   const me = query3.data?.me || [];
 
+  console.log(me)
+
   return (
     <>
       <h2 className="text-center">
@@ -36,10 +38,14 @@ const Home = () => {
               // title="Some Feed for Thought(s)..."
             />
           )}
-      
-        <Right
-          me={me}
-        />
+          {query3.loading ? (
+            <div>Loading...</div>
+          ) : (
+            <Right
+            me={me}          
+          />
+          )}
+
       </div>
     </>
   );
