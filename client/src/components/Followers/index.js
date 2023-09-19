@@ -4,16 +4,15 @@ import { ADD_FOLLOW } from '../../utils/mutations';
 import { Link } from 'react-router-dom';
 import './FollowForm.scss'
 
-const FollowForm = (meInfo, userInfo) => {
-    
+const FollowForm = (meInfo, userInfo) => {   
 
-
-    const followed = meInfo.meInfo.me?.following?.length
-    const followers = meInfo.meInfo.me?.followers?.length
+    const followed = meInfo.meInfo?.me?.following?.length
+    const followers = meInfo.meInfo?.me?.followers?.length
 
     const otherFollowed = meInfo.meInfo?.user?.following?.length
     const otherFollowers = meInfo.meInfo?.user?.followers?.length
 
+    
     const [followUser] = useMutation(ADD_FOLLOW)
 
     const handleFollow = async () => {
@@ -66,7 +65,7 @@ const FollowForm = (meInfo, userInfo) => {
                     </>
                 )}
 
-                {followed ? (meInfo.meInfo.me.following.map((followedPerson) => {
+                {followed ? ( meInfo.meInfo.me?.following?.map((followedPerson) => {
                     return (<>
                         <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit", marginBottom: ".7rem"}}>
                         <div className='followed-info'>
@@ -76,7 +75,7 @@ const FollowForm = (meInfo, userInfo) => {
                         </Link>
                     </>
                     )
-                })) : (meInfo.meInfo.user.following.map((followedPerson) => {
+                })) : ( meInfo.meInfo.user?.following?.map((followedPerson) => {
                     return (<>
                         <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit" }}>
                             <div className='followed-info'>
