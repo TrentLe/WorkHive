@@ -14,11 +14,6 @@ import { REMOVE_THOUGHT } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 // import { QUERY_USERS } from "../../utils/queries";
 
-// added --
-
-
-
-
 
 const ThoughtList = ({
   thoughts,
