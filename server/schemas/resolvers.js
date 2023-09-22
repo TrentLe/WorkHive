@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, JobPosting, Thought, Company, Contact } = require('../models');
+const { User, Thought, Contact } = require('../models');
 const { signToken } = require('../utils/auth');
 const fs = require('fs')
 const path = require('path')
@@ -13,12 +13,6 @@ const resolvers = {
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('thoughts').populate('following').populate('followers')
-    },
-    companies: async () => {
-      return Company.find()
-    },
-    company: async (parent, { companyname }) => {
-      return Company.findOne({ companyname })
     },
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -47,11 +41,6 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addCompany: async (parent, { companyname, email, password }) => {
-      const company = await Company.create({ companyname, email, password });
-      const token = signToken(company);
-      return { token, company };
-    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -68,73 +57,6 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    },
-    companyLogin: async (parent, { email, password }) => {
-      const company = await Company.findOne({ email });
-
-      if (!company) {
-        throw new AuthenticationError('No company found with this email address');
-      }
-
-      const correctPw = await company.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
-      }
-
-      const token = signToken(company);
-
-      return { token, company };
-    },
-    createJobPosting: async (parent, { title, description}, context) => {
-      if (context.company) {
-        const jobPosting = await JobPosting.create({
-          title,
-          description,
-          author: context.company.companyname,
-        });
-
-        await Company.findOneAndUpdate(
-          { _id: context.company._id },
-          { $addToSet: { jobpostings: jobposting._id } }
-        );
-
-        return jobPosting;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    removeJobPosting: async (parent, { jobpostingId }, context) => {
-      if (context.company) {
-        const jobposting = await JobPosting.findOneAndDelete({
-          _id: jobpostingId,
-          author: context.company.companyname,
-        });
-
-        await Company.findOneAndUpdate(
-          { _id: context.company._id },
-          { $pull: { jobpostings: jobposting._id } }
-        );
-
-        return jobposting;
-      }
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    likeJobPosting: async (parent, args, context) => {
-      if (context.user) {
-        return JobPosting.findOneAndUpdate(
-          { _id: jobpostingId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
-        );
-      }
-      throw new AuthenticationError('You need to be logged in!');
     },
     addThought: async (parent, { thoughtText }, context) => {
       if (context.user) {
@@ -196,14 +118,6 @@ const resolvers = {
       console.log(user)
       return user;
     },
-    updateCompany: async (_, { id, companyname, email, password, profilePicture, bio }) => {
-      const company = await Company.findByIdAndUpdate(
-        id,
-        { companyname, email, password, profilePicture, bio, },
-        { new: true }
-      );
-      return company;
-    },
     deleteUser: async (parent, { userId }, context) => {
       try {
         const deletedUser = await User.findOneAndDelete({ _id: userId });
@@ -217,21 +131,6 @@ const resolvers = {
       } catch (err) {
         console.log(err);
         throw new Error('Error deleting user');
-      }
-    },
-    deleteCompany: async (parent, { companyId }, context) => {
-      try {
-        const deletedCompany = await Company.findOneAndDelete({ _id: companyId });
-        if (!deletedCompany) {
-          throw new Error('Company not found');
-        }
-        await Thought.deleteMany({ thoughtAuthor: deletedCompany.companyname });
-        // delete related job postings
-        await JobPosting.deleteMany({ author: deletedCompany.companyname });
-        return { message: 'Company deleted successfully' };
-      } catch (err) {
-        console.log(err);
-        throw new Error('Error deleting company');
       }
     },
     addFollow: async (parent, { userId }, context) => {

@@ -38,7 +38,6 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
             </div>
           ))}
       </div>
-      <CommentForm/>
       {/* <div>
             <div>
               <div>
