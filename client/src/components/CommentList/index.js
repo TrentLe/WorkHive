@@ -4,20 +4,25 @@ import CommentForm from '../CommentForm';
 
 
 const CommentList = ({ comments = [] },{thoughtId}) => {
+  console.log()
 
-  if (!comments.length) {
-    return <h3>No Comments Yet</h3>;
+  if (comments.length === 0) {
+    return (<>
+    <h3> no comments yet! </h3>
+    {/* <CommentForm thoughtId={thoughtId}/>  */}
+   </>
+   )
               
    
 
   }
-
+console.log(thoughtId)
   return (
     <>
-      <h3 className="p-5 display-inline-block" style={{ borderBottom: '1px dotted #1a1a1a' }} >
+      {/* <h3 className="p-5 display-inline-block" style={{ borderBottom: '1px dotted #1a1a1a' }} >
         Comments
 
-      </h3>
+      </h3> */}
       
 
       <div className="flex-row my-4">
@@ -33,12 +38,12 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
                 </h5>
 
                 <p className="card-body">{comment.commentText}</p>
-                
+                <p> {thoughtId}</p>
               </div>
             </div>
           ))}
       </div>
-      <CommentForm/>
+      {/* <CommentForm thoughtId={thoughtId}/> */}
       {/* <div>
             <div>
               <div>

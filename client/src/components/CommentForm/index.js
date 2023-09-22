@@ -7,6 +7,7 @@ import { ADD_COMMENT } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 const CommentForm = ({ thoughtId }) => {
+  console.log(thoughtId)
   const [commentText, setCommentText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -87,3 +88,5 @@ const CommentForm = ({ thoughtId }) => {
 };
 
 export default CommentForm;
+
+

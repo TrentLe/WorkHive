@@ -7,11 +7,13 @@ import "./thoughtList.scss"
  import {  FcLikePlaceholder  } from "react-icons/fc";
  import { TbShare3 } from "react-icons/tb";
 import CommentList from '../CommentList';
+import CommentForm from '../CommentForm';
 
 export default function SingleThought({
     thought,
     liked
 }) {
+
     
     const [showComments, setShowComments] = useState(false)
 
@@ -50,7 +52,7 @@ export default function SingleThought({
             </div>
             <div className="content">
               <p>{thought.thoughtText}</p>
-              <img src='https://cdn.vox-cdn.com/thumbor/RaRYyCa8D-PrmpPMrBTOsIIkvEg=/0x0:2997x2398/1200x800/filters:focal(852x628:1330x1106)/cdn.vox-cdn.com/uploads/chorus_image/image/71761914/usa_today_19606912.0.jpg' alt="" />
+              {/* <img src='https://cdn.vox-cdn.com/thumbor/RaRYyCa8D-PrmpPMrBTOsIIkvEg=/0x0:2997x2398/1200x800/filters:focal(852x628:1330x1106)/cdn.vox-cdn.com/uploads/chorus_image/image/71761914/usa_today_19606912.0.jpg' alt="" /> */}
             </div>
             <div className='info'>
               <div className='item'>
@@ -69,7 +71,7 @@ export default function SingleThought({
             Share
             </div>
             </div>
-            {showComments && (<CommentList comments={thought.comments ?? []} />)}
+            {showComments && ( <> <CommentList comments={thought.comments ?? []} thoughtId = {thought._id} /> <CommentForm thoughtId={thought._id}/> </>) }
           </div>
   )
 }
