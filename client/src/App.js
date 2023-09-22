@@ -25,6 +25,7 @@ import Contact from './pages/Contact';
 import Meetup from './pages/Meetup';
 import AuthRequired from './components/AuthRequired/AuthRequired';
 import ProfileEditor from './pages/ProfileEditor/ProfileEditor';
+import FollowingFeed from './components/FollowingFeed/FollowingFeed';
 
 import Signup from './components/Signup/Signup';
 import './App.css'
@@ -76,7 +77,7 @@ function App() {
           <div className="">
             <Routes>
 
-
+              <Route path="/FollowFeed" element={<FollowingFeed />} />
               <Route path="/LandingPage" element={<LandingPage />} />  
            
               

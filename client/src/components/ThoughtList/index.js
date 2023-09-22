@@ -8,11 +8,19 @@ import "./thoughtList.scss"
  import { TbShare3 } from "react-icons/tb";
 
 import Auth from "../../utils/auth";
+
 import SingleThought from './SingleThought';
 
 
 const ThoughtList = ({
   
+
+
+import { REMOVE_THOUGHT } from "../../utils/mutations";
+
+import { useMutation } from "@apollo/client";
+// import { QUERY_USERS } from "../../utils/queries";
+
 
 
   

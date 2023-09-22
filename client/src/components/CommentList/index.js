@@ -43,7 +43,7 @@ console.log(thoughtId)
             </div>
           ))}
       </div>
-      {/* <CommentForm thoughtId={thoughtId}/> */}
+
       {/* <div>
             <div>
               <div>
