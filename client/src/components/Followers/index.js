@@ -16,6 +16,8 @@ const FollowForm = (meInfo, userInfo) => {
 
     const [followUser] = useMutation(ADD_FOLLOW)
 
+
+
     const handleFollow = async () => {
 
         const userId = meInfo.meInfo.user?._id
@@ -31,7 +33,7 @@ const FollowForm = (meInfo, userInfo) => {
                 console.log(res)
             })
 
-            window.location.reload()
+            window.location.reload(true)
 
 
         } catch (err) {
