@@ -61,6 +61,7 @@ const Profile = ({ userId }) => {
         <Left />
 
         <ThoughtList
+          user={user}
           thoughts={user.thoughts}
           title={`${user.username}'s thoughts...`}
           displayPic={user.profilepicture}
