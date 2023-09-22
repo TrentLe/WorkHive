@@ -6,6 +6,10 @@ import "./thoughtList.scss"
  import {  FcLike  } from "react-icons/fc";
  import {  FcLikePlaceholder  } from "react-icons/fc";
  import { TbShare3 } from "react-icons/tb";
+ import { REMOVE_THOUGHT } from "../../utils/mutations";
+
+import { useMutation } from "@apollo/client";
+// import { QUERY_USERS } from "../../utils/queries";
 
 import Auth from "../../utils/auth";
 
@@ -13,13 +17,7 @@ import SingleThought from './SingleThought';
 
 
 const ThoughtList = ({
-  
 
-
-import { REMOVE_THOUGHT } from "../../utils/mutations";
-
-import { useMutation } from "@apollo/client";
-// import { QUERY_USERS } from "../../utils/queries";
 
 
 
