@@ -15,22 +15,30 @@ import Auth from "../../utils/auth";
 export default function SingleThought({
   thought,
   users,
+  user,
   liked
 }) {
 
   const [displayPic, setDisplayPic] = useState([])
   const [showComments, setShowComments] = useState(false)
   const [stockPic, setStockPic] = useState("")
-  const [ loadingState, setLoadingState] = useState(false)
+  const [loadingState, setLoadingState] = useState(false)
 
   useEffect(() => {
-      const filteredUser = users.filter((user) => user.username === thought.thoughtAuthor)
+    setDisplayPic(user?.profilepicture)
+    setLoadingState(true)
+  }, [user])
+
+  useEffect(() => {
+    const filteredUser = users?.filter((user) => user.username === thought.thoughtAuthor)
+    if (filteredUser) {
       setDisplayPic(filteredUser[0]?.profilepicture)
       setLoadingState(true)
+    }
   }, [users, thought])
 
   useEffect(() => {
-      setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")  
+    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
   }, [loadingState])
 
   // REMOVE THOUGHT

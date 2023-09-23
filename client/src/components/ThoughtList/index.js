@@ -18,6 +18,7 @@ import { useMutation } from "@apollo/client";
 const ThoughtList = ({
   thoughts,
   users,
+  user,
   title,
   displayPic,
   showTitle = true,
@@ -33,7 +34,7 @@ const ThoughtList = ({
       {/* {showTitle && <h3>{title}</h3>} */}
       {thoughts &&
         thoughts.map((thought) => (
-          <SingleThought thought={thought} users={users} key={thought._id} />
+          <SingleThought thought={thought} users={users} user={user} key={thought._id} />
           // show comments on click
         ))}
     </div>
