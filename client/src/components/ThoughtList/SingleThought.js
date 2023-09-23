@@ -21,17 +21,17 @@ export default function SingleThought({
   const [displayPic, setDisplayPic] = useState([])
   const [showComments, setShowComments] = useState(false)
   const [stockPic, setStockPic] = useState("")
+  const [ loadingState, setLoadingState] = useState(false)
 
   useEffect(() => {
-    if (users) {
       const filteredUser = users.filter((user) => user.username === thought.thoughtAuthor)
       setDisplayPic(filteredUser[0]?.profilepicture)
-      
-      if (!filteredUser[0]?.profilepicture) {
-        setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
-      }
-    }
-  }, [])
+      setLoadingState(true)
+  }, [users, thought])
+
+  useEffect(() => {
+      setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")  
+  }, [loadingState])
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -48,6 +48,7 @@ export default function SingleThought({
       console.log(error);
     }
   };
+
 
   return (
     <div key={thought._id} className="container">
