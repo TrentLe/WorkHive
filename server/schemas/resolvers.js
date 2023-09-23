@@ -12,7 +12,12 @@ const resolvers = {
       return User.find().populate('thoughts').populate('following').populate('followers')
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts').populate('following').populate('followers')
+      return User.findOne({ username }).populate({
+        path: 'thoughts',
+        options: {
+          sort: { createdAt: -1 } 
+        }
+      }).populate('following').populate('followers')
     },
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -23,7 +28,12 @@ const resolvers = {
     },    
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts').populate('following').populate('followers');
+        return User.findOne({ _id: context.user._id }).populate({
+          path: 'thoughts',
+          options: {
+            sort: { createdAt: -1 } 
+          }
+        }).populate('following').populate('followers');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
