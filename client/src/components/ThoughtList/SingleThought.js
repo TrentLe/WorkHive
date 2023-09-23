@@ -18,16 +18,20 @@ export default function SingleThought({
   liked
 }) {
 
-  const [ correctUser, setCorrectUser ] = useState({})
+  const [displayPic, setDisplayPic] = useState([])
   const [showComments, setShowComments] = useState(false)
+  const [stockPic, setStockPic] = useState("")
 
   useEffect(() => {
-    const filteredUser = users.filter((user) => user.username === thought.thoughtAuthor)
-    setCorrectUser(filteredUser)
+    if (users) {
+      const filteredUser = users.filter((user) => user.username === thought.thoughtAuthor)
+      setDisplayPic(filteredUser[0]?.profilepicture)
+      
+      if (!filteredUser[0]?.profilepicture) {
+        setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
+      }
+    }
   }, [])
-  
-  const stockPic = "https://i.ibb.co/znBQMM4/stockimageprofilepicture.png"
-  console.log(correctUser)
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -49,7 +53,7 @@ export default function SingleThought({
     <div key={thought._id} className="container">
       <div className="user">
         <div className='userinfo'>
-          <img src={correctUser[0]?.profilepicture ? correctUser[0].profilepicture : stockPic} alt="" />
+          <img src={displayPic ? displayPic : stockPic} alt="" />
           <div className='postdetails'>
             <Link
               to={`/profiles/${thought.thoughtAuthor}`}
