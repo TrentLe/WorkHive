@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdOutlineMessage } from "react-icons/md";
 import "./thoughtList.scss"
@@ -18,6 +18,17 @@ export default function SingleThought({
   liked
 }) {
 
+  const [ correctUser, setCorrectUser ] = useState({})
+  const [showComments, setShowComments] = useState(false)
+
+  useEffect(() => {
+    const filteredUser = users.filter((user) => user.username === thought.thoughtAuthor)
+    setCorrectUser(filteredUser)
+  }, [])
+  
+  const stockPic = "https://i.ibb.co/znBQMM4/stockimageprofilepicture.png"
+  console.log(correctUser)
+
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
 
@@ -34,14 +45,11 @@ export default function SingleThought({
     }
   };
 
-
-  const [showComments, setShowComments] = useState(false)
-
   return (
     <div key={thought._id} className="container">
       <div className="user">
         <div className='userinfo'>
-          <img src='' alt="" />
+          <img src={correctUser[0]?.profilepicture ? correctUser[0].profilepicture : stockPic} alt="" />
           <div className='postdetails'>
             <Link
               to={`/profiles/${thought.thoughtAuthor}`}

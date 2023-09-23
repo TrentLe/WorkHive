@@ -67,7 +67,7 @@ const ThoughtList = ({
       {/* {showTitle && <h3>{title}</h3>} */}
       {thoughts &&
         thoughts.map((thought) => (
-          <SingleThought thought={thought} key={thought._id} />
+          <SingleThought thought={thought} users={users} key={thought._id} />
           // show comments on click
         ))}
     </div>
