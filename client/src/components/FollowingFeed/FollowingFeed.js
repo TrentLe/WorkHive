@@ -14,10 +14,6 @@ const FollowingFeed = ({ me, thoughts }) => {
     const followedUsers = query1.data?.me?.following?.map((following) => following.username)
     const followFeed = query2.data?.thoughts?.filter((thought) => followedUsers?.includes(thought.thoughtAuthor))
 
-    console.log(followedUsers)
-    console.log(followFeed)
-
-
     if (query1.loading || query2.loading) {
         return <div>Loading...</div>
     }
