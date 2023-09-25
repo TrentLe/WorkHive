@@ -31,8 +31,6 @@ const FollowForm = ({ meInfo }) => {
         setAmIfollowing(followerIdArr?.includes(Auth.getProfile().data._id))
     }, [meInfo.user])
 
-    const followed = meInfo?.me?.following?.length
-
     const [followUser] = useMutation(ADD_FOLLOW)
     const [unfollowUser] = useMutation(REMOVE_FOLLOW)
 
@@ -108,7 +106,7 @@ const FollowForm = ({ meInfo }) => {
                     </>
                 )}
 
-                {followed ? (meInfo.me.following.map((followedPerson) => {
+                {meInfo.me ? (meInfo.me.following.map((followedPerson) => {
                     return (<>
                         <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit", marginBottom: ".7rem" }}>
                             <div className='followed-info' key={followedPerson._id}>
