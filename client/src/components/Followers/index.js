@@ -98,9 +98,9 @@ const FollowForm = ({ meInfo }) => {
                         <p>Following: {otherFollowedUsersCount}</p>
                         <p>Followers: {otherFollowerUsersCount} </p>
 
-                        {amIfollowing ? (<button onClick={handleUnfollow}>Unfollow</button>)
+                        {amIfollowing ? (<button className="btn btn-primary" onClick={handleUnfollow}>Unfollow</button>)
                         
-                        : (<button onClick={handleFollow}>Follow</button>)}
+                        : (<button className="btn btn-primary" onClick={handleFollow}>Follow</button>)}
 
                         <h1>Following</h1>
                     </>

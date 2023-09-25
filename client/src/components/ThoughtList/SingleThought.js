@@ -100,7 +100,7 @@ export default function SingleThought({
           15 likes
         </div>
         <div className='item'>
-          <button onClick={() => setShowComments(!showComments)}
+          <button className="btn btn-primary" onClick={() => setShowComments(!showComments)}
           >
             <MdOutlineMessage size='25px' />
             Comments
@@ -110,9 +110,9 @@ export default function SingleThought({
           <TbShare3 size='25px' />
           Share
         </div>
-        <button onClick={() => handleDeleteThought(thought._id)}>
+        {Auth.getProfile().data.username === thought.thoughtAuthor ? (<button className="btn btn-outline-danger" onClick={() => handleDeleteThought(thought._id)}>
           Delete
-        </button>
+        </button>) : ""}
       </div>
       {showComments && (<> <CommentList comments={thought.comments ?? []} thoughtId={thought._id} /> <CommentForm thoughtId={thought._id} /> </>)}
     </div>
