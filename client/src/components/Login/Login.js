@@ -9,7 +9,7 @@ import "./login.scss"
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);  
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -42,7 +42,7 @@ const Login = (props) => {
 
 
         Auth.login(data.login.token)
-       
+
       } catch (err) {
         console.error(err)
       }
@@ -99,7 +99,7 @@ const Login = (props) => {
     <>
       <main className="flex-row justify-center mb-4">
         <div className="col-12 col-lg-10">
-          <div className="carding">
+          <div className="card">
             <h3 className="card-header bg-dark text-light p-2">Login</h3>
             <div className="card-body">
               {data ? (
@@ -109,6 +109,12 @@ const Login = (props) => {
                 </p>
               ) : (
                 <div>
+                  <div>
+                    <p className='test-info'>
+                      Test Email: test@gmail.com                      
+                    </p>
+                    <p className='test-info'>Test Password: test12345</p>
+                  </div>
                   <form onSubmit={handleFormSubmit}>
                     <input
                       className="form-input"
