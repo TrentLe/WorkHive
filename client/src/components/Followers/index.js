@@ -1,44 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useApolloClient } from '@apollo/client';
 import { useMutation } from '@apollo/client';
-import { ADD_FOLLOW } from '../../utils/mutations';
+import { ADD_FOLLOW, REMOVE_FOLLOW} from '../../utils/mutations';
 import { Link } from 'react-router-dom';
+import Auth from '../../utils/auth';
 
 import './FollowForm.scss'
 
 const FollowForm = ({ meInfo }) => {
     const client = useApolloClient()
 
-    const [ followedUsersCount, setFollowedUsersCount ] = useState(0)
-    const [ followerUsersCount, setFollowerUsersCount] = useState(0)
-    const [ otherFollowedUsersCount, setOtherFollowedUsersCount ] = useState(0)
-    const [ otherFollowerUsersCount, setOtherFollowerUsersCount ] = useState(0)
+    const [followedUsersCount, setFollowedUsersCount] = useState(0)
+    const [followerUsersCount, setFollowerUsersCount] = useState(0)
+    const [otherFollowedUsersCount, setOtherFollowedUsersCount] = useState(0)
+    const [otherFollowerUsersCount, setOtherFollowerUsersCount] = useState(0)
 
-    useEffect( () => {
+    const followerIdArr = meInfo.user.followers.map((follower) => {
+        return follower._id
+    })
+
+    const amIfollowing = followerIdArr.includes(Auth.getProfile().data._id)
+
+    useEffect(() => {
         setFollowedUsersCount(meInfo?.me?.following?.length)
         setFollowerUsersCount(meInfo?.me?.followers?.length)
-    }, [meInfo.me] )
+    }, [meInfo.me])
 
-    useEffect( () => {
+    useEffect(() => {
         setOtherFollowedUsersCount(meInfo?.user?.following?.length)
         setOtherFollowerUsersCount(meInfo?.user?.followers?.length)
     }, [meInfo.user])
 
     const followed = meInfo?.me?.following?.length
-    // const followers = meInfo?.me?.followers?.length
-
-    // const otherFollowed = meInfo?.user?.following?.length
-    // const otherFollowers = meInfo?.user?.followers?.length
 
     const [followUser] = useMutation(ADD_FOLLOW)
+    const [unfollowUser] = useMutation(REMOVE_FOLLOW)
 
     const handleFollow = async () => {
 
         const userId = meInfo.user?._id
 
         try {
-            console.log(userId)
-
             await followUser({
                 variables: {
                     userId: userId
@@ -50,8 +52,28 @@ const FollowForm = ({ meInfo }) => {
             await client.refetchQueries({
                 include: "all",
             })
+        } catch (err) {
+            console.error(err)
+        }
 
+    }
 
+    const handleUnfollow = async () => {
+
+        const userId = meInfo.user?._id
+
+        try {
+            await unfollowUser({
+                variables: {
+                    userId: userId
+                }
+            }).then(res => {
+                console.log(res)
+            })
+
+            await client.refetchQueries({
+                include: "all",
+            })
         } catch (err) {
             console.error(err)
         }
@@ -78,7 +100,9 @@ const FollowForm = ({ meInfo }) => {
                         <p>Following: {otherFollowedUsersCount}</p>
                         <p>Followers: {otherFollowerUsersCount} </p>
 
-                        <button onClick={handleFollow}>Follow</button>
+                        {amIfollowing ? (<button onClick={handleUnfollow}>Unfollow</button>)
+                        
+                        : (<button onClick={handleFollow}>Follow</button>)}
 
                         <h1>Following</h1>
                     </>
@@ -86,11 +110,11 @@ const FollowForm = ({ meInfo }) => {
 
                 {followed ? (meInfo.me.following.map((followedPerson) => {
                     return (<>
-                        <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit", marginBottom: ".7rem"}}>
-                        <div className='followed-info'>
-                            <img src={followedPerson.profilepicture} alt='following' />
-                            <h5>{followedPerson.username}</h5>
-                        </div>
+                        <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit", marginBottom: ".7rem" }}>
+                            <div className='followed-info'>
+                                <img src={followedPerson.profilepicture} alt='following' />
+                                <h5>{followedPerson.username}</h5>
+                            </div>
                         </Link>
                     </>
                     )

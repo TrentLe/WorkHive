@@ -87,18 +87,11 @@ mutation AddFollow($userId: ID!) {
 `;
 
 export const REMOVE_FOLLOW = gql`
-  mutation removeFollow($followId: ID!) {
-    removeFollow(followId: $followId) {
-      _id
-      username
-      email
-      followerCount
-      followers {
-        _id
-        username
-      }
-    }
+mutation RemoveFollow($userId: ID!) {
+  removeFollow(userId: $userId) {
+    _id
   }
+}
 `;
 
 export const ADD_CONTACT = gql`

@@ -70,7 +70,7 @@ const typeDefs = gql`
     updateUser(id: ID!, username: String, email: String, password: String, profilepicture: String, bio: String): User
     deleteUser(userId: ID!): User
     addFollow(userId: ID!): User
-    removeFollow(userId: ID!): Boolean
+    removeFollow(userId: ID!): User
     addContact(name: String, email: String, message: String): Contact
     addComment(thoughtId: ID!, commentText: String!): Thought    
   }
