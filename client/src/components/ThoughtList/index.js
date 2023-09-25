@@ -1,17 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { MdOutlineMessage } from "react-icons/md";
+import React from "react";
 import "./thoughtList.scss";
-import { CgMenuCheese } from "react-icons/cg";
-import { FcLike } from "react-icons/fc";
-import { FcLikePlaceholder } from "react-icons/fc";
-import { TbShare3 } from "react-icons/tb";
 import SingleThought from './SingleThought';
-import Auth from "../../utils/auth";
 
-import { REMOVE_THOUGHT } from "../../utils/mutations";
-
-import { useMutation } from "@apollo/client";
 // import { QUERY_USERS } from "../../utils/queries";
 
 

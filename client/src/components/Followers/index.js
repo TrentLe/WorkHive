@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useApolloClient } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { ADD_FOLLOW } from '../../utils/mutations';
 import { Link } from 'react-router-dom';
+
 import './FollowForm.scss'
 
-const FollowForm = (meInfo, userInfo) => {
-    
+const FollowForm = ({ meInfo }) => {
+    const client = useApolloClient()
 
+    const [ followedUsersCount, setFollowedUsersCount ] = useState(0)
+    const [ followerUsersCount, setFollowerUsersCount] = useState(0)
+    const [ otherFollowedUsersCount, setOtherFollowedUsersCount ] = useState(0)
+    const [ otherFollowerUsersCount, setOtherFollowerUsersCount ] = useState(0)
 
-    const followed = meInfo.meInfo.me?.following?.length
-    const followers = meInfo.meInfo.me?.followers?.length
+    useEffect( () => {
+        setFollowedUsersCount(meInfo?.me?.following?.length)
+        setFollowerUsersCount(meInfo?.me?.followers?.length)
+    }, [meInfo.me] )
 
-    const otherFollowed = meInfo.meInfo?.user?.following?.length
-    const otherFollowers = meInfo.meInfo?.user?.followers?.length
+    useEffect( () => {
+        setOtherFollowedUsersCount(meInfo?.user?.following?.length)
+        setOtherFollowerUsersCount(meInfo?.user?.followers?.length)
+    }, [meInfo.user])
+
+    const followed = meInfo?.me?.following?.length
+    // const followers = meInfo?.me?.followers?.length
+
+    // const otherFollowed = meInfo?.user?.following?.length
+    // const otherFollowers = meInfo?.user?.followers?.length
 
     const [followUser] = useMutation(ADD_FOLLOW)
 
-
-
     const handleFollow = async () => {
 
-        const userId = meInfo.meInfo.user?._id
+        const userId = meInfo.user?._id
 
         try {
             console.log(userId)
@@ -33,7 +47,9 @@ const FollowForm = (meInfo, userInfo) => {
                 console.log(res)
             })
 
-            window.location.reload(true)
+            await client.refetchQueries({
+                include: "all",
+            })
 
 
         } catch (err) {
@@ -47,20 +63,20 @@ const FollowForm = (meInfo, userInfo) => {
     return (
         <div className='follow-box'>
             <div className='container'>
-                {meInfo.meInfo.me ? (
+                {meInfo.me ? (
                     <>
                         <h1>Your Follow Info</h1>
-                        <p>Following: {followed}</p>
-                        <p>Followers: {followers} </p>
+                        <p>Following: {followedUsersCount}</p>
+                        <p>Followers: {followerUsersCount} </p>
 
                         <h1> Following</h1>
                     </>
                 ) : (
                     <>
-                        <img src={meInfo.meInfo.user?.profilepicture} alt="their display" />
-                        <h1>{meInfo.meInfo.user?.username}'s Follow Info</h1>
-                        <p>Following: {otherFollowed}</p>
-                        <p>Followers: {otherFollowers} </p>
+                        <img src={meInfo.user?.profilepicture} alt="their display" />
+                        <h1>{meInfo.user?.username}'s Follow Info</h1>
+                        <p>Following: {otherFollowedUsersCount}</p>
+                        <p>Followers: {otherFollowerUsersCount} </p>
 
                         <button onClick={handleFollow}>Follow</button>
 
@@ -68,7 +84,7 @@ const FollowForm = (meInfo, userInfo) => {
                     </>
                 )}
 
-                {followed ? (meInfo.meInfo.me.following.map((followedPerson) => {
+                {followed ? (meInfo.me.following.map((followedPerson) => {
                     return (<>
                         <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit", marginBottom: ".7rem"}}>
                         <div className='followed-info'>
@@ -78,7 +94,7 @@ const FollowForm = (meInfo, userInfo) => {
                         </Link>
                     </>
                     )
-                })) : (meInfo.meInfo.user.following.map((followedPerson) => {
+                })) : (meInfo.user.following.map((followedPerson) => {
                     return (<>
                         <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit" }}>
                             <div className='followed-info'>
