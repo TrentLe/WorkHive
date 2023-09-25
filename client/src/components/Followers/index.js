@@ -14,12 +14,8 @@ const FollowForm = ({ meInfo }) => {
     const [followerUsersCount, setFollowerUsersCount] = useState(0)
     const [otherFollowedUsersCount, setOtherFollowedUsersCount] = useState(0)
     const [otherFollowerUsersCount, setOtherFollowerUsersCount] = useState(0)
+    const [ amIfollowing, setAmIfollowing ] = useState(false)
 
-    const followerIdArr = meInfo.user.followers.map((follower) => {
-        return follower._id
-    })
-
-    const amIfollowing = followerIdArr.includes(Auth.getProfile().data._id)
 
     useEffect(() => {
         setFollowedUsersCount(meInfo?.me?.following?.length)
@@ -29,6 +25,10 @@ const FollowForm = ({ meInfo }) => {
     useEffect(() => {
         setOtherFollowedUsersCount(meInfo?.user?.following?.length)
         setOtherFollowerUsersCount(meInfo?.user?.followers?.length)
+        const followerIdArr = meInfo?.user?.followers?.map((follower) => {
+            return follower._id
+        })        
+        setAmIfollowing(followerIdArr?.includes(Auth.getProfile().data._id))
     }, [meInfo.user])
 
     const followed = meInfo?.me?.following?.length
@@ -111,7 +111,7 @@ const FollowForm = ({ meInfo }) => {
                 {followed ? (meInfo.me.following.map((followedPerson) => {
                     return (<>
                         <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit", marginBottom: ".7rem" }}>
-                            <div className='followed-info'>
+                            <div className='followed-info' key={followedPerson._id}>
                                 <img src={followedPerson.profilepicture} alt='following' />
                                 <h5>{followedPerson.username}</h5>
                             </div>
@@ -121,7 +121,7 @@ const FollowForm = ({ meInfo }) => {
                 })) : (meInfo.user.following.map((followedPerson) => {
                     return (<>
                         <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit" }}>
-                            <div className='followed-info'>
+                            <div className='followed-info' key={followedPerson._id}>
                                 <img src={followedPerson.profilepicture} alt='following' />
                                 <h5>{followedPerson.username}</h5>
                             </div>
