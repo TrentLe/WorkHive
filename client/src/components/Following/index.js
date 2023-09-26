@@ -1,3 +1,5 @@
+// This is a component we are currently not using and it might be unnecessary
+
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_FOLLOW } from '../../utils/mutations';

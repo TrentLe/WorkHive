@@ -10,10 +10,10 @@ import Auth from "../../utils/auth";
 // import { FiUpload } from "react-icons/fi";
 // import Uploader from "../Uploader";
 
-const ThoughtForm = (meInfo) => {
+const ThoughtForm = ({ meInfo }) => {
 
-  const myImage = meInfo.meInfo.me?.profilepicture
-  const thisImage = meInfo.meInfo.me
+  const myImage = meInfo.me?.profilepicture
+  const thisImage = meInfo.me
 
   const [thoughtText, setThoughtText] = useState("");
 

@@ -12,7 +12,12 @@ const resolvers = {
       return User.find().populate('thoughts').populate('following').populate('followers')
     },
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate('thoughts').populate('following').populate('followers')
+      return User.findOne({ username }).populate({
+        path: 'thoughts',
+        options: {
+          sort: { createdAt: -1 }
+        }
+      }).populate('following').populate('followers')
     },
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
@@ -20,10 +25,15 @@ const resolvers = {
     },
     thought: async (parent, { thoughtId }) => {
       return Thought.findOne({ _id: thoughtId });
-    },    
+    },
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate('thoughts').populate('following').populate('followers');
+        return User.findOne({ _id: context.user._id }).populate({
+          path: 'thoughts',
+          options: {
+            sort: { createdAt: -1 }
+          }
+        }).populate('following').populate('followers');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -96,7 +106,7 @@ const resolvers = {
       const stream = createReadStream()
       const pathName = path.join(__dirname, `./public/images/${filename}`)
       await stream.pipe(fs.createWriteStream(pathName))
-      
+
       return {
         url: `http://localhost:3001/public/images/${filename}`
       }
@@ -104,8 +114,8 @@ const resolvers = {
     updateUser: async (_, { id, username, email, password, profilepicture, bio }, context) => {
       console.log(id, profilepicture, context.user._id)
       const user = await User.findByIdAndUpdate(
-        {_id: context.user._id},
-        {$set: { username: username, email: email, password: password, profilepicture: profilepicture, bio: bio, }},
+        { _id: context.user._id },
+        { $set: { username: username, email: email, password: password, profilepicture: profilepicture, bio: bio, } },
         { new: true },
         (error, updatedUser) => {
           if (error) {
@@ -136,8 +146,8 @@ const resolvers = {
     addFollow: async (parent, { userId }, context) => {
       if (context.user) {
 
-        const followedUser = await User.findOne({userId})
-        
+        const followedUser = await User.findOne({ userId })
+
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { following: userId } },
@@ -155,18 +165,21 @@ const resolvers = {
     },
     removeFollow: async (parent, { userId }, context) => {
       if (context.user) {
-        const followingUser = await User.findOneAndUpdate(
+
+        const unfollowedUser = await User.findOne({ userId })
+
+        await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { following: userId } },
           { new: true }
         );
 
-        const followerUser = await User.findOneAndUpdate(
+        await User.findOneAndUpdate(
           { _id: userId },
           { $pull: { followers: context.user._id } },
           { new: true }
         )
-        return { followingUser, followerUser };
+        return unfollowedUser;
       }
       throw new AuthenticationError('You need to be logged in!');
     },

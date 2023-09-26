@@ -1,7 +1,6 @@
 import React from 'react';
 
 const CommentList = ({ comments = [] },{thoughtId}) => {
-  console.log()
 
   if (comments.length === 0) {
     return (<>

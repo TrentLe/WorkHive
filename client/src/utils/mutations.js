@@ -70,37 +70,6 @@ export const ADD_COMMENT = gql`
   }
 `;
 
-export const ADD_JOB = gql`
-mutation createJobPosting($title: String!, $description: String!, $author: String!) {
-  createJobPosting(title: $title, description: $description, Author: $author) {
-    _id
-    description
-    title
-    comments {
-      _id
-      commentText
-    }
-  }
-}`;
-
-export const ADD_COMPANY = gql`
-  mutation addCompany($companyname: String!, $email: String!, $password: String!) {
-    addCompany(companyname: $companyname, email: $email, password: $password) {
-      token
-
-    }
-  }
-`;
-
-export const LOGIN_COMPANY = gql`
-  mutation companyLogin($email: String!, $password: String!) {
-    companyLogin(email: $email, password: $password) {
-      token
-
-    }
-  }
-`;
-
 export const UPLOAD_IMAGE = gql`
   mutation UploadImage($file: Upload!) {
     uploadImage(file: $file) {
@@ -118,18 +87,11 @@ mutation AddFollow($userId: ID!) {
 `;
 
 export const REMOVE_FOLLOW = gql`
-  mutation removeFollow($followId: ID!) {
-    removeFollow(followId: $followId) {
-      _id
-      username
-      email
-      followerCount
-      followers {
-        _id
-        username
-      }
-    }
+mutation RemoveFollow($userId: ID!) {
+  removeFollow(userId: $userId) {
+    _id
   }
+}
 `;
 
 export const ADD_CONTACT = gql`

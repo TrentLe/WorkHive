@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdOutlineMessage } from "react-icons/md";
 import "./thoughtList.scss"
@@ -15,8 +15,31 @@ import Auth from "../../utils/auth";
 export default function SingleThought({
   thought,
   users,
+  user,
   liked
 }) {
+
+  const [displayPic, setDisplayPic] = useState([])
+  const [showComments, setShowComments] = useState(false)
+  const [stockPic, setStockPic] = useState("")
+  const [loadingState, setLoadingState] = useState(false)
+
+  useEffect(() => {
+    setDisplayPic(user?.profilepicture)
+    setLoadingState(true)
+  }, [user])
+
+  useEffect(() => {
+    const filteredUser = users?.filter((user) => user.username === thought.thoughtAuthor)
+    if (filteredUser) {
+      setDisplayPic(filteredUser[0]?.profilepicture)
+      setLoadingState(true)
+    }
+  }, [users, thought])
+
+  useEffect(() => {
+    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
+  }, [loadingState])
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -35,13 +58,11 @@ export default function SingleThought({
   };
 
 
-  const [showComments, setShowComments] = useState(false)
-
   return (
     <div key={thought._id} className="container">
       <div className="user">
         <div className='userinfo'>
-          <img src='' alt="" />
+          <img src={displayPic ? displayPic : stockPic} alt="" />
           <div className='postdetails'>
             <Link
               to={`/profiles/${thought.thoughtAuthor}`}
@@ -79,7 +100,7 @@ export default function SingleThought({
           15 likes
         </div>
         <div className='item'>
-          <button onClick={() => setShowComments(!showComments)}
+          <button className="btn btn-primary" onClick={() => setShowComments(!showComments)}
           >
             <MdOutlineMessage size='25px' />
             Comments
@@ -89,9 +110,9 @@ export default function SingleThought({
           <TbShare3 size='25px' />
           Share
         </div>
-        <button onClick={() => handleDeleteThought(thought._id)}>
+        {Auth.getProfile().data.username === thought.thoughtAuthor ? (<button className="btn btn-outline-danger" onClick={() => handleDeleteThought(thought._id)}>
           Delete
-        </button>
+        </button>) : ""}
       </div>
       {showComments && (<> <CommentList comments={thought.comments ?? []} thoughtId={thought._id} /> <CommentForm thoughtId={thought._id} /> </>)}
     </div>
