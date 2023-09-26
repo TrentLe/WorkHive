@@ -8,7 +8,7 @@ import {
 // import { split } from '@apollo/client/link/core'
 // import { createUploadLink }  from 'apollo-upload-client'
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 
 
@@ -92,13 +92,15 @@ function App() {
                 <Route path="/me" element={<Profile />} />
                 <Route path="/profiles/:username" element={<Profile />} />
                 <Route path="/FollowFeed" element={<FollowingFeed />} /> 
-                <Route path="/ProfileEditor" element={<ProfileEditor />} />                 
+                <Route path="/ProfileEditor" element={<ProfileEditor />} />                                  
               </Route>
+
+              <Route path="*" element={<Navigate to="/" />} /> 
               
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />
               <Route path="/contact" element={<Contact />} />
               {/* <Route path="/uploader" element={<Uploader />} />              */}
-               
+                    
              
           
             </Routes>
