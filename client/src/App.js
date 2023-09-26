@@ -77,7 +77,7 @@ function App() {
           <div className="">
             <Routes>
 
-              <Route path="/FollowFeed" element={<FollowingFeed />} />
+              
               <Route path="/LandingPage" element={<LandingPage />} />  
            
               
@@ -89,13 +89,16 @@ function App() {
               <Route element={<AuthRequired />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/meetup" element={<Meetup />} />
-                <Route path="/me" element={<Profile />} />                
+                <Route path="/me" element={<Profile />} />
+                <Route path="/profiles/:username" element={<Profile />} />
+                <Route path="/FollowFeed" element={<FollowingFeed />} /> 
+                <Route path="/ProfileEditor" element={<ProfileEditor />} />                 
               </Route>
-              <Route path="/profiles/:username" element={<Profile />} />
+              
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />
               <Route path="/contact" element={<Contact />} />
               {/* <Route path="/uploader" element={<Uploader />} />              */}
-               <Route path="/ProfileEditor" element={<ProfileEditor />} />  
+               
              
           
             </Routes>
