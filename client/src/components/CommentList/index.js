@@ -4,13 +4,10 @@ const CommentList = ({ comments = [] },{thoughtId}) => {
 
   if (comments.length === 0) {
     return (<>
-    <h3> no comments yet! </h3>
+    <h6 className='mt-3'> no comments yet! </h6>
 
    </>
-   )
-              
-   
-
+   )            
   }
 
   return (

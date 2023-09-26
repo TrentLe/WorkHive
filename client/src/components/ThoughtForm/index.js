@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useMutation } from "@apollo/client";
 
@@ -11,13 +11,24 @@ import Auth from "../../utils/auth";
 // import Uploader from "../Uploader";
 
 const ThoughtForm = ({ meInfo }) => {
+  
 
-  const myImage = meInfo.me?.profilepicture
-  const thisImage = meInfo.me
-
+  const [stockPic, setStockPic] = useState("")
+  const [loadingState, setLoadingState] = useState(false)
+  const [ myImage, setMyImage ] = useState("")
   const [thoughtText, setThoughtText] = useState("");
-
+  
   const [characterCount, setCharacterCount] = useState(0);
+
+  useEffect(() => {
+    setMyImage(meInfo.me?.profilepicture)
+    setLoadingState(true)
+  }, [meInfo.me])
+
+  useEffect(() => {
+    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
+  }, [loadingState])
+
 
   const [addThought, { error }] = useMutation(ADD_THOUGHT, {
     update(cache, { data: { addThought } }) {
@@ -77,7 +88,7 @@ const ThoughtForm = ({ meInfo }) => {
         <div className="container">
           <div className="top">
             <img
-              src={myImage || thisImage}
+              src={myImage ? myImage : stockPic}
               alt=""
             />
             <input placeholder={`What's on your mind ?`} name='thoughtText' value={thoughtText} onChange={handleChange} />

@@ -15,7 +15,17 @@ const resolvers = {
       return User.findOne({ username }).populate({
         path: 'thoughts',
         options: {
-          sort: { createdAt: -1 }
+          sort: { 
+            createdAt: -1 
+          }
+        },
+        populate: {
+          path: 'comments',
+          options: {
+            sort: {
+              createdAt: -1
+            }
+          }
         }
       }).populate('following').populate('followers')
     },
@@ -31,7 +41,17 @@ const resolvers = {
         return User.findOne({ _id: context.user._id }).populate({
           path: 'thoughts',
           options: {
-            sort: { createdAt: -1 }
+            sort: { 
+              createdAt: -1 
+            }
+          },
+          populate: {
+            path: 'comments',
+            options: {
+              sort: {
+                createdAt: -1
+              }
+            }
           }
         }).populate('following').populate('followers');
       }

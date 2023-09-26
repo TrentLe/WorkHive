@@ -13,6 +13,12 @@ query User($username: String!) {
       createdAt
       thoughtAuthor
       thoughtText
+      comments {
+        _id
+        commentAuthor
+        commentText
+        createdAt
+      }
     }
     followers {
       _id
@@ -112,6 +118,12 @@ query Me {
       createdAt
       thoughtAuthor
       thoughtText
+      comments {
+        _id
+        commentAuthor
+        commentText
+        createdAt
+      }
     }
     followers {
       _id
