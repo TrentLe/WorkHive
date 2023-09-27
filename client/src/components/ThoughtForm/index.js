@@ -11,7 +11,7 @@ import Auth from "../../utils/auth";
 // import Uploader from "../Uploader";
 
 const ThoughtForm = ({ meInfo }) => {
-
+ const client = useApolloClient()
 
   const [stockPic, setStockPic] = useState("")
   const [loadingState, setLoadingState] = useState(false)
@@ -66,6 +66,10 @@ const ThoughtForm = ({ meInfo }) => {
       setThoughtText("");
       setCharacterCount(0);
 
+      await client.refetchQueries({
+        include: 'all'
+      })
+      
     } catch (err) {
       console.error(err);
     }
