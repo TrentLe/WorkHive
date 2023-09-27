@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { useMutation } from "@apollo/client";
+import { useApolloClient, useMutation } from "@apollo/client";
 
 import { ADD_THOUGHT } from "../../utils/mutations";
 import { QUERY_THOUGHTS, QUERY_ME } from "../../utils/queries";
@@ -11,7 +11,7 @@ import Auth from "../../utils/auth";
 // import Uploader from "../Uploader";
 
 const ThoughtForm = ({ meInfo }) => {
-  
+
 
   const [stockPic, setStockPic] = useState("")
   const [loadingState, setLoadingState] = useState(false)
@@ -65,11 +65,12 @@ const ThoughtForm = ({ meInfo }) => {
 
       setThoughtText("");
       setCharacterCount(0);
+
     } catch (err) {
       console.error(err);
     }
 
-    window.location.reload();
+    
   };
 
   const handleChange = (event) => {

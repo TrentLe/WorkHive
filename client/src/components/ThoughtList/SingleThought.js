@@ -8,9 +8,10 @@ import { FcLikePlaceholder } from "react-icons/fc";
 import { TbShare3 } from "react-icons/tb";
 import CommentList from '../CommentList';
 import CommentForm from '../CommentForm';
-import { useMutation } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { REMOVE_THOUGHT } from '../../utils/mutations';
 import Auth from "../../utils/auth";
+// import LinkifyText from '../Linkify/Linkify';
 
 export default function SingleThought({
   thought,
@@ -18,6 +19,7 @@ export default function SingleThought({
   user,
   liked
 }) {
+const client = useApolloClient()
 
   const [displayPic, setDisplayPic] = useState([])
   const [showComments, setShowComments] = useState(false)
@@ -51,7 +53,9 @@ export default function SingleThought({
     }
     try {
       await removeThought({ variables: { thoughtId } });
-      window.location.reload();
+      await client.refetchQueries({
+        include: 'all'
+      })
     } catch (error) {
       console.log(error);
     }
@@ -92,6 +96,7 @@ export default function SingleThought({
         <CgMenuCheese />
       </div>
       <div className="content">
+        {/* <LinkifyText text={thought.thoughtText} /> */}
         <p>{thought.thoughtText}</p>
       </div>
       <div className='info'>

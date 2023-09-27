@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { ImHome } from "react-icons/im";
 import { ImBubble } from "react-icons/im";
@@ -8,17 +8,35 @@ import { ImSearch } from "react-icons/im";
 import { IoIosKeypad } from "react-icons/io";
 import { MdBedtime } from "react-icons/md";
 import { UPDATE_USER } from "../../utils/mutations";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import "./header.scss";
 // import { useContext } from 'react';
 // import { DarkModeContext } from "./context/darkModeContext.js";
 
 import RemoveUser from "../DeleteUser/DeleteUser";
 import Auth from "../../utils/auth";
+import { QUERY_ME } from "../../utils/queries";
 
 
 
 const Header = () => {
+
+  const query1 = useQuery(QUERY_ME)
+
+  const [ headerPic, setHeaderPic ] = useState("")
+  const [ stockPic, setStockPic ] = useState("")
+  const [ loadingState, setLoadingState ] = useState(false)
+
+  useEffect(() => {
+    setHeaderPic(query1?.data?.me?.profilepicture)
+    setLoadingState(true)
+  }, [query1.data])
+
+  useEffect(() => {
+    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
+  }, [loadingState])
+
+
 
   const logout = (event) => {
     event.preventDefault();
@@ -87,7 +105,7 @@ const Header = () => {
                 {Auth.getProfile().data.token}
 
                 <div className="dropdown">
-                  <span><img src={localStorage.getItem('profilePic')} alt="my profile" /></span>
+                  <span><img src={headerPic ? headerPic : stockPic} alt="my profile" /></span>
                   <div className="dropdown-content">
                     <div className="get-username">
                       {Auth.getProfile().data.username}
