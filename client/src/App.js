@@ -29,6 +29,7 @@ import FollowingFeed from './components/FollowingFeed/FollowingFeed';
 
 import Signup from './components/Signup/Signup';
 import './App.css'
+import UserList from './components/UserList/UserList';
 
 
 
@@ -92,9 +93,10 @@ function App() {
                 <Route path="/me" element={<Profile />} />
                 <Route path="/profiles/:username" element={<Profile />} />
                 <Route path="/FollowFeed" element={<FollowingFeed />} /> 
-                <Route path="/ProfileEditor" element={<ProfileEditor />} />                                  
+                <Route path="/ProfileEditor" element={<ProfileEditor />} />
+                <Route path="/userlist" element={<UserList />} />                                  
               </Route>
-
+              
               <Route path="*" element={<Navigate to="/" />} /> 
               
               <Route path="/thoughts/:thoughtId" element={<SingleThought />} />

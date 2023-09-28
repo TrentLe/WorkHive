@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 // import { useMutation } from '@apollo/client';
@@ -21,14 +21,6 @@ const Profile = ({ userId }) => {
   const query1 = useQuery(userParam ? QUERY_USER : QUERY_ME, {
     variables: { username: userParam },
   });
-
-  // const targetUser = query1.data?.user || {};
-  // const [followed, setFollowed] = useState(targetUser.followed || false);
-  // const [bio, setBio] = useState('');
-
-  // const handleBioChange = (event) => {
-  //   setBio(event.target.value);
-  // };
 
   const user = query1.data?.me || query1.data?.user || {};
 
