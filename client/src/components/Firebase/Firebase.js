@@ -25,8 +25,7 @@ export const signInWithGoogle = () => {
         localStorage.setItem("name", name)
         localStorage.setItem("email", email)
         localStorage.setItem("profilePic", profilePic)
-        
-        console.log(result)
+
     }).catch((error) => {
         console.log(error)
     })

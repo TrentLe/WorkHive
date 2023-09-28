@@ -54,6 +54,15 @@ const AmIFollowing = ({ user }) => {
         }
     }
 
+    if ( Auth.getProfile().data._id === user?._id) {
+        return (
+            <>
+                
+            </>
+
+        )
+    }
+
     return (
 
         <>
