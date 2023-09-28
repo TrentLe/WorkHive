@@ -7,6 +7,7 @@ import './UserList.css'
 import DisplayPicture from '../DisplayPicture/DisplayPicture'
 
 const UserList = () => {
+    
     const query1 = useQuery(QUERY_USERS)
 
     const [users, setUsers] = useState([])
