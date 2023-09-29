@@ -9,7 +9,7 @@ const resolvers = {
 
   Query: {
     users: async () => {
-      return User.find().populate('thoughts').populate('following').populate('followers')
+      return User.find().sort({ username: 1 }).populate('thoughts').populate('following').populate('followers')
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate({

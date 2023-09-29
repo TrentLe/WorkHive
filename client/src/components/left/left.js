@@ -68,8 +68,10 @@ const Left = () => {
             </Link>
           </div>
           <div className="icon">
-            <BsFillPersonCheckFill style={{ color: '#FFD02E', fontSize: '2rem' }} />
-            <span>Following</span>
+            <Link to="/FollowFeed" >
+              <BsFillPersonCheckFill style={{ color: '#FFD02E', fontSize: '2rem' }} />
+              <span>Following</span>
+            </Link>
           </div>
           {/* <div className="icon">
             <span>Gaming</span>

@@ -4,12 +4,9 @@ import { QUERY_ME, QUERY_THOUGHTS } from '../../utils/queries'
 import ThoughtList from '../ThoughtList'
 import Left from '../left/left'
 
-const FollowingFeed = ({ me, thoughts }) => {
+const FollowingFeed = () => {
     const query1 = useQuery(QUERY_ME)
     const query2 = useQuery(QUERY_THOUGHTS)
-
-    console.log(query1.data)
-    console.log(query2.data)
 
     const followedUsers = query1.data?.me?.following?.map((following) => following.username)
     const followFeed = query2.data?.thoughts?.filter((thought) => followedUsers?.includes(thought.thoughtAuthor))
@@ -20,7 +17,7 @@ const FollowingFeed = ({ me, thoughts }) => {
 
     return (
         <>
-            <div>FollowingFeed</div>
+            <div className='text-center'>Posts from people you follow</div>
 
             {query1.loading || query2.loading ? (<div>Loading...</div>) : (
                 <>
