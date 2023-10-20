@@ -23,10 +23,10 @@ function Contact() {
         >
           <div className="row">
             <div className="col-lg-4 contactCard">
-              <div className="card w-60 h-75" style={{ width: "18rem;" }}>
+              <div className="card w-60 h-75" style={{ width: "25rem" }}>
                 <a href='https://github.com/JonJon50'>
                   <img
-                    src="https://media.licdn.com/dms/image/D5603AQEzlPHvPwJ_YQ/profile-displayphoto-shrink_800_800/0/1678838200855?e=1684368000&v=beta&t=rxvAwfDqAUfCO4R5uIlLPcz5c5ZXn2XVV0iR4iR-Ip8"
+                    src="https://media.licdn.com/dms/image/D5603AQEzlPHvPwJ_YQ/profile-displayphoto-shrink_800_800/0/1678838200855?e=1703116800&v=beta&t=gvpNAhCV40NATKX4449Q98_LTU_CrNvXn7yqMJwLMqs"
                     className="card-img-top"
                     alt="..."
                   />
@@ -34,7 +34,7 @@ function Contact() {
                 <div className="card-body">
                   <p className="card-text" style={{ color: "white" }}>
                     John Hagens - "The most important thing is to try to inspire
-                    peoeple so that they can be great in whatever they do." -
+                    people so that they can be great in whatever they do." -
                     Kobe Bryant
                   </p>
                 </div>
@@ -48,10 +48,10 @@ function Contact() {
               About Us
             </div>
             <div className="col-lg-4 contactCard">
-              <div className="card w-60 h-75" style={{ width: "18rem;" }}>
+              <div className="card w-60 h-75" style={{ width: "25rem" }}>
                 <a href="https://github.com/TheQuentinJones">
                   <img
-                    src="https://media.licdn.com/dms/image/C5603AQFcm8UdjN47dw/profile-displayphoto-shrink_800_800/0/1567959211712?e=1684368000&v=beta&t=mPzHaUVCQgirid2R1m2gP3VWUvSzdagApu3W-a2wd1E"
+                    src="https://media.licdn.com/dms/image/C5603AQFcm8UdjN47dw/profile-displayphoto-shrink_800_800/0/1567959211712?e=1703116800&v=beta&t=uI5arBKMf-p9Q95XLf5OhvAZFklYNbeIbjFZEjxlTSY"
                     className="card-img-top"
                     alt="..."
                   />
@@ -68,28 +68,10 @@ function Contact() {
           <div className="row">
             <div className="col-lg-4 contactCard">
               {" "}
-              <div className="card w-60 h-75" style={{ width: "18rem;" }}>
-                <a href="https://github.com/dhruvin0777">
-                  <img
-                    src="https://media.licdn.com/dms/image/D4E03AQES8bQcBDI4Jw/profile-displayphoto-shrink_800_800/0/1678889123672?e=1684368000&v=beta&t=fnFLSAQcQeEa38dNQ-3lpHVU4XiQv0_Mud3gvUS2PYM"
-                    className="card-img-top"
-                    alt="..."
-                  />
-                </a>
-                <div className="card-body">
-                  <p className="card-text" style={{ color: "white" }}>
-                    Dhruvin Patel - "The best leaders are those most interested in surrounding
-                    themselves with assistants and associates smarter than they are." - John C. Maxwell
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 contactCard">
-              {" "}
-              <div className="card w-60 h-75" style={{ width: "18rem;" }}>
+              <div className="card w-60 h-75" style={{ width: "25rem" }}>
                 <a href="https://github.com/TrentLe">
                   <img
-                    src="https://media.licdn.com/dms/image/D4E03AQG8avYkhn5YWQ/profile-displayphoto-shrink_800_800/0/1676060466939?e=1684368000&v=beta&t=3zCTl3w5cNTniZn3rORSgv3EiNFJWq6nJ3pazaG2zw0"
+                    src="https://media.licdn.com/dms/image/D4E03AQG8avYkhn5YWQ/profile-displayphoto-shrink_800_800/0/1676060466939?e=1703116800&v=beta&t=9E4ip9Ujf-MkGyW6Wq9HMISV6ct0FYhp2hWV-LR4-JY"
                     className="card-img-top"
                     alt="..."
                   />
@@ -105,10 +87,14 @@ function Contact() {
             </div>
             <div className="col-lg-4 contactCard">
               {" "}
-              <div className="card w-60 h-75" style={{ width: "18rem;" }}>
+ 
+            </div>
+            <div className="col-lg-4 contactCard">
+              {" "}
+              <div className="card w-60 h-75" style={{ width: "25rem" }}>
                 <a href="https://github.com/Henrich77">
                   <img
-                    src="https://media.licdn.com/dms/image/D5603AQHh1BhLTfM57g/profile-displayphoto-shrink_800_800/0/1671667372575?e=1684368000&v=beta&t=woLMI9TgiSG6xDMJsSCRKrSwwh7aH4yaQOaDujZjb0k"
+                    src="https://media.licdn.com/dms/image/D4E03AQFVkXfwiH_KkA/profile-displayphoto-shrink_800_800/0/1685112136218?e=1703116800&v=beta&t=0xqApo81dbDwx3N8J8LqPZaMSaEyILMgfM4cQEo_oBg"
                     className="card-img-top"
                     alt="..."
                   />
