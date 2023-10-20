@@ -45,7 +45,7 @@ const FollowForm = ({ meInfo }) => {
                     </>
                 )}
                 <div className='all-follow-info'>
-                    {meInfo.me ? (meInfo.me.following.map((followedPerson) => {
+                    {meInfo.me ? (meInfo.me.following?.map((followedPerson) => {
                         return (<>
                             <div className='followed-info' key={followedPerson._id}>
                                 <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit", marginBottom: ".7rem" }}>
@@ -55,7 +55,7 @@ const FollowForm = ({ meInfo }) => {
                             </div>
                         </>
                         )
-                    })) : (meInfo.user.following.map((followedPerson) => {
+                    })) : (meInfo.user.following?.map((followedPerson) => {
                         return (<>
                             <div className='followed-info' key={followedPerson._id}>
                                 <Link to={`/profiles/${followedPerson.username}`} style={{ textDecoration: "none", color: "inherit" }}>

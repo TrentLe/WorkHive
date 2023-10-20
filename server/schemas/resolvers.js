@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought, Contact } = require('../models');
+const { User, Thought, Contact, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
 const fs = require('fs')
 const path = require('path')
@@ -31,10 +31,10 @@ const resolvers = {
     },
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+      return Thought.find(params).sort({ createdAt: -1 }).populate('comments');
     },
     thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+      return Thought.findOne({ _id: thoughtId }).populate('comments');
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -49,7 +49,7 @@ const resolvers = {
             path: 'comments',
             options: {
               sort: {
-                createdAt: -1
+                createdAt: 1
               }
             }
           }
@@ -62,6 +62,10 @@ const resolvers = {
     },
     contact: async (parent, { name }, context, info) => {
       return Contact.findOne({ name })
+    },
+    comments: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Comment.find(params);
     },
   },
 
@@ -106,6 +110,7 @@ const resolvers = {
     },
     removeThought: async (parent, { thoughtId }, context) => {
       if (context.user) {
+
         const thought = await Thought.findOneAndDelete({
           _id: thoughtId,
           thoughtAuthor: context.user.username,
@@ -117,6 +122,23 @@ const resolvers = {
         );
 
         return thought;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeComment: async (parent, { commentId, thoughtId }, context) => {
+      if (context.user) {
+
+        const comment = await Comment.findOneAndDelete({
+          _id: commentId,
+          commentAuthor: context.user.username,
+        });
+
+        await Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          { $pull: { comments: comment._id } }
+        );
+
+        return comment;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -209,18 +231,60 @@ const resolvers = {
     },
     addComment: async (parent, { thoughtId, commentText }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
+        const comment = await Comment.create({
+          commentText,
+          commentAuthor: context.user.username,
+        });
+
+        await Thought.findOneAndUpdate(
           { _id: thoughtId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
+          { $addToSet: { comments: comment._id } }
         );
+
+        return comment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addSubComment: async (parent, { commentId, commentText }, context) => {
+      if (context.user) {
+        const comment = await Comment.create({
+          commentText,
+          commentAuthor: context.user.username,
+        });
+
+        await Comment.findOneAndUpdate(
+          { _id: commentId },
+          { $addToSet: { comments: comment._id } }
+        );
+
+        return comment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addLike: async (parent, { userId, commentId, thoughtId }, context) => {
+      if (thoughtId) {
+
+        const likedThought = await Thought.findOne({ thoughtId })
+
+        await Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          { $addToSet: { likes: userId } },
+          { new: true }
+        );
+
+        return likedThought;
+      }
+
+      if (commentId) {
+        const likedComment = await Comment.findOne({ commentId })
+
+        await Comment.findOneAndUpdate(
+          { _id: commentId },
+          { $addToSet: { likes: userId} },
+          { new: true }
+        );
+
+        return likedComment
       }
       throw new AuthenticationError('You need to be logged in!');
     },

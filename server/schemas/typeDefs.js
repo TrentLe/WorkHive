@@ -19,6 +19,7 @@ const typeDefs = gql`
     thoughtAuthor: String
     createdAt: String
     comments: [Comment]!
+    likes: [User]!
   }
 
   type Comment {
@@ -26,6 +27,8 @@ const typeDefs = gql`
     commentText: String
     commentAuthor: String
     createdAt: String
+    comments: [Comment]!
+    likes: [User]!
   }
 
   type File {
@@ -52,12 +55,13 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
+    thoughts: [Thought]
     thought(thoughtId: ID!): Thought
     followers: [User]
     following: [User]
     contacts: [Contact]
-    contact(name: String): Contact     
+    contact(name: String): Contact
+    comments(username: String): [Comment]    
   }
 
 
@@ -72,7 +76,11 @@ const typeDefs = gql`
     addFollow(userId: ID!): User
     removeFollow(userId: ID!): User
     addContact(name: String, email: String, message: String): Contact
-    addComment(thoughtId: ID!, commentText: String!): Thought    
+    addComment(thoughtId: ID!, commentText: String!): Comment
+    addSubComment(commentId: ID!, commentText: String!): Comment
+    removeComment(commentId: ID!, thoughtId: ID!): Comment
+    addLike(thoughtId: ID, commentId: ID, userId: ID!): Thought
+    removeLike(thoughtId: ID, commentId: ID, userId: ID!): Thought   
   }
 `;
 

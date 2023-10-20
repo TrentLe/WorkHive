@@ -23,6 +23,7 @@ const Profile = ({ userId }) => {
   });
 
   const user = query1.data?.me || query1.data?.user || {};
+  console.log(user)
 
   // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {

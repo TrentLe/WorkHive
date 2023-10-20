@@ -55,17 +55,23 @@ export const REMOVE_THOUGHT = gql`
 
 
 export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
+  mutation AddComment($thoughtId: ID!, $commentText: String!) {
     addComment(thoughtId: $thoughtId, commentText: $commentText) {
       _id
-      thoughtText
-      thoughtAuthor
+      commentAuthor
+      commentText
       createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+    }
+  }
+`;
+
+export const REMOVE_COMMENT = gql`
+    mutation RemoveComment($commentId: ID!, $thoughtId: ID!) {
+      removeComment(commentId: $commentId, thoughtId: $thoughtId) {
+      _id
+      commentAuthor
+      commentText
+      createdAt
     }
   }
 `;
@@ -121,6 +127,25 @@ mutation updateUser($updateUserId: ID!, $username: String, $email: String, $pass
     username
     profilepicture
     bio
+  }
+}
+`;
+
+export const ADD_LIKE = gql`
+mutation AddLike($userId: ID!, $commentId: ID, $thoughtId: ID) {
+  addLike(userId: $userId, commentId: $commentId, thoughtId: $thoughtId) {
+    ... on Thought {
+      _id
+      createdAt
+      thoughtAuthor
+      thoughtText
+    }
+    ... on Comment {
+      _id
+      commentAuthor
+      commentText
+      createdAt
+    }
   }
 }
 `

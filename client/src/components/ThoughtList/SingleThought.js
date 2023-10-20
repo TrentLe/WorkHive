@@ -10,6 +10,7 @@ import CommentList from '../CommentList';
 import CommentForm from '../CommentForm';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { REMOVE_THOUGHT } from '../../utils/mutations';
+import LikeButton from '../LikeButton/LikeButton';
 import Auth from "../../utils/auth";
 // import LinkifyText from '../Linkify/Linkify';
 
@@ -101,8 +102,9 @@ const client = useApolloClient()
       </div>
       <div className='info'>
         <div className='item'>
-          {liked ? < FcLike size='25px' /> : <FcLikePlaceholder size='25px' onClick={() => { < FcLike size='25px' /> }} />}
-          15 likes
+          {/* {liked ? < FcLike size='25px' /> : <FcLikePlaceholder size='25px' onClick={() => { < FcLike size='25px' /> }} />}
+          15 likes */}
+          <LikeButton thought={thought} />
         </div>
         <div className='item'>
           <button className="btn btn-primary" onClick={() => setShowComments(!showComments)}
