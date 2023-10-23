@@ -9,6 +9,7 @@ const typeDefs = gql`
     bio: String
     profilepicture: String
     thoughts: [Thought]
+    comments: [Comment]
     followers: [User]
     following: [User]
   }
@@ -78,9 +79,12 @@ const typeDefs = gql`
     addContact(name: String, email: String, message: String): Contact
     addComment(thoughtId: ID!, commentText: String!): Comment
     addSubComment(commentId: ID!, commentText: String!): Comment
-    removeComment(commentId: ID!, thoughtId: ID!): Comment
-    addLike(thoughtId: ID, commentId: ID, userId: ID!): Thought
-    removeLike(thoughtId: ID, commentId: ID, userId: ID!): Thought   
+    removeComment(thoughtId: ID!): Thought
+    removeSubComment(commentId: ID!): Comment
+    addThoughtLike(thoughtId: ID!): Thought
+    addCommentLike(commentId: ID!): Comment
+    removeThoughtLike(thoughtId: ID!): Thought
+    removeCommentLike(commentId: ID!): Comment   
   }
 `;
 
