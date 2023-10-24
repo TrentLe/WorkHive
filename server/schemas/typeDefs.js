@@ -79,8 +79,8 @@ const typeDefs = gql`
     addContact(name: String, email: String, message: String): Contact
     addComment(thoughtId: ID!, commentText: String!): Comment
     addSubComment(commentId: ID!, commentText: String!): Comment
-    removeComment(thoughtId: ID!): Thought
-    removeSubComment(commentId: ID!): Comment
+    removeComment(thoughtId: ID!, commentId: ID!): Comment
+    removeSubComment(commentId: ID!, subCommentId: ID!): Comment
     addThoughtLike(thoughtId: ID!): Thought
     addCommentLike(commentId: ID!): Comment
     removeThoughtLike(thoughtId: ID!): Thought

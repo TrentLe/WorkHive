@@ -8,7 +8,7 @@ const SingleComment = ({ comment, thoughtId }) => {
 
     const [removeComment] = useMutation(REMOVE_COMMENT);
 
-    const handleDeleteThought = async (commentId) => {
+    const handleDeleteComment = async (commentId) => {
       const token = Auth.loggedIn() ? Auth.getToken() : null;
       if (!token) {
         return false;
@@ -36,7 +36,7 @@ const SingleComment = ({ comment, thoughtId }) => {
 
                     <p className="card-body">{comment.commentText}</p>
                 </div>
-                {Auth.getProfile().data.username === comment.commentAuthor ? (<button className="btn btn-outline-danger" onClick={() => handleDeleteThought(comment._id)}>
+                {Auth.getProfile().data.username === comment.commentAuthor ? (<button className="btn btn-outline-danger" onClick={() => handleDeleteComment(comment._id)}>
                     Delete
                 </button>) : ""}
             </div>
