@@ -11,6 +11,7 @@ import CommentForm from '../CommentForm';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { REMOVE_THOUGHT } from '../../utils/mutations';
 import LikeButton from '../LikeButton/LikeButton';
+import DisplayPicture from '../DisplayPicture/DisplayPicture';
 import Auth from "../../utils/auth";
 // import LinkifyText from '../Linkify/Linkify';
 
@@ -20,29 +21,21 @@ export default function SingleThought({
   user,
   liked
 }) {
-const client = useApolloClient()
+  const client = useApolloClient()
 
-  const [displayPic, setDisplayPic] = useState([])
+  const [filteredUser, setFilteredUser] = useState({})
   const [showComments, setShowComments] = useState(false)
-  const [stockPic, setStockPic] = useState("")
-  const [loadingState, setLoadingState] = useState(false)
 
   useEffect(() => {
-    setDisplayPic(user?.profilepicture)
-    setLoadingState(true)
-  }, [user])
-
-  useEffect(() => {
-    const filteredUser = users?.filter((user) => user.username === thought.thoughtAuthor)
-    if (filteredUser) {
-      setDisplayPic(filteredUser[0]?.profilepicture)
-      setLoadingState(true)
+    if (users) {
+    const displayUser = users?.filter((user) => user.username === thought.thoughtAuthor)
+    const targetUser = displayUser[0]
+    setFilteredUser(targetUser)
+    } else {
+      setFilteredUser(user)
     }
-  }, [users, thought])
+  }, [users, thought, user]) 
 
-  useEffect(() => {
-    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
-  }, [loadingState])
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -67,7 +60,8 @@ const client = useApolloClient()
     <div key={thought._id} className="container">
       <div className="user">
         <div className='userinfo'>
-          <img src={displayPic ? displayPic : stockPic} alt="" />
+          {/* <img src={displayPic ? displayPic : stockPic} alt="" /> */}
+          <DisplayPicture user={filteredUser}/>
           <div className='postdetails'>
             <Link
               to={`/profiles/${thought.thoughtAuthor}`}
