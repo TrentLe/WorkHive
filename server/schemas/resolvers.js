@@ -21,7 +21,7 @@ const resolvers = {
           path: 'comments',
           options: {
             sort: {
-              createdAt: -1
+              createdAt: 1
             }
           }
         },
@@ -44,7 +44,7 @@ const resolvers = {
            path: 'comments',
            options: {
              sort: {
-               createdAt: -1
+               createdAt: 1
              }
            }
          },
@@ -75,7 +75,7 @@ const resolvers = {
              path: 'comments',
              options: {
                sort: {
-                 createdAt: -1
+                 createdAt: 1
                }
              }
            },
