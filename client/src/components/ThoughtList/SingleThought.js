@@ -60,11 +60,11 @@ export default function SingleThought({
 
 
   return (
-    <div key={thought._id} className="container">
-      <div className="user">
-        <div className='userinfo'>
-          <DisplayPicture user={filteredUser}/>
-          <div className='postdetails'>
+    <div key={thought._id} className="container rounded-4 mb-3 p-4">
+      <div className="user d-flex align-items-center justify-content-between">
+        <div className='d-flex gap-3'>
+          <DisplayPicture user={filteredUser} />
+          <div className='d-flex flex-column'>
             <Link
               to={`/profiles/${thought.thoughtAuthor}`}
               style={{ textDecoration: "none", color: "inherit" }}>
@@ -75,12 +75,12 @@ export default function SingleThought({
         </div>
         <CgMenuCheese />
       </div>
-      <div className="content">
+      <div className="mt-4 mb-4">
         {/* <LinkifyText text={thought.thoughtText} /> */}
         <p>{thought.thoughtText}</p>
       </div>
-      <div className='info'>
-        <div className='item'>
+      <div className='info d-flex align-items-center gap-4'>
+        <div className='item d-flex align-items-center gap-2 '>
           <LikeButton thought={thought} />
         </div>
         <div className='item'>

@@ -22,7 +22,7 @@ const ThoughtList = ({
   }
 
   return (
-    <div className='post'>
+    <div className='post d-flex flex-column'>
       {thoughts &&
         thoughts.map((thought) => (
           <SingleThought thought={thought} users={users} user={user} key={thought._id} />

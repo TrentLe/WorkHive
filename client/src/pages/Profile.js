@@ -49,7 +49,7 @@ const Profile = ({ userId }) => {
       <h2 className="text-center">
         You are viewing {userParam ? `${user.username}'s` : 'your'} profile.
       </h2>
-      <div className="feed-container">
+      <div className="d-inline-flex">
 
         <Left />
 
