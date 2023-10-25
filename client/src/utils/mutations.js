@@ -131,21 +131,24 @@ mutation updateUser($updateUserId: ID!, $username: String, $email: String, $pass
 }
 `;
 
-export const ADD_LIKE = gql`
-mutation AddLike($userId: ID!, $commentId: ID, $thoughtId: ID) {
-  addLike(userId: $userId, commentId: $commentId, thoughtId: $thoughtId) {
-    ... on Thought {
-      _id
-      createdAt
-      thoughtAuthor
-      thoughtText
-    }
-    ... on Comment {
-      _id
-      commentAuthor
-      commentText
-      createdAt
-    }
+export const ADD_THOUGHT_LIKE = gql`
+mutation AddThoughtLike($thoughtId: ID!) {
+  addThoughtLike(thoughtId: $thoughtId) {
+    _id
+    createdAt
+    thoughtAuthor
+    thoughtText
+  }
+}
+`
+
+export const REMOVE_THOUGHT_LIKE = gql`
+mutation RemoveThoughtLike($thoughtId: ID!) {
+  removeThoughtLike(thoughtId: $thoughtId) {
+    _id
+    createdAt
+    thoughtAuthor
+    thoughtText
   }
 }
 `

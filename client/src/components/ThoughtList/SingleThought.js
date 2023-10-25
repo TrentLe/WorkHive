@@ -10,7 +10,7 @@ import CommentList from '../CommentList';
 import CommentForm from '../CommentForm';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { REMOVE_THOUGHT } from '../../utils/mutations';
-import LikeButton from '../LikeButton/LikeButton';
+import LikeButton from '../LikeButton/LikeThoughtButton';
 import DisplayPicture from '../DisplayPicture/DisplayPicture';
 import Auth from "../../utils/auth";
 // import LinkifyText from '../Linkify/Linkify';

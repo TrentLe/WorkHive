@@ -19,6 +19,9 @@ query User($username: String!) {
         commentText
         createdAt
       }
+      likes {
+        _id
+      }
     }
     followers {
       _id
@@ -83,6 +86,9 @@ export const QUERY_THOUGHTS = gql`
         commentAuthor
         createdAt
       }
+      likes {
+        _id
+      }
     }
     
   }
@@ -123,6 +129,9 @@ query Me {
         commentAuthor
         commentText
         createdAt
+      }
+      likes {
+        _id
       }
     }
     followers {

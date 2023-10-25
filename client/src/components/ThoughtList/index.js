@@ -15,7 +15,7 @@ const ThoughtList = ({
   showUsername = true,
 }) => {
 
-  if (!thoughts.length) {
+  if (!thoughts?.length) {
     return <div className="no-thoughts">
       <h3 >Nothing to see here!</h3>
     </div>;

@@ -9,7 +9,7 @@ const resolvers = {
 
   Query: {
     users: async () => {
-      return User.find().sort({ username: 1 }).populate('thoughts').populate('following').populate('followers')
+      return User.find().sort({ username: 1 }).populate('thoughts').populate('following').populate('followers').populate('comments')
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate({
@@ -26,15 +26,18 @@ const resolvers = {
               createdAt: -1
             }
           }
+        },
+        populate: {
+          path: 'likes',
         }
-      }).populate('following').populate('followers')
+      }).populate('following').populate('followers').populate('comments')
     },
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 }).populate('comments');
+      return Thought.find(params).sort({ createdAt: -1 }).populate('comments').populate('likes');
     },
     thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId }).populate('comments');
+      return Thought.findOne({ _id: thoughtId }).populate('comments').populate('likes');
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -52,8 +55,11 @@ const resolvers = {
                 createdAt: 1
               }
             }
+          },
+          populate: {
+            path: 'likes'
           }
-        }).populate('following').populate('followers');
+        }).populate('following').populate('followers').populate('comments');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -65,7 +71,7 @@ const resolvers = {
     },
     comments: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Comment.find(params);
+      return Comment.find(params).populate('comments').populate('likes');
     },
   },
 
