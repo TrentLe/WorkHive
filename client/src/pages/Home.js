@@ -18,10 +18,6 @@ const Home = () => {
   const users = query2.data?.users || [];
   const me = query3.data?.me || [];
 
-  console.log(thoughts)
-  console.log(users)
-  console.log(me)
-
   if (query1.loading || query2.loading || query3.loading) {
     <div>Loading...</div>
   }

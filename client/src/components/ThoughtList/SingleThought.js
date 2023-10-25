@@ -19,12 +19,16 @@ export default function SingleThought({
   thought,
   users,
   user,
-  liked
 }) {
   const client = useApolloClient()
 
   const [filteredUser, setFilteredUser] = useState({})
   const [showComments, setShowComments] = useState(false)
+  const [ commentState, setCommentState ] = useState([])
+
+  useEffect(() => {
+    setCommentState(thought.comments)
+  }, [thought])
 
   useEffect(() => {
     if (users) {
@@ -35,7 +39,6 @@ export default function SingleThought({
       setFilteredUser(user)
     }
   }, [users, thought, user]) 
-
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -60,7 +63,6 @@ export default function SingleThought({
     <div key={thought._id} className="container">
       <div className="user">
         <div className='userinfo'>
-          {/* <img src={displayPic ? displayPic : stockPic} alt="" /> */}
           <DisplayPicture user={filteredUser}/>
           <div className='postdetails'>
             <Link
@@ -69,23 +71,6 @@ export default function SingleThought({
               <span>{thought.thoughtAuthor}</span>
             </Link>
             <span className="date">{thought.createdAt}</span>
-            {/* {showUsername ? (
-                <Link
-                  className=""
-                  to={`/profiles/${thought.thoughtAuthor}`}
-                >
-                  {thought.thoughtAuthor} <br />
-                  <span style={{ fontSize: '1rem' }}>
-                     {thought.createdAt}
-                  </span>
-                </Link>
-              ) : (
-                <>
-                  <span style={{ fontSize: '1rem' }}>
-                  {thought.createdAt}
-                  </span>
-                </>
-              )} */}
           </div>
         </div>
         <CgMenuCheese />
@@ -96,8 +81,6 @@ export default function SingleThought({
       </div>
       <div className='info'>
         <div className='item'>
-          {/* {liked ? < FcLike size='25px' /> : <FcLikePlaceholder size='25px' onClick={() => { < FcLike size='25px' /> }} />}
-          15 likes */}
           <LikeButton thought={thought} />
         </div>
         <div className='item'>
@@ -115,7 +98,7 @@ export default function SingleThought({
           Delete
         </button>) : ""}
       </div>
-      {showComments && (<> <CommentList comments={thought.comments ?? []} thoughtId={thought._id} /> <CommentForm thoughtId={thought._id} /> </>)}
+      {showComments && (<> <CommentList comments={commentState} thoughtId={thought._id} /> <CommentForm thoughtId={thought._id} /> </>)}
     </div>
   )
 }

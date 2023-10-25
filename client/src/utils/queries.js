@@ -54,6 +54,15 @@ query Users {
       thoughtAuthor
       createdAt
       _id
+      comments {
+        _id
+        commentAuthor
+        commentText
+        createdAt
+      }
+      likes {
+        _id
+      }
     }
     followers {
       _id

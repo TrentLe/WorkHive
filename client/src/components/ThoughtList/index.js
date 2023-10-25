@@ -23,11 +23,9 @@ const ThoughtList = ({
 
   return (
     <div className='post'>
-      {/* {showTitle && <h3>{title}</h3>} */}
       {thoughts &&
         thoughts.map((thought) => (
           <SingleThought thought={thought} users={users} user={user} key={thought._id} />
-          // show comments on click
         ))}
     </div>
   );

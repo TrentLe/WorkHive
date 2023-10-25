@@ -6,6 +6,8 @@ import { REMOVE_COMMENT } from '../../utils/mutations';
 const SingleComment = ({ comment, thoughtId }) => {
   const client = useApolloClient()
 
+  console.log(comment)
+
   const [removeComment] = useMutation(REMOVE_COMMENT);
 
   const handleDeleteComment = async (commentId) => {

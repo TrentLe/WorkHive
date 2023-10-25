@@ -9,7 +9,27 @@ const resolvers = {
 
   Query: {
     users: async () => {
-      return User.find().sort({ username: 1 }).populate('thoughts').populate('following').populate('followers').populate('comments')
+      return User.find().sort({ username: 1 }).populate({
+        path: 'thoughts',
+        options: {
+          sort: { 
+            createdAt: -1 
+          }
+        },
+        populate: [
+         {
+          path: 'comments',
+          options: {
+            sort: {
+              createdAt: -1
+            }
+          }
+        },
+        {
+          path: 'likes',
+        }
+      ]
+      }).populate('following').populate('followers').populate('comments')
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate({
@@ -19,17 +39,19 @@ const resolvers = {
             createdAt: -1 
           }
         },
-        populate: {
-          path: 'comments',
-          options: {
-            sort: {
-              createdAt: -1
-            }
-          }
-        },
-        populate: {
-          path: 'likes',
-        }
+        populate: [
+          {
+           path: 'comments',
+           options: {
+             sort: {
+               createdAt: -1
+             }
+           }
+         },
+         {
+           path: 'likes',
+         }
+       ]
       }).populate('following').populate('followers').populate('comments')
     },
     thoughts: async (parent, { username }) => {
@@ -48,17 +70,19 @@ const resolvers = {
               createdAt: -1 
             }
           },
-          populate: {
-            path: 'comments',
-            options: {
-              sort: {
-                createdAt: 1
-              }
-            }
-          },
-          populate: {
-            path: 'likes'
-          }
+          populate: [
+            {
+             path: 'comments',
+             options: {
+               sort: {
+                 createdAt: -1
+               }
+             }
+           },
+           {
+             path: 'likes',
+           }
+         ]
         }).populate('following').populate('followers').populate('comments');
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -144,6 +168,11 @@ const resolvers = {
           { $pull: { comments: comment._id } }
         );
 
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { comments: comment._id } }
+        )
+
         return comment;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -160,20 +189,17 @@ const resolvers = {
       }
     },
     updateUser: async (_, { id, username, email, password, profilepicture, bio }, context) => {
-      console.log(id, profilepicture, context.user._id)
-      const user = await User.findByIdAndUpdate(
+        const user = await User.findByIdAndUpdate(
         { _id: context.user._id },
         { $set: { username: username, email: email, password: password, profilepicture: profilepicture, bio: bio, } },
         { new: true },
-        (error, updatedUser) => {
+        (error) => {
           if (error) {
             console.error(error)
-          } else {
-            console.log(updatedUser)
           }
         }
       );
-      console.log(user)
+
       return user;
     },
     deleteUser: async (parent, { userId }, context) => {
