@@ -65,14 +65,14 @@ const CommentForm = ({ thoughtId }) => {
             onSubmit={handleFormSubmit}
           >
             <div className="col-12 col-lg-9">
-              <textarea
+              <input
                 name="commentText"
                 placeholder="Add your comment..."
                 value={commentText}
                 className="form-input w-100"
                 style={{ lineHeight: '1.5', resize: 'vertical' }}
                 onChange={handleChange}
-              ></textarea>
+              ></input>
             </div>
 
             <div className="col-12 col-lg-3">

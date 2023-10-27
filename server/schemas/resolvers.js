@@ -188,7 +188,7 @@ const resolvers = {
         url: `http://localhost:3001/public/images/${filename}`
       }
     },
-    updateUser: async (_, { id, username, email, password, profilepicture, bio }, context) => {
+    updateUser: async (_, { username, email, password, profilepicture, bio }, context) => {
         const user = await User.findByIdAndUpdate(
         { _id: context.user._id },
         { $set: { username: username, email: email, password: password, profilepicture: profilepicture, bio: bio, } },

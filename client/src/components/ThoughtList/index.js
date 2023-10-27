@@ -9,10 +9,7 @@ const ThoughtList = ({
   thoughts,
   users,
   user,
-  title,
-  displayPic,
-  showTitle = true,
-  showUsername = true,
+  profileUsers,
 }) => {
 
   if (!thoughts?.length) {
@@ -25,7 +22,7 @@ const ThoughtList = ({
     <div className='post d-flex flex-column'>
       {thoughts &&
         thoughts.map((thought) => (
-          <SingleThought thought={thought} users={users} user={user} key={thought._id} />
+          <SingleThought thought={thought} users={users} user={user} key={thought._id} profileUsers={profileUsers}/>
         ))}
     </div>
   );

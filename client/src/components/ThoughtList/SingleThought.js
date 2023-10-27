@@ -18,6 +18,7 @@ export default function SingleThought({
   thought,
   users,
   user,
+  profileUsers,
 }) {
   const client = useApolloClient()
 
@@ -89,7 +90,7 @@ export default function SingleThought({
           Delete
         </button>) : ""}
       </div>
-      {showComments && (<> <CommentList comments={commentState} thoughtId={thought._id} users={users} /> <CommentForm thoughtId={thought._id} /> </>)}
+      {showComments && (<> <CommentList comments={commentState} thoughtId={thought._id} users={users} profileUsers={profileUsers}/> <CommentForm thoughtId={thought._id} /> </>)}
     </div>
   )
 }

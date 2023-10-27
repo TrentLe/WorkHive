@@ -7,10 +7,10 @@ import { useFilterUser } from '../../utils/CustomHooks';
 import './SingleComment.css'
 
 
-const SingleComment = ({ comment, thoughtId, users, user, thought }) => {
+const SingleComment = ({ comment, thoughtId, users, user, thought, profileUsers }) => {
   const client = useApolloClient()
 
-  const thisUser = useFilterUser(users, user, thought, comment)
+  const thisUser = useFilterUser(users, user, thought, comment, profileUsers)
 
   const [removeComment] = useMutation(REMOVE_COMMENT);
 

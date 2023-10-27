@@ -8,12 +8,12 @@ import ThoughtList from '../components/ThoughtList';
 // import RemoveUser from '../components/DeleteUser/DeleteUser';
 import Auth from '../utils/auth';
 // import FollowButton from '../components/FollowButton';
-import { QUERY_USER, QUERY_ME } from '../utils/queries';
+import { QUERY_USER, QUERY_ME, QUERY_USERS } from '../utils/queries';
 // import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
 import Left from '../components/left/left';
 import Right from '../components/right/right';
 
-const Profile = ({ userId }) => {
+const Profile = () => {
   // use this to determine if `useEffect()` hook needs to run again
   const { username: userParam } = useParams();
 
@@ -22,8 +22,11 @@ const Profile = ({ userId }) => {
     variables: { username: userParam },
   });
 
+  const query2 = useQuery(QUERY_USERS)
+
   const user = query1.data?.me || query1.data?.user || {};
-  console.log(user)
+
+  const users = query2.data?.users
 
   // navigate to personal profile page if username is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
@@ -55,6 +58,7 @@ const Profile = ({ userId }) => {
 
         <ThoughtList
           user={user}
+          profileUsers={users}
           thoughts={user.thoughts}
           title={`${user.username}'s thoughts...`}
           displayPic={user.profilepicture}

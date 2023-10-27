@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleComment from './SingleComment';
 
-const CommentList = ({ comments = [], thoughtId, users }) => {
+const CommentList = ({ comments = [], thoughtId, users, profileUsers }) => {
 
   if (comments.length === 0) {
     return (<>
@@ -18,7 +18,7 @@ const CommentList = ({ comments = [], thoughtId, users }) => {
         {comments &&
           comments.map((comment) => (
 
-            <SingleComment comment={comment} thoughtId={thoughtId} users={users} />
+            <SingleComment comment={comment} thoughtId={thoughtId} users={users} profileUsers={profileUsers} />
 
           ))}
       </div>
