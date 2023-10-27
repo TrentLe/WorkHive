@@ -2,11 +2,15 @@ import React from 'react'
 import Auth from '../../utils/auth'
 import { useApolloClient, useMutation } from '@apollo/client';
 import { REMOVE_COMMENT } from '../../utils/mutations';
+import DisplayPicture from '../DisplayPicture/DisplayPicture';
+import { useFilterUser } from '../../utils/CustomHooks';
+import './SingleComment.css'
 
-const SingleComment = ({ comment, thoughtId }) => {
+
+const SingleComment = ({ comment, thoughtId, users, user, thought }) => {
   const client = useApolloClient()
 
-  console.log(comment)
+  const thisUser = useFilterUser(users, user, thought, comment)
 
   const [removeComment] = useMutation(REMOVE_COMMENT);
 
@@ -27,9 +31,10 @@ const SingleComment = ({ comment, thoughtId }) => {
   return (
     <>
 
-      <div key={comment._id} className="col-12 mb-3 pb-3">
-        <div className="p-3 bg-dark text-light">
+      <div key={comment._id} className="col-12 mb-2">
+        <div className="pb-3 ps-3 bg-dark text-light rounded-5">
           <h5 className="card-header">
+            <DisplayPicture user={thisUser} />
             {comment.commentAuthor} commented {" "}
             <span style={{ fontSize: '0.825rem' }}>
               on {comment.createdAt}

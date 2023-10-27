@@ -5,11 +5,11 @@ const DisplayPicture = ({ user }) => {
 
     const [displayPicture, setDisplayPicture] = useState("")
     const [stockPic, setStockPic] = useState("")
-    const [loadingState, setLoadingState] = useState(false)
+    const [loadingState, setLoadingState] = useState(true)
 
     useEffect(() => {
         setDisplayPicture(user?.profilepicture)
-        setLoadingState(true)
+        setLoadingState(false)
     }, [user])
 
     useEffect(() => {

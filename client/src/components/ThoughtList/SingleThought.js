@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { MdOutlineMessage } from "react-icons/md";
 import "./thoughtList.scss"
 import { CgMenuCheese } from "react-icons/cg";
-import { FcLike } from "react-icons/fc";
-import { FcLikePlaceholder } from "react-icons/fc";
 import { TbShare3 } from "react-icons/tb";
 import CommentList from '../CommentList';
 import CommentForm from '../CommentForm';
@@ -14,6 +12,7 @@ import LikeButton from '../LikeButton/LikeThoughtButton';
 import DisplayPicture from '../DisplayPicture/DisplayPicture';
 import Auth from "../../utils/auth";
 // import LinkifyText from '../Linkify/Linkify';
+import { useFilterUser } from '../../utils/CustomHooks';
 
 export default function SingleThought({
   thought,
@@ -22,7 +21,6 @@ export default function SingleThought({
 }) {
   const client = useApolloClient()
 
-  const [filteredUser, setFilteredUser] = useState({})
   const [showComments, setShowComments] = useState(false)
   const [ commentState, setCommentState ] = useState([])
 
@@ -30,15 +28,8 @@ export default function SingleThought({
     setCommentState(thought.comments)
   }, [thought])
 
-  useEffect(() => {
-    if (users) {
-    const displayUser = users?.filter((user) => user.username === thought.thoughtAuthor)
-    const targetUser = displayUser[0]
-    setFilteredUser(targetUser)
-    } else {
-      setFilteredUser(user)
-    }
-  }, [users, thought, user]) 
+  const thisUser = useFilterUser(users, user, thought)
+
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -63,7 +54,7 @@ export default function SingleThought({
     <div key={thought._id} className="container rounded-4 mb-3 p-4">
       <div className="user d-flex align-items-center justify-content-between">
         <div className='d-flex gap-3'>
-          <DisplayPicture user={filteredUser} />
+          <DisplayPicture user={thisUser} />
           <div className='d-flex flex-column'>
             <Link
               to={`/profiles/${thought.thoughtAuthor}`}
@@ -98,7 +89,7 @@ export default function SingleThought({
           Delete
         </button>) : ""}
       </div>
-      {showComments && (<> <CommentList comments={commentState} thoughtId={thought._id} /> <CommentForm thoughtId={thought._id} /> </>)}
+      {showComments && (<> <CommentList comments={commentState} thoughtId={thought._id} users={users} /> <CommentForm thoughtId={thought._id} /> </>)}
     </div>
   )
 }
