@@ -72,7 +72,7 @@ const typeDefs = gql`
     addThought(thoughtText: String!): Thought
     removeThought(thoughtId: ID!): Thought
     uploadImage(file: String!): File!
-    updateUser(id: ID!, username: String, email: String, password: String, profilepicture: String, bio: String): User
+    updateUser( username: String, email: String, password: String, profilepicture: String, bio: String): User
     deleteUser(userId: ID!): User
     addFollow(userId: ID!): User
     removeFollow(userId: ID!): User

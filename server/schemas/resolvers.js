@@ -192,14 +192,12 @@ const resolvers = {
         const user = await User.findByIdAndUpdate(
         { _id: context.user._id },
         { $set: { username: username, email: email, password: password, profilepicture: profilepicture, bio: bio, } },
-        { new: true },
         (error) => {
           if (error) {
             console.error(error)
           }
         }
       );
-
       return user;
     },
     deleteUser: async (parent, { userId }, context) => {

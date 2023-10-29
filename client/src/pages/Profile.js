@@ -52,32 +52,43 @@ const Profile = () => {
       <h2 className="text-center">
         You are viewing {userParam ? `${user.username}'s` : 'your'} profile.
       </h2>
-      <div className="d-inline-flex">
+      <div>
+        <div>
+          <div>
+            <p>Bio</p>
+            <p>{user.bio}</p>
+          </div>
+          <div>
+            
+          </div>
+        </div>
+        <div className="d-inline-flex">
 
-        <Left />
+          <Left />
 
-        <ThoughtList
-          user={user}
-          profileUsers={users}
-          thoughts={user.thoughts}
-          title={`${user.username}'s thoughts...`}
-          displayPic={user.profilepicture}
-          showTitle={false}
-          showUsername={false}
-        />
-
-        { query1.loading ? ( <div>Loading...</div> ) : ( !userParam ? (
-          <Right
-            me={user}
-          />
-        ) : (
-
-          <Right          
+          <ThoughtList
             user={user}
+            profileUsers={users}
+            thoughts={user.thoughts}
+            title={`${user.username}'s thoughts...`}
+            displayPic={user.profilepicture}
+            showTitle={false}
+            showUsername={false}
           />
 
-        ))}
+          {query1.loading ? (<div>Loading...</div>) : (!userParam ? (
+            <Right
+              me={user}
+            />
+          ) : (
 
+            <Right
+              user={user}
+            />
+
+          ))}
+
+        </div>
       </div>
     </>
   );
