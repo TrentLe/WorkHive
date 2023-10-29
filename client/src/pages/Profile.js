@@ -12,6 +12,7 @@ import { QUERY_USER, QUERY_ME, QUERY_USERS } from '../utils/queries';
 // import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
 import Left from '../components/left/left';
 import Right from '../components/right/right';
+import Counter from '../components/FollowerCounter/FollowerCounter'
 
 const Profile = () => {
   // use this to determine if `useEffect()` hook needs to run again
@@ -53,13 +54,18 @@ const Profile = () => {
         You are viewing {userParam ? `${user.username}'s` : 'your'} profile.
       </h2>
       <div>
-        <div>
-          <div>
-            <p>Bio</p>
-            <p>{user.bio}</p>
-          </div>
-          <div>
-            
+        <div className='container text-center mb-5 mt-5'>
+          <div className='row'>
+            <div className='col'>
+              <p>Bio</p>
+              <p>{user.bio}</p>
+            </div>
+            <div className='col'>
+              <Counter followers={user.followers?.length} />
+            </div>
+            <div className='col'>
+              <Counter followers={user.following?.length} />
+            </div>
           </div>
         </div>
         <div className="d-inline-flex">

@@ -32,14 +32,10 @@ const Login = (props) => {
 
     if (localStorage.getItem("email") && localStorage.getItem("name") && localStorage.getItem("profilePic")) {
 
-      console.log(formState)
-
       try {
-        console.log(formState)
         const { data } = await login({
           variables: { ...formState },
         })
-
 
         Auth.login(data.login.token)
 
@@ -72,30 +68,6 @@ const Login = (props) => {
 
   return (
 
-    //   <div className="login">
-    //   <div className="carding">
-    //     <div className="leftside">
-    //       <h1>Hello World.</h1>
-    //       <p>
-    //         Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
-    //         alias totam numquam ipsa exercitationem dignissimos, error nam,
-    //         consequatur.
-    //       </p>
-    //       <span>Don't you have an account?</span>
-    //       <Link to="/register">
-    //         <button>Register</button>
-    //       </Link>
-    //     </div>
-    //     <div className="rightside">
-    //       <h1>Login</h1>
-    //       <form>
-    //         <input type="text" placeholder="Username" />
-    //         <input type="password" placeholder="Password" />
-    //         <button onClick={handleFormSubmit}>Login</button>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </div>
     <>
       <main className="flex-row justify-center mb-4">
         <div className="col-12 col-lg-10">
