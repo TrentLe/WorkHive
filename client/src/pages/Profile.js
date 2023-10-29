@@ -12,7 +12,8 @@ import { QUERY_USER, QUERY_ME, QUERY_USERS } from '../utils/queries';
 // import { ADD_FOLLOW, REMOVE_FOLLOW } from '../utils/mutations';
 import Left from '../components/left/left';
 import Right from '../components/right/right';
-import Counter from '../components/FollowerCounter/FollowerCounter'
+import FollowerCounter from '../components/FollowerCounter/FollowerCounter'
+import FollowingCounter from '../components/FollowerCounter/FollowingCounter';
 
 const Profile = () => {
   // use this to determine if `useEffect()` hook needs to run again
@@ -61,10 +62,10 @@ const Profile = () => {
               <p>{user.bio}</p>
             </div>
             <div className='col'>
-              <Counter followers={user.followers?.length} />
+              <FollowerCounter followers={user.followers?.length} />
             </div>
             <div className='col'>
-              <Counter followers={user.following?.length} />
+              <FollowingCounter following={user.following?.length} />
             </div>
           </div>
         </div>

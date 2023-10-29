@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-const FollowerCounter = ({ followers }) => {
+const FollowingCounter = ({ following }) => {
   // Specify the target number to count up to
 
-  const targetNumber = followers;
+  const targetNumber = following;
 
   // Define the interval for the animation (in milliseconds)
   const animationInterval = 10;
@@ -40,10 +40,10 @@ const FollowerCounter = ({ followers }) => {
 
   return (
     <div>
-      <h4>Followers</h4>
+      <h4>Following</h4>
       <p className="counter">{Math.round(currentCount)}</p>
     </div>
   );
 };
 
-export default FollowerCounter;
+export default FollowingCounter;
