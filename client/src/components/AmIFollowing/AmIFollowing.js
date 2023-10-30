@@ -63,12 +63,19 @@ const AmIFollowing = ({ user }) => {
         )
     }
 
+    if (!user.username) {
+       return  (<>
+        </>)
+    }
+
     return (
 
         <>
             {amIfollowing ? (<button className="btn btn-primary" onClick={handleUnfollow}>Unfollow</button>)
 
                 : (<button className="btn btn-primary" onClick={handleFollow}>Follow</button>)}
+
+             
         </>
 
     )

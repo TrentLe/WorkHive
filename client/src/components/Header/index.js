@@ -49,8 +49,6 @@ const Header = () => {
         }
       })
 
-      console.log(Auth.getProfile())
-
       window.location.reload()
 
     } catch (err) {

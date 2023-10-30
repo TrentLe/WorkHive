@@ -14,6 +14,7 @@ import Left from '../components/left/left';
 import Right from '../components/right/right';
 import FollowerCounter from '../components/FollowerCounter/FollowerCounter'
 import FollowingCounter from '../components/FollowerCounter/FollowingCounter';
+import DisplayPicture from '../components/DisplayPicture/DisplayPicture';
 
 const Profile = () => {
   // use this to determine if `useEffect()` hook needs to run again
@@ -57,6 +58,9 @@ const Profile = () => {
       <div>
         <div className='container text-center mb-5 mt-5'>
           <div className='row'>
+            <div className='col'>
+              <DisplayPicture user={user} />
+            </div>
             <div className='col'>
               <p>Bio</p>
               <p>{user.bio}</p>
