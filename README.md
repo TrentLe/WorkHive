@@ -83,7 +83,7 @@ Whether you are a social media professional or just starting out in the industry
 
 <br>
 
-🔭 [Heroku Deployed Application Link](https://workhive1.herokuapp.com) 🔭
+🔭 [Heroku Deployed Application Link](https://the-social-hive-2f9b38244e14.herokuapp.com/) 🔭
 
 <img src='https://i.postimg.cc/nLY8ZVDq/Screenshot-Work-Hive.jpg' width='70%' height='auto'>
 
@@ -130,9 +130,8 @@ Whether you are a social media professional or just starting out in the industry
 👨‍💻 We are Coding BootCamp Alumni of [UCF](https://www.ucf.edu/students/)  ⭐️
 
 - [Profile]( https://github.com/TheQuentinJones  "Quentin Jones") -- Quentin Jones
-- [Profile]( https://github.com/TrentLe " Tanis Henrich") -- Trent Raeburn
+- [Profile]( https://github.com/TrentLe " Trent Raeburn") -- Trent Raeburn
 - [Profile]( https://github.com/Henrich77  " Tanis Henrich") -- Tanis Henrich
-- [Profile]( https://github.com/dhruvin0777  " Dhruvin Patel ") -- Dhruvin Patel
 - [Profile]( https://github.com/JonJon50  " John Hagens ") -- John Hagens
 
 ## Contributing
