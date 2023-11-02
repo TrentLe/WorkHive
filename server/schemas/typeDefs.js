@@ -9,6 +9,7 @@ const typeDefs = gql`
     bio: String
     profilepicture: String
     thoughts: [Thought]
+    comments: [Comment]
     followers: [User]
     following: [User]
   }
@@ -19,6 +20,7 @@ const typeDefs = gql`
     thoughtAuthor: String
     createdAt: String
     comments: [Comment]!
+    likes: [User]!
   }
 
   type Comment {
@@ -26,6 +28,10 @@ const typeDefs = gql`
     commentText: String
     commentAuthor: String
     createdAt: String
+    thought: Thought!
+    comment: Comment!
+    comments: [Comment]!
+    likes: [User]!
   }
 
   type File {
@@ -52,12 +58,13 @@ const typeDefs = gql`
     me: User
     users: [User]
     user(username: String!): User
-    thoughts(username: String): [Thought]
+    thoughts: [Thought]
     thought(thoughtId: ID!): Thought
     followers: [User]
     following: [User]
     contacts: [Contact]
-    contact(name: String): Contact     
+    contact(name: String): Contact
+    comments(username: String): [Comment]    
   }
 
 
@@ -67,12 +74,19 @@ const typeDefs = gql`
     addThought(thoughtText: String!): Thought
     removeThought(thoughtId: ID!): Thought
     uploadImage(file: String!): File!
-    updateUser(id: ID!, username: String, email: String, password: String, profilepicture: String, bio: String): User
+    updateUser( username: String, email: String, password: String, profilepicture: String, bio: String): User
     deleteUser(userId: ID!): User
     addFollow(userId: ID!): User
     removeFollow(userId: ID!): User
     addContact(name: String, email: String, message: String): Contact
-    addComment(thoughtId: ID!, commentText: String!): Thought    
+    addComment(thoughtId: ID!, commentText: String!): Comment
+    addSubComment(commentId: ID!, commentText: String!): Comment
+    removeComment(thoughtId: ID!, commentId: ID!): Comment
+    removeSubComment(commentId: ID!, subCommentId: ID!): Comment
+    addThoughtLike(thoughtId: ID!): Thought
+    addCommentLike(commentId: ID!): Comment
+    removeThoughtLike(thoughtId: ID!): Thought
+    removeCommentLike(commentId: ID!): Comment   
   }
 `;
 

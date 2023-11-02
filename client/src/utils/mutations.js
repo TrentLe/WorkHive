@@ -55,17 +55,23 @@ export const REMOVE_THOUGHT = gql`
 
 
 export const ADD_COMMENT = gql`
-  mutation addComment($thoughtId: ID!, $commentText: String!) {
+  mutation AddComment($thoughtId: ID!, $commentText: String!) {
     addComment(thoughtId: $thoughtId, commentText: $commentText) {
       _id
-      thoughtText
-      thoughtAuthor
+      commentAuthor
+      commentText
       createdAt
-      comments {
-        _id
-        commentText
-        createdAt
-      }
+    }
+  }
+`;
+
+export const REMOVE_COMMENT = gql`
+    mutation RemoveComment($commentId: ID!, $thoughtId: ID!) {
+      removeComment(commentId: $commentId, thoughtId: $thoughtId) {
+      _id
+      commentAuthor
+      commentText
+      createdAt
     }
   }
 `;
@@ -114,13 +120,35 @@ export const DELETE_USER = gql`
 `;
 
 export const UPDATE_USER = gql`
-mutation updateUser($updateUserId: ID!, $username: String, $email: String, $password: String, $profilepicture: String, $bio: String) {
-  updateUser(id: $updateUserId, username: $username, email: $email, password: $password, profilepicture: $profilepicture, bio: $bio) {
+mutation updateUser($username: String, $email: String, $password: String, $profilepicture: String, $bio: String) {
+  updateUser(username: $username, email: $email, password: $password, profilepicture: $profilepicture, bio: $bio) {
     _id
     email
     username
     profilepicture
     bio
+  }
+}
+`;
+
+export const ADD_THOUGHT_LIKE = gql`
+mutation AddThoughtLike($thoughtId: ID!) {
+  addThoughtLike(thoughtId: $thoughtId) {
+    _id
+    createdAt
+    thoughtAuthor
+    thoughtText
+  }
+}
+`
+
+export const REMOVE_THOUGHT_LIKE = gql`
+mutation RemoveThoughtLike($thoughtId: ID!) {
+  removeThoughtLike(thoughtId: $thoughtId) {
+    _id
+    createdAt
+    thoughtAuthor
+    thoughtText
   }
 }
 `

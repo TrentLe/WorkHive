@@ -33,6 +33,12 @@ const userSchema = new Schema({
       ref: 'Thought',
     },
   ],
+  comments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Comment',
+    },
+  ],
   following: [
     {
       type: Schema.Types.ObjectId,

@@ -9,25 +9,20 @@ const ThoughtList = ({
   thoughts,
   users,
   user,
-  title,
-  displayPic,
-  showTitle = true,
-  showUsername = true,
+  profileUsers,
 }) => {
 
-  if (!thoughts.length) {
+  if (!thoughts?.length) {
     return <div className="no-thoughts">
       <h3 >Nothing to see here!</h3>
     </div>;
   }
 
   return (
-    <div className='post'>
-      {/* {showTitle && <h3>{title}</h3>} */}
+    <div className='post d-flex flex-column'>
       {thoughts &&
         thoughts.map((thought) => (
-          <SingleThought thought={thought} users={users} user={user} key={thought._id} />
-          // show comments on click
+          <SingleThought thought={thought} users={users} user={user} key={thought._id} profileUsers={profileUsers}/>
         ))}
     </div>
   );

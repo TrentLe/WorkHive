@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought, Contact } = require('../models');
+const { User, Thought, Contact, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
 const fs = require('fs')
 const path = require('path')
@@ -9,7 +9,27 @@ const resolvers = {
 
   Query: {
     users: async () => {
-      return User.find().sort({ username: 1 }).populate('thoughts').populate('following').populate('followers')
+      return User.find().sort({ username: 1 }).populate({
+        path: 'thoughts',
+        options: {
+          sort: { 
+            createdAt: -1 
+          }
+        },
+        populate: [
+         {
+          path: 'comments',
+          options: {
+            sort: {
+              createdAt: 1
+            }
+          }
+        },
+        {
+          path: 'likes',
+        }
+      ]
+      }).populate('following').populate('followers').populate('comments')
     },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate({
@@ -19,22 +39,27 @@ const resolvers = {
             createdAt: -1 
           }
         },
-        populate: {
-          path: 'comments',
-          options: {
-            sort: {
-              createdAt: -1
-            }
-          }
-        }
-      }).populate('following').populate('followers')
+        populate: [
+          {
+           path: 'comments',
+           options: {
+             sort: {
+               createdAt: 1
+             }
+           }
+         },
+         {
+           path: 'likes',
+         }
+       ]
+      }).populate('following').populate('followers').populate('comments')
     },
     thoughts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Thought.find(params).sort({ createdAt: -1 });
+      return Thought.find(params).sort({ createdAt: -1 }).populate('comments').populate('likes');
     },
     thought: async (parent, { thoughtId }) => {
-      return Thought.findOne({ _id: thoughtId });
+      return Thought.findOne({ _id: thoughtId }).populate('comments').populate('likes');
     },
     me: async (parent, args, context) => {
       if (context.user) {
@@ -45,15 +70,20 @@ const resolvers = {
               createdAt: -1 
             }
           },
-          populate: {
-            path: 'comments',
-            options: {
-              sort: {
-                createdAt: -1
-              }
-            }
-          }
-        }).populate('following').populate('followers');
+          populate: [
+            {
+             path: 'comments',
+             options: {
+               sort: {
+                 createdAt: 1
+               }
+             }
+           },
+           {
+             path: 'likes',
+           }
+         ]
+        }).populate('following').populate('followers').populate('comments');
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -62,6 +92,10 @@ const resolvers = {
     },
     contact: async (parent, { name }, context, info) => {
       return Contact.findOne({ name })
+    },
+    comments: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Comment.find(params).populate('comments').populate('likes');
     },
   },
 
@@ -106,6 +140,7 @@ const resolvers = {
     },
     removeThought: async (parent, { thoughtId }, context) => {
       if (context.user) {
+
         const thought = await Thought.findOneAndDelete({
           _id: thoughtId,
           thoughtAuthor: context.user.username,
@@ -116,7 +151,31 @@ const resolvers = {
           { $pull: { thoughts: thought._id } }
         );
 
+        await Comment.deleteMany({ thought: thought._id })
+
         return thought;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeComment: async (parent, { commentId, thoughtId }, context) => {
+      if (context.user) {
+
+        const comment = await Comment.findOneAndDelete({
+          _id: commentId,
+          commentAuthor: context.user.username,
+        });
+
+        await Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          { $pull: { comments: comment._id } }
+        );
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { comments: comment._id } }
+        )
+
+        return comment;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
@@ -131,21 +190,16 @@ const resolvers = {
         url: `http://localhost:3001/public/images/${filename}`
       }
     },
-    updateUser: async (_, { id, username, email, password, profilepicture, bio }, context) => {
-      console.log(id, profilepicture, context.user._id)
-      const user = await User.findByIdAndUpdate(
+    updateUser: async (_, { username, email, password, profilepicture, bio }, context) => {
+        const user = await User.findByIdAndUpdate(
         { _id: context.user._id },
         { $set: { username: username, email: email, password: password, profilepicture: profilepicture, bio: bio, } },
-        { new: true },
-        (error, updatedUser) => {
+        (error) => {
           if (error) {
             console.error(error)
-          } else {
-            console.log(updatedUser)
           }
         }
       );
-      console.log(user)
       return user;
     },
     deleteUser: async (parent, { userId }, context) => {
@@ -156,7 +210,8 @@ const resolvers = {
         }
         // delete related thoughts
         await Thought.deleteMany({ thoughtAuthor: deletedUser.username });
-        // delete related job postings
+        // delete related comments
+        await Comment.deleteMany({ commentAuthor: deletedUser.username });
         return { message: 'User deleted successfully' };
       } catch (err) {
         console.log(err);
@@ -209,22 +264,113 @@ const resolvers = {
     },
     addComment: async (parent, { thoughtId, commentText }, context) => {
       if (context.user) {
-        return Thought.findOneAndUpdate(
+        const comment = await Comment.create({
+          commentText,
+          commentAuthor: context.user.username,
+          thought: thoughtId,
+        });
+
+        const thought = await Thought.findOneAndUpdate(
           { _id: thoughtId },
-          {
-            $addToSet: {
-              comments: { commentText, commentAuthor: context.user.username },
-            },
-          },
-          {
-            new: true,
-            runValidators: true,
-          }
+          { $addToSet: { comments: comment._id } }
         );
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { comments: comment._id } }
+        )
+
+        return comment;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+    addSubComment: async (parent, { commentId, commentText }, context) => {
+      if (context.user) {
+        const comment = await Comment.create({
+          commentText,
+          commentAuthor: context.user.username,
+        });
+
+        await Comment.findOneAndUpdate(
+          { _id: commentId },
+          { $addToSet: { comments: comment._id } },
+          { new: true }
+        );
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { comments: comment._id } },
+          { new: true }
+        )
+
+        return comment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addThoughtLike: async (parent, { thoughtId }, context) => {
+      if (thoughtId && context.user) {
+
+        const likedThought = await Thought.findOne({ thoughtId })
+
+        await Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          { $addToSet: { likes: context.user._id } },
+          { new: true }
+        );
+
+        return likedThought;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    addCommentLike: async (parent, { commentId }, context) => {
+      if (commentId && context.user) {
+
+        const likedComment = await Comment.findOne({ commentId })
+      
+        await Comment.findOneAndUpdate(
+          { _id: commentId },
+          { $addToSet: { likes: userId} },
+          { new: true }
+        );
+      
+        return likedComment
+      }    
+
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeThoughtLike: async (parent, { thoughtId }, context) => {
+      if (context.user) {
+
+        const unlikedthought = await Thought.findOne({ thoughtId })
+
+        await Thought.findOneAndUpdate(
+          { _id: thoughtId },
+          { $pull: { likes: context.user._id } },
+          { new: true }
+        );
+
+        return unlikedthought;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeCommentLike: async (parent, { commentId }, context) => {
+      if (context.user) {
+
+        const unlikedcomment = await Comment.findOne({ commentId })
+
+        await Comment.findOneAndUpdate(
+          { _id: commentId },
+          { $pull: { likes: context.user._id } },
+          { new: true }
+        );
+
+        return unlikedcomment;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },    
   },
 };
 
 module.exports = resolvers;
+

@@ -2,21 +2,16 @@
   
     
     box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-    border-radius: 20px;
-    background-color: transparent;
     color: white;
-    margin-bottom: 20px;
+
   
     .container {
-      padding: 20px;
     
       .top {
-        display: flex;
-        align-items: center;
         gap: 20px;
         img {
-          width: 40px;
-          height: 40px;
+          width: 3rem;
+          height: auto;
           border-radius: 50%;
           object-fit: cover;
         }
@@ -70,7 +65,6 @@
             color: white;
             cursor: pointer;
             background-color: darkblue;
-            border-radius: 10px;
             width: 3vw;
           }
         }

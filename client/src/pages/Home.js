@@ -3,7 +3,6 @@ import { useQuery } from '@apollo/client';
 import ThoughtList from '../components/ThoughtList';
 // import Stories from '../components/stories'
 import { QUERY_THOUGHTS, QUERY_USERS, QUERY_ME } from '../utils/queries';
-import "./home.scss"
 import Left from '../components/left/left';
 import Right from '../components/right/right';
 
@@ -27,7 +26,7 @@ const Home = () => {
       <h2 className="text-center">
         You are viewing the live feed. Tell us something cool!
       </h2>
-      <div className="feed-container">
+      <div className="d-inline-flex">
         <Left />
 
         {query1.loading ? (

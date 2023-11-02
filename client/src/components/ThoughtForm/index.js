@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useApolloClient, useMutation } from "@apollo/client";
-
+import  DisplayPicture from '../DisplayPicture/DisplayPicture'
 import { ADD_THOUGHT } from "../../utils/mutations";
 import { QUERY_THOUGHTS, QUERY_ME } from "../../utils/queries";
 import "./postbox.scss";
@@ -13,22 +13,9 @@ import Auth from "../../utils/auth";
 const ThoughtForm = ({ meInfo }) => {
  const client = useApolloClient()
 
-  const [stockPic, setStockPic] = useState("")
-  const [loadingState, setLoadingState] = useState(false)
-  const [ myImage, setMyImage ] = useState("")
   const [thoughtText, setThoughtText] = useState("");
   
   const [characterCount, setCharacterCount] = useState(0);
-
-  useEffect(() => {
-    setMyImage(meInfo.me?.profilepicture)
-    setLoadingState(true)
-  }, [meInfo.me])
-
-  useEffect(() => {
-    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
-  }, [loadingState])
-
 
   const [addThought, { error }] = useMutation(ADD_THOUGHT, {
     update(cache, { data: { addThought } }) {
@@ -89,13 +76,10 @@ const ThoughtForm = ({ meInfo }) => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="postbox">
-        <div className="container">
-          <div className="top">
-            <img
-              src={myImage ? myImage : stockPic}
-              alt=""
-            />
+      <div className="postbox bg-transparent mb-4 rounded-2">
+        <div className="container p-4">
+          <div className="top d-flex align-items-center">
+            <DisplayPicture user={meInfo.me} />
             <input placeholder={`What's on your mind ?`} name='thoughtText' value={thoughtText} onChange={handleChange} />
           </div>
           <hr />
@@ -123,7 +107,7 @@ const ThoughtForm = ({ meInfo }) => {
               </div>
             </div>
             <div className="righty">
-              <button type="submit">Post</button>
+              <button className="p-1 rounded-1 w-3vw" type="submit">Post</button>
             </div>
             {error && <div className="">{`Reporting to the Hive...`}</div>}
           </div>

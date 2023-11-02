@@ -9,6 +9,7 @@ import { IoIosKeypad } from "react-icons/io";
 import { MdBedtime } from "react-icons/md";
 import { UPDATE_USER } from "../../utils/mutations";
 import { useMutation, useQuery } from "@apollo/client";
+import DisplayPicture from "../DisplayPicture/DisplayPicture"
 import "./header.scss";
 // import { useContext } from 'react';
 // import { DarkModeContext } from "./context/darkModeContext.js";
@@ -22,21 +23,6 @@ import { QUERY_ME } from "../../utils/queries";
 const Header = () => {
 
   const query1 = useQuery(QUERY_ME)
-
-  const [ headerPic, setHeaderPic ] = useState("")
-  const [ stockPic, setStockPic ] = useState("")
-  const [ loadingState, setLoadingState ] = useState(false)
-
-  useEffect(() => {
-    setHeaderPic(query1?.data?.me?.profilepicture)
-    setLoadingState(true)
-  }, [query1.data])
-
-  useEffect(() => {
-    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
-  }, [loadingState])
-
-
 
   const logout = (event) => {
     event.preventDefault();
@@ -62,8 +48,6 @@ const Header = () => {
           profilepicture: image,
         }
       })
-
-      console.log(Auth.getProfile())
 
       window.location.reload()
 
@@ -105,7 +89,7 @@ const Header = () => {
                 {Auth.getProfile().data.token}
 
                 <div className="dropdown">
-                  <span><img src={headerPic ? headerPic : stockPic} alt="my profile" /></span>
+                  <DisplayPicture user={query1?.data?.me} />
                   <div className="dropdown-content">
                     <div className="get-username">
                       {Auth.getProfile().data.username}

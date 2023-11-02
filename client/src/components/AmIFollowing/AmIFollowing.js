@@ -9,7 +9,7 @@ const AmIFollowing = ({ user }) => {
 
     const [amIfollowing, setAmIfollowing] = useState(false)
     const [followUser] = useMutation(ADD_FOLLOW)
-    const [unfollowUser] = useMutation(REMOVE_FOLLOW)    
+    const [unfollowUser] = useMutation(REMOVE_FOLLOW)
 
     useEffect(() => {
         const followerIdArr = user?.followers?.map((follower) => {
@@ -54,13 +54,18 @@ const AmIFollowing = ({ user }) => {
         }
     }
 
-    if ( Auth.getProfile().data._id === user?._id) {
+    if (Auth.getProfile().data._id === user?._id) {
         return (
             <>
-                
+
             </>
 
         )
+    }
+
+    if (!user.username) {
+        return (<>
+        </>)
     }
 
     return (
@@ -69,6 +74,8 @@ const AmIFollowing = ({ user }) => {
             {amIfollowing ? (<button className="btn btn-primary" onClick={handleUnfollow}>Unfollow</button>)
 
                 : (<button className="btn btn-primary" onClick={handleFollow}>Follow</button>)}
+
+
         </>
 
     )

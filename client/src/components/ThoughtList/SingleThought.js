@@ -3,45 +3,34 @@ import { Link } from 'react-router-dom';
 import { MdOutlineMessage } from "react-icons/md";
 import "./thoughtList.scss"
 import { CgMenuCheese } from "react-icons/cg";
-import { FcLike } from "react-icons/fc";
-import { FcLikePlaceholder } from "react-icons/fc";
 import { TbShare3 } from "react-icons/tb";
 import CommentList from '../CommentList';
 import CommentForm from '../CommentForm';
 import { useApolloClient, useMutation } from '@apollo/client';
 import { REMOVE_THOUGHT } from '../../utils/mutations';
+import LikeButton from '../LikeButton/LikeThoughtButton';
+import DisplayPicture from '../DisplayPicture/DisplayPicture';
 import Auth from "../../utils/auth";
 // import LinkifyText from '../Linkify/Linkify';
+import { useFilterUser } from '../../utils/CustomHooks';
 
 export default function SingleThought({
   thought,
   users,
   user,
-  liked
+  profileUsers,
 }) {
-const client = useApolloClient()
+  const client = useApolloClient()
 
-  const [displayPic, setDisplayPic] = useState([])
   const [showComments, setShowComments] = useState(false)
-  const [stockPic, setStockPic] = useState("")
-  const [loadingState, setLoadingState] = useState(false)
+  const [ commentState, setCommentState ] = useState([])
 
   useEffect(() => {
-    setDisplayPic(user?.profilepicture)
-    setLoadingState(true)
-  }, [user])
+    setCommentState(thought.comments)
+  }, [thought])
 
-  useEffect(() => {
-    const filteredUser = users?.filter((user) => user.username === thought.thoughtAuthor)
-    if (filteredUser) {
-      setDisplayPic(filteredUser[0]?.profilepicture)
-      setLoadingState(true)
-    }
-  }, [users, thought])
+  const thisUser = useFilterUser(users, user, thought)
 
-  useEffect(() => {
-    setStockPic("https://i.ibb.co/znBQMM4/stockimageprofilepicture.png")
-  }, [loadingState])
 
   // REMOVE THOUGHT
   const [removeThought] = useMutation(REMOVE_THOUGHT);
@@ -63,46 +52,28 @@ const client = useApolloClient()
 
 
   return (
-    <div key={thought._id} className="container">
-      <div className="user">
-        <div className='userinfo'>
-          <img src={displayPic ? displayPic : stockPic} alt="" />
-          <div className='postdetails'>
+    <div key={thought._id} className="container rounded-4 mb-3 p-4">
+      <div className="user d-flex align-items-center justify-content-between">
+        <div className='d-flex gap-3'>
+          <DisplayPicture user={thisUser} />
+          <div className='d-flex flex-column'>
             <Link
               to={`/profiles/${thought.thoughtAuthor}`}
               style={{ textDecoration: "none", color: "inherit" }}>
               <span>{thought.thoughtAuthor}</span>
             </Link>
             <span className="date">{thought.createdAt}</span>
-            {/* {showUsername ? (
-                <Link
-                  className=""
-                  to={`/profiles/${thought.thoughtAuthor}`}
-                >
-                  {thought.thoughtAuthor} <br />
-                  <span style={{ fontSize: '1rem' }}>
-                     {thought.createdAt}
-                  </span>
-                </Link>
-              ) : (
-                <>
-                  <span style={{ fontSize: '1rem' }}>
-                  {thought.createdAt}
-                  </span>
-                </>
-              )} */}
           </div>
         </div>
         <CgMenuCheese />
       </div>
-      <div className="content">
+      <div className="mt-4 mb-4">
         {/* <LinkifyText text={thought.thoughtText} /> */}
         <p>{thought.thoughtText}</p>
       </div>
-      <div className='info'>
-        <div className='item'>
-          {liked ? < FcLike size='25px' /> : <FcLikePlaceholder size='25px' onClick={() => { < FcLike size='25px' /> }} />}
-          15 likes
+      <div className='info d-flex align-items-center gap-4'>
+        <div className='item d-flex align-items-center gap-2 '>
+          <LikeButton thought={thought} />
         </div>
         <div className='item'>
           <button className="btn btn-primary" onClick={() => setShowComments(!showComments)}
@@ -119,7 +90,7 @@ const client = useApolloClient()
           Delete
         </button>) : ""}
       </div>
-      {showComments && (<> <CommentList comments={thought.comments ?? []} thoughtId={thought._id} /> <CommentForm thoughtId={thought._id} /> </>)}
+      {showComments && (<> <CommentList comments={commentState} thoughtId={thought._id} users={users} profileUsers={profileUsers}/> <CommentForm thoughtId={thought._id} /> </>)}
     </div>
   )
 }
