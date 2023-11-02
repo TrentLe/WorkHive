@@ -151,6 +151,8 @@ const resolvers = {
           { $pull: { thoughts: thought._id } }
         );
 
+        await Comment.deleteMany({ thought: thought._id })
+
         return thought;
       }
       throw new AuthenticationError('You need to be logged in!');
@@ -208,7 +210,8 @@ const resolvers = {
         }
         // delete related thoughts
         await Thought.deleteMany({ thoughtAuthor: deletedUser.username });
-        // delete related job postings
+        // delete related comments
+        await Comment.deleteMany({ commentAuthor: deletedUser.username });
         return { message: 'User deleted successfully' };
       } catch (err) {
         console.log(err);
@@ -264,9 +267,10 @@ const resolvers = {
         const comment = await Comment.create({
           commentText,
           commentAuthor: context.user.username,
+          thought: thoughtId,
         });
 
-        await Thought.findOneAndUpdate(
+        const thought = await Thought.findOneAndUpdate(
           { _id: thoughtId },
           { $addToSet: { comments: comment._id } }
         );

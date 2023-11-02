@@ -75,7 +75,7 @@ function App() {
         <div className="">
           <Header />
         
-          <div className="container">
+          <div className="">
             <Routes>
 
               

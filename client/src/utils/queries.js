@@ -91,8 +91,8 @@ export const QUERY_THOUGHTS = gql`
       createdAt
       comments {
         _id
-        commentText
         commentAuthor
+        commentText
         createdAt
       }
       likes {
@@ -112,8 +112,8 @@ export const QUERY_SINGLE_THOUGHT = gql`
       createdAt
       comments {
         _id
-        commentText
         commentAuthor
+        commentText
         createdAt
       }
     }

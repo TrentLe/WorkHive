@@ -28,6 +28,8 @@ const typeDefs = gql`
     commentText: String
     commentAuthor: String
     createdAt: String
+    thought: Thought!
+    comment: Comment!
     comments: [Comment]!
     likes: [User]!
   }

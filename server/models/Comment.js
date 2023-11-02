@@ -17,6 +17,14 @@ const commentSchema = new Schema({
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
     },
+    thought: {
+        type: Schema.Types.ObjectId,
+        ref: 'Thought'
+    },
+    comment: {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    },
     comments: [
         {
             type: Schema.Types.ObjectId,
